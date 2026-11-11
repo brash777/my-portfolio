@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# instrucciones para agentes de IA que Next.js regenera solo (el único documento del proyecto es README.md)
+AGENTS.md
