@@ -47,7 +47,7 @@ export const profileImages: { hero: SiteImage; avatar: SiteImage } = {
 // Menú: el orden es el mismo de las secciones en app/page.tsx
 export const navItems: NavItem[] = [
   { id: "hero", label: "Inicio" },
-  { id: "about", label: "Sobre mí" },
+  { id: "about", label: "Acerca de mí" },
   { id: "projects", label: "Proyectos" },
   { id: "testimonials", label: "Testimonios" },
   { id: "experience", label: "Experiencia" },

@@ -54,7 +54,7 @@ function CvSummary() {
           href={site.githubUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="rounded-full border-2 border-ink px-3 py-2 text-sm font-bold"
+          className="inline-flex min-h-11 items-center rounded-full border-2 border-ink px-3 py-2 text-sm font-bold"
         >
           {cv.moreButton}
           <span className="sr-only"> {ui.opensNewTab}</span>
@@ -83,7 +83,7 @@ export function Hero() {
         <div className="lg:col-span-7 lg:row-start-1">
           <p className="text-lg font-semibold">{hero.kicker}</p>
           <h1 id="hero-title" className="mt-4">
-            <span className="block text-title">{hero.greeting}</span>
+            <span className="block text-title">{hero.greeting}</span>{" "}
             <span className="-ml-1 block origin-bottom-left animate-slap-in text-hero [animation-delay:120ms]">{site.name}</span>
           </h1>
           <p className="mt-8 max-w-xl text-lg leading-relaxed">{hero.description}</p>
@@ -94,7 +94,7 @@ export function Hero() {
               href={site.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="sticker-sm inline-flex items-center rounded-full bg-paper px-4 py-2 font-bold text-ink transition-transform duration-200 hover:-translate-y-0.5"
+              className="sticker-sm inline-flex min-h-11 items-center rounded-full bg-paper px-5 py-2 font-bold text-ink transition-transform duration-200 hover:-translate-y-0.5"
             >
               {hero.githubButton}
               <span className="sr-only"> {ui.opensNewTab}</span>

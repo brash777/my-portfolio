@@ -14,7 +14,7 @@ export function CvButton({ className }: CvButtonProps) {
     return (
       <span
         className={cn(
-          "inline-flex items-center rounded-full border-2 border-dashed border-current px-4 py-2 text-sm font-semibold",
+          "inline-flex items-center rounded-full border-2 border-dashed border-current px-4 py-2 text-sm font-semibold whitespace-nowrap",
           className,
         )}
       >
@@ -29,7 +29,7 @@ export function CvButton({ className }: CvButtonProps) {
       target="_blank"
       rel="noopener noreferrer"
       className={cn(
-        "sticker-sm inline-flex items-center rounded-full bg-yellow px-4 py-2 font-bold text-ink transition-transform duration-200 hover:-translate-y-0.5",
+        "sticker-sm inline-flex min-h-11 items-center rounded-full bg-yellow px-5 py-2 font-bold whitespace-nowrap text-ink transition-transform duration-200 hover:-translate-y-0.5",
         className,
       )}
     >

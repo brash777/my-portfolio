@@ -17,7 +17,8 @@ export function Logo({ href = "#hero", onClick }: LogoProps) {
       >
         {site.initials}
       </span>
-      <span className="font-display text-xl leading-none font-extrabold font-stretch-condensed">
+      {/* entre 1024 y 1279 px no cabe junto al menú: queda solo para lectores de pantalla */}
+      <span className="font-display text-xl leading-none font-extrabold whitespace-nowrap font-stretch-condensed lg:max-xl:sr-only">
         {site.shortName}
       </span>
       <span className="sr-only">, {ui.homeLink}</span>

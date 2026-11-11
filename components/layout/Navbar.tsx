@@ -46,7 +46,7 @@ export function Navbar() {
                     href={`${linkPrefix}#${item.id}`}
                     aria-current={isActive ? "true" : undefined}
                     className={cn(
-                      "block rounded-full border-2 px-3 py-1.5 text-[0.95rem] font-semibold transition-transform duration-200 hover:-translate-y-0.5",
+                      "block rounded-full border-2 px-3 py-1.5 text-[0.95rem] font-semibold whitespace-nowrap transition-transform duration-200 hover:-translate-y-0.5 lg:max-xl:px-2.5",
                       isActive ? "border-ink bg-ink text-paper" : "border-transparent hover:border-ink",
                     )}
                   >

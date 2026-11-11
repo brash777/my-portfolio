@@ -8,7 +8,7 @@ export const hero: HeroContent = {
   greeting: "Hola, soy",
   description:
     "Construyo aplicaciones completas, desde la base de datos hasta la pantalla. Mi proyecto más fuerte es Flux IA, una app de finanzas personales con asistente de IA. Estoy aprendiendo todos los días y me gusta que lo que hago funcione y se vea bien.",
-  githubButton: "Ver GitHub",
+  githubButton: "Ver mi GitHub",
   stackLabel: "Tecnologías que uso",
   stack: [tech.java, tech.springBoot, tech.postgresql, tech.supabase, tech.typescript, tech.nextjs, tech.tailwind, tech.gsap],
   code: {
