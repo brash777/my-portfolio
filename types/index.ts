@@ -35,6 +35,7 @@ export interface SiteInfo {
   role: string;
   location: string;
   university: string;
+  career: string;
   githubUser: string;
   githubUrl: string;
   linkedinUrl: string;

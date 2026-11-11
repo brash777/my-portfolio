@@ -7,15 +7,16 @@ export const site: SiteInfo = {
   name: "Johan",
   shortName: "Johan Mosquera",
   initials: "JM",
-  fullName: "Johan Stiv Mosquera Montilla", // TODO: confirmar "Stiv" o "Stib" (en LinkedIn aparece "stib")
+  fullName: "Johan Stib Mosquera Montilla",
   role: "Full Stack Developer",
   location: "Pasto, Colombia",
-  university: "Universidad Cooperativa de Colombia", // TODO: carrera y años
+  university: "Universidad Cooperativa de Colombia",
+  career: "Ingeniería de Software",
   githubUser: "brash777",
   githubUrl: "https://github.com/brash777",
   linkedinUrl: "https://www.linkedin.com/in/joan-stib-mosquera-montilla-30b370449/",
   cvUrl: null, // TODO: URL pública del CV en Google Drive ("cualquier persona con el enlace puede ver")
-  emails: [], // TODO: correos que quieres mostrar
+  emails: [], // TODO: confirmar qué correo mostrar (dijo "el de GitHub")
   meta: {
     // borrador
     title: "Johan Mosquera | Full Stack Developer junior",
