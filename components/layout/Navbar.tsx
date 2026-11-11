@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { MobileMenu } from "@/components/layout/MobileMenu";
 import { CvButton } from "@/components/ui/CvButton";
 import { Logo } from "@/components/ui/Logo";
@@ -17,6 +18,8 @@ const sectionIds = navItems.map((item) => item.id);
  */
 export function Navbar() {
   const activeId = useScrollSpy(sectionIds);
+  // en /projects/... los enlaces deben volver a la página principal
+  const linkPrefix = usePathname() === "/" ? "" : "/";
 
   return (
     <>
@@ -32,7 +35,7 @@ export function Navbar() {
           aria-label={ui.mainNav}
           className="mx-auto flex max-w-6xl items-center justify-between gap-3 rounded-sticker border-3 border-ink bg-paper p-2 text-ink shadow-hard lg:pr-3"
         >
-          <Logo />
+          <Logo href={`${linkPrefix}#hero`} />
 
           <ul className="hidden items-center gap-0.5 lg:flex">
             {navItems.map((item) => {
@@ -40,7 +43,7 @@ export function Navbar() {
               return (
                 <li key={item.id}>
                   <a
-                    href={`#${item.id}`}
+                    href={`${linkPrefix}#${item.id}`}
                     aria-current={isActive ? "true" : undefined}
                     className={cn(
                       "block rounded-full border-2 px-3 py-1.5 text-[0.95rem] font-semibold transition-transform duration-200 hover:-translate-y-0.5",
@@ -59,7 +62,7 @@ export function Navbar() {
             <div className="hidden sm:block">
               <CvButton />
             </div>
-            <MobileMenu activeId={activeId} />
+            <MobileMenu activeId={activeId} linkPrefix={linkPrefix} />
           </div>
         </nav>
       </header>
