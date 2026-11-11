@@ -18,10 +18,12 @@ interface MobileMenuProps {
  */
 export function MobileMenu({ activeId }: MobileMenuProps) {
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
   const [isOpen, setIsOpen] = useState(false);
 
   function openMenu() {
     dialogRef.current?.showModal();
+    closeButtonRef.current?.focus(); // el foco empieza en "Cerrar menú"
     setIsOpen(true);
   }
 
@@ -56,6 +58,7 @@ export function MobileMenu({ activeId }: MobileMenuProps) {
           <div className="flex items-center justify-between gap-3">
             <Logo onClick={closeMenu} />
             <button
+              ref={closeButtonRef}
               type="button"
               onClick={closeMenu}
               className="sticker-sm grid size-11 place-items-center rounded-xl bg-paper text-ink"
