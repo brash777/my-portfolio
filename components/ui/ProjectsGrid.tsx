@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { ProjectCard } from "@/components/ui/ProjectCard";
+import { Reveal } from "@/components/ui/Reveal";
+import { TiltCard } from "@/components/ui/TiltCard";
 import { projectsContent as content } from "@/data/projects";
 import { cn } from "@/lib/utils";
 import type { Project, ProjectCategory } from "@/types";
@@ -55,9 +57,13 @@ export function ProjectsGrid({ projects }: { projects: Project[] }) {
         <p className="mt-10 text-lg">{content.emptyFilter}</p>
       ) : (
         <ul className="mt-10 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
-          {visible.map((project) => (
+          {visible.map((project, index) => (
             <li key={project.slug}>
-              <ProjectCard project={project} />
+              <Reveal delay={(index % 3) * 100} className="h-full">
+                <TiltCard max={5} className="h-full">
+                  <ProjectCard project={project} />
+                </TiltCard>
+              </Reveal>
             </li>
           ))}
         </ul>
