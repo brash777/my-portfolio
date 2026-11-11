@@ -15,6 +15,11 @@ export interface NavItem {
   label: string;
 }
 
+export interface SocialLink {
+  label: string;
+  href: string;
+}
+
 /** imagen local con su texto alternativo en español */
 export interface SiteImage {
   src: StaticImageData;

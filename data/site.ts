@@ -1,6 +1,6 @@
 import aboutAvatar from "@/public/images/about/about-avatar.webp";
 import heroProfile from "@/public/images/profile/hero-profile.webp";
-import type { NavItem, SectionId, SiteImage, SiteInfo, UiText } from "@/types";
+import type { NavItem, SectionId, SiteImage, SiteInfo, SocialLink, UiText } from "@/types";
 
 // Datos personales. Lo marcado TODO está pendiente de confirmar.
 export const site: SiteInfo = {
@@ -23,6 +23,12 @@ export const site: SiteInfo = {
       "Portafolio de Johan Mosquera, estudiante de desarrollo de software en Pasto. Aquí muestro las apps que construyo, como Flux IA y FlowStore.",
   },
 };
+
+// Redes (se usan en el menú móvil, Contacto y Footer)
+export const socialLinks: SocialLink[] = [
+  { label: "GitHub", href: site.githubUrl },
+  { label: "LinkedIn", href: site.linkedinUrl },
+];
 
 // Fotos de perfil con su texto alternativo (borrador)
 export const profileImages: { hero: SiteImage; avatar: SiteImage } = {
