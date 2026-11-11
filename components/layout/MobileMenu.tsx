@@ -9,6 +9,8 @@ import type { SectionId } from "@/types";
 
 interface MobileMenuProps {
   activeId: SectionId | null;
+  /** "" en la página principal, "/" en las demás (para volver a la sección) */
+  linkPrefix: string;
 }
 
 /**
@@ -16,7 +18,7 @@ interface MobileMenuProps {
  * Usa <dialog> nativo con showModal(): el navegador ya cierra con Esc,
  * deja el foco del teclado dentro del menú y lo devuelve al botón al cerrar.
  */
-export function MobileMenu({ activeId }: MobileMenuProps) {
+export function MobileMenu({ activeId, linkPrefix }: MobileMenuProps) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -56,7 +58,7 @@ export function MobileMenu({ activeId }: MobileMenuProps) {
       >
         <div className="flex min-h-full flex-col px-5 pt-5 pb-8 sm:px-8">
           <div className="flex items-center justify-between gap-3">
-            <Logo onClick={closeMenu} />
+            <Logo href={`${linkPrefix}#hero`} onClick={closeMenu} />
             <button
               ref={closeButtonRef}
               type="button"
@@ -77,7 +79,7 @@ export function MobileMenu({ activeId }: MobileMenuProps) {
                 return (
                   <li key={item.id}>
                     <a
-                      href={`#${item.id}`}
+                      href={`${linkPrefix}#${item.id}`}
                       onClick={closeMenu}
                       aria-current={isActive ? "true" : undefined}
                       className={cn(

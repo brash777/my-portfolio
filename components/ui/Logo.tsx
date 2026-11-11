@@ -1,14 +1,16 @@
 import { site, ui } from "@/data/site";
 
 interface LogoProps {
+  /** "#hero" en la página principal, "/#hero" en las demás */
+  href?: string;
   /** se usa en el menú móvil para cerrarlo al tocar el logo */
   onClick?: () => void;
 }
 
 /** Logo: sticker redondo con las iniciales + nombre. Lleva al inicio. */
-export function Logo({ onClick }: LogoProps) {
+export function Logo({ href = "#hero", onClick }: LogoProps) {
   return (
-    <a href="#hero" onClick={onClick} className="group flex items-center gap-2.5 rounded-full pr-2">
+    <a href={href} onClick={onClick} className="group flex items-center gap-2.5 rounded-full pr-2">
       <span
         aria-hidden="true"
         className="sticker-sm grid size-11 -rotate-6 place-items-center rounded-full bg-yellow font-display text-lg font-extrabold text-ink font-stretch-condensed transition-transform duration-200 group-hover:rotate-0"
