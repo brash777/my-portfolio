@@ -8,6 +8,7 @@ export const hero: HeroContent = {
   description:
     "Construyo aplicaciones completas, desde la base de datos hasta la pantalla. Mi proyecto más fuerte es Flux IA, una app de finanzas personales con asistente de IA. Estoy aprendiendo todos los días y me gusta que lo que hago funcione y se vea bien.",
   githubButton: "Ver GitHub",
+  stackLabel: "Tecnologías que uso",
   stack: ["Java", "Spring Boot", "PostgreSQL", "Supabase", "TypeScript", "Next.js", "Tailwind CSS", "GSAP"],
   code: {
     fileName: "johan.ts",
@@ -30,12 +31,12 @@ export const hero: HeroContent = {
     whoTitle: "Quién soy",
     who: `${site.fullName}. Estudio ${site.career} en la ${site.university}, en Pasto.`,
     doTitle: "A qué me dedico",
-    do: "Desarrollo apps completas: la parte que ves (frontend), el servidor (backend) y la base de datos.",
+    do: "Apps completas: frontend, backend y base de datos.",
     servicesTitle: "Servicios",
     experienceTitle: "Experiencia",
     experience: [
-      `Estudiante de ${site.career}, ${site.university}`,
-      "Freelance: creo mis propias apps, Flux IA y FlowStore (en desarrollo)",
+      `${site.career} en la ${site.university} (en curso)`,
+      "Freelance: mis propias apps, Flux IA y FlowStore (en desarrollo)",
     ],
     moreButton: "Ver más en GitHub",
     cvLinkLabel: "Enlace del CV:",

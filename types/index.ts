@@ -66,6 +66,7 @@ export interface HeroContent {
   description: string;
   githubButton: string;
   /** tecnologías que se muestran como stickers */
+  stackLabel: string;
   stack: string[];
   code: {
     fileName: string;
