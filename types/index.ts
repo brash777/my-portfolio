@@ -23,6 +23,9 @@ export interface SiteImage {
 
 export interface SiteInfo {
   name: string;
+  /** nombre que se ve en el logo */
+  shortName: string;
+  initials: string;
   fullName: string;
   role: string;
   location: string;
@@ -48,6 +51,7 @@ export interface UiText {
   closeMenu: string;
   cvButton: string;
   cvPending: string;
+  opensNewTab: string;
   homeLink: string;
   sectionPending: string;
 }

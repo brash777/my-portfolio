@@ -1,10 +1,12 @@
 import aboutAvatar from "@/public/images/about/about-avatar.webp";
 import heroProfile from "@/public/images/profile/hero-profile.webp";
-import type { NavItem, SiteImage, SiteInfo, UiText } from "@/types";
+import type { NavItem, SectionId, SiteImage, SiteInfo, UiText } from "@/types";
 
 // Datos personales. Lo marcado TODO está pendiente de confirmar.
 export const site: SiteInfo = {
   name: "Johan",
+  shortName: "Johan Mosquera",
+  initials: "JM",
   fullName: "Johan Stiv Mosquera Montilla", // TODO: confirmar "Stiv" o "Stib" (en LinkedIn aparece "stib")
   role: "Full Stack Developer",
   location: "Pasto, Colombia",
@@ -45,6 +47,11 @@ export const navItems: NavItem[] = [
   { id: "skills", label: "Skills" },
 ];
 
+/** nombre de una sección tal como aparece en el menú */
+export function navLabel(id: SectionId): string {
+  return navItems.find((item) => item.id === id)?.label ?? id;
+}
+
 // Textos cortos de la interfaz (borrador, revisar con ux-copy)
 export const ui: UiText = {
   skipToContent: "Saltar al contenido",
@@ -54,6 +61,7 @@ export const ui: UiText = {
   closeMenu: "Cerrar menú",
   cvButton: "Ver CV",
   cvPending: "CV en camino",
+  opensNewTab: "(se abre en otra pestaña)",
   homeLink: "Ir al inicio",
   sectionPending: "Sección en construcción",
 };
