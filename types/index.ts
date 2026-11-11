@@ -35,6 +35,7 @@ export interface SiteInfo {
   role: string;
   location: string;
   university: string;
+  career: string;
   githubUser: string;
   githubUrl: string;
   linkedinUrl: string;
@@ -44,6 +45,51 @@ export interface SiteInfo {
   meta: {
     title: string;
     description: string;
+  };
+}
+
+export interface Service {
+  title: string;
+  description: string;
+}
+
+/** una línea del panel tipo editor de código del hero */
+export interface CodeField {
+  key: string;
+  value: string | boolean | string[];
+}
+
+export interface HeroContent {
+  /** línea pequeña sobre el saludo */
+  kicker: string;
+  greeting: string;
+  description: string;
+  githubButton: string;
+  /** tecnologías que se muestran como stickers */
+  stackLabel: string;
+  stack: string[];
+  code: {
+    fileName: string;
+    variable: string;
+    fields: CodeField[];
+  };
+  flip: {
+    hint: string;
+    toBack: string;
+    toFront: string;
+  };
+  /** reverso de la tarjeta: CV resumido */
+  cv: {
+    title: string;
+    whoTitle: string;
+    who: string;
+    doTitle: string;
+    do: string;
+    servicesTitle: string;
+    experienceTitle: string;
+    experience: string[];
+    moreButton: string;
+    cvLinkLabel: string;
   };
 }
 

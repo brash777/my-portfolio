@@ -22,6 +22,8 @@
   --radius-sticker: 1.25rem;
 
   /* escala de títulos fluida: crece con el ancho de la pantalla */
+  --text-hero: clamp(5.5rem, 2.5rem + 12vw, 12rem); /* solo el nombre del hero */
+  --text-hero--line-height: 0.8;
   --text-display: clamp(3.25rem, 2rem + 6vw, 7.5rem);
   --text-display--line-height: 0.88;
   --text-title: clamp(2.5rem, 1.75rem + 3.5vw, 4.75rem);
@@ -52,6 +54,22 @@
   box-shadow:
     0 0 0 2px var(--color-ink),
     3px 3px 0 2px var(--color-ink);
+}
+
+/*
+  Esquina doblada ("dog-ear") de la tarjeta del hero: corta la esquina inferior
+  derecha en diagonal (--ear). Los puntos salen 24px por fuera de la tarjeta para
+  no recortar el contorno negro ni la sombra dura del sticker.
+*/
+@utility dog-ear {
+  --ear: 3.5rem;
+  clip-path: polygon(
+    -24px -24px,
+    calc(100% + 24px) -24px,
+    calc(100% + 24px) calc(100% - var(--ear) - 24px),
+    calc(100% - var(--ear) - 24px) calc(100% + 24px),
+    -24px calc(100% + 24px)
+  );
 }
 
 @layer base {
