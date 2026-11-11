@@ -95,14 +95,15 @@ export function About() {
             </Reveal>
             <dl className="mt-10 space-y-5">
               {about.facts.map((fact) => (
-                <div key={fact.label} className="flex items-start gap-3">
-                  <span className="grid size-11 shrink-0 place-items-center rounded-full border-2 border-ink bg-paper">
-                    <Icon name={fact.icon} />
-                  </span>
-                  <div>
-                    <dt className="text-sm font-semibold">{fact.label}</dt>
-                    <dd className="text-lg leading-snug font-bold">{fact.value}</dd>
-                  </div>
+                // cada grupo es un div con su <dt> y su <dd> directos (así lo exige HTML)
+                <div key={fact.label} className="relative min-h-11 pl-14">
+                  <dt className="text-sm font-semibold">
+                    <span className="absolute top-0 left-0 grid size-11 place-items-center rounded-full border-2 border-ink bg-paper">
+                      <Icon name={fact.icon} />
+                    </span>
+                    {fact.label}
+                  </dt>
+                  <dd className="text-lg leading-snug font-bold">{fact.value}</dd>
                 </div>
               ))}
             </dl>
