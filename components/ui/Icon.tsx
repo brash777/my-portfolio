@@ -70,7 +70,15 @@ const paths = {
   ),
   chevronLeft: <path d="m15 5-7 7 7 7" />,
   chevronRight: <path d="m9 5 7 7-7 7" />,
-  quote: <path d="M10 7H6.5A2.5 2.5 0 0 0 4 9.5V13h5v5H4M20 7h-3.5A2.5 2.5 0 0 0 14 9.5V13h5v5h-5" />,
+  // comillas rellenas (”): círculo + colita, sin trazo
+  quote: (
+    <g fill="currentColor" stroke="none">
+      <circle cx="7" cy="9.5" r="3" />
+      <path d="M10 9.5c0 4.2-2.1 6.9-5.3 8l-.7-1.5c2-.9 3.2-2.6 3.3-4.9Z" />
+      <circle cx="16.5" cy="9.5" r="3" />
+      <path d="M19.5 9.5c0 4.2-2.1 6.9-5.3 8l-.7-1.5c2-.9 3.2-2.6 3.3-4.9Z" />
+    </g>
+  ),
   person: (
     <>
       <circle cx="12" cy="8" r="4" />
