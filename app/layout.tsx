@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Hubot_Sans, JetBrains_Mono, Mona_Sans } from "next/font/google";
+import { site } from "@/data/site";
 import "./globals.css";
 
 // Hubot Sans: títulos (se usa angosta con el eje de ancho "wdth")
@@ -22,8 +23,8 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Portafolio",
-  description: "Portafolio personal",
+  title: site.meta.title,
+  description: site.meta.description,
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
