@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Hubot_Sans, JetBrains_Mono, Mona_Sans } from "next/font/google";
 import { site } from "@/data/site";
+import { siteUrl } from "@/lib/siteUrl";
 import "./globals.css";
 
 // Hubot Sans: títulos (se usa angosta con el eje de ancho "wdth")
@@ -20,11 +21,20 @@ const mona = Mona_Sans({
 const jetbrains = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-jetbrains",
+  preload: false, // no se precarga: así no le quita velocidad a la foto del hero
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: site.meta.title,
   description: site.meta.description,
+  openGraph: {
+    title: site.meta.title,
+    description: site.meta.description,
+    locale: "es_CO",
+    type: "website",
+  },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
