@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
 import { Icon } from "@/components/ui/Icon";
 import { ProjectCover } from "@/components/ui/ProjectCover";
@@ -182,6 +183,7 @@ export default async function ProjectPage(props: PageProps<"/projects/[slug]">) 
           </div>
         </article>
       </main>
+      <Footer linkPrefix="/" />
     </>
   );
 }
