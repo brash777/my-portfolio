@@ -130,9 +130,9 @@ export function Hero() {
           <p className="mx-auto mt-6 max-w-sm text-sm">{hero.flip.hint}</p>
 
           <ul aria-label={hero.stackLabel} className="mx-auto mt-6 flex max-w-sm flex-wrap gap-3">
-            {hero.stack.map((tech, index) => (
-              <li key={tech}>
-                <TechBadge name={tech} className={tilts[index % tilts.length]} />
+            {hero.stack.map((item, index) => (
+              <li key={item.name}>
+                <TechBadge tech={item} className={tilts[index % tilts.length]} />
               </li>
             ))}
           </ul>

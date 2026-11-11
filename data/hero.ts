@@ -1,4 +1,5 @@
 import { site } from "@/data/site";
+import { tech } from "@/data/tech";
 import type { HeroContent } from "@/types";
 
 // Textos del Hero y del CV resumido (borrador: edítalos con tus palabras)
@@ -9,7 +10,7 @@ export const hero: HeroContent = {
     "Construyo aplicaciones completas, desde la base de datos hasta la pantalla. Mi proyecto más fuerte es Flux IA, una app de finanzas personales con asistente de IA. Estoy aprendiendo todos los días y me gusta que lo que hago funcione y se vea bien.",
   githubButton: "Ver GitHub",
   stackLabel: "Tecnologías que uso",
-  stack: ["Java", "Spring Boot", "PostgreSQL", "Supabase", "TypeScript", "Next.js", "Tailwind CSS", "GSAP"],
+  stack: [tech.java, tech.springBoot, tech.postgresql, tech.supabase, tech.typescript, tech.nextjs, tech.tailwind, tech.gsap],
   code: {
     fileName: "johan.ts",
     variable: "johan",

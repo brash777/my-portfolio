@@ -17,6 +17,7 @@ export const site: SiteInfo = {
   linkedinUrl: "https://www.linkedin.com/in/joan-stib-mosquera-montilla-30b370449/",
   cvUrl: null, // TODO: URL pública del CV en Google Drive ("cualquier persona con el enlace puede ver")
   emails: [], // TODO: confirmar qué correo mostrar (dijo "el de GitHub")
+  relationship: null, // TODO: el profe lo pidió; falta el texto (ej. "Soltero"). Con null no se muestra
   meta: {
     // borrador
     title: "Johan Mosquera | Full Stack Developer junior",
