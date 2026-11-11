@@ -199,6 +199,10 @@ export interface ProjectsContent extends SectionIntro {
   demoButton: string;
   builtWith: string;
   emptyFilter: string;
+  /** "{n}" se reemplaza por la cantidad de proyectos que se están mostrando */
+  resultsLabel: string;
+  /** "{name}" se reemplaza por el nombre del proyecto */
+  repoLinkLabel: string;
   detail: {
     back: string;
     roleLabel: string;
