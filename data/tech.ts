@@ -27,6 +27,7 @@ export const tech = {
   git: { name: "Git", icon: "/images/icons/git.svg" },
   github: { name: "GitHub", icon: "/images/icons/github.svg" },
   vscode: { name: "VS Code", icon: "/images/icons/vscode.svg" },
+  vercel: { name: "Vercel", icon: "/images/icons/vercel.svg" },
   groq: { name: "Groq (IA)" },
   anthropic: { name: "API de Anthropic", icon: "/images/icons/anthropic.svg" },
   claudeCode: { name: "Claude Code", icon: "/images/icons/claude.svg" },
