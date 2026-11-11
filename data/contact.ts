@@ -19,8 +19,8 @@ export const contactContent: ContactContent = {
       messageShort: "Escribe un mensaje de al menos 10 caracteres.",
     },
     success: "¡Mensaje enviado! Te respondo pronto.",
-    sendError: "No se pudo enviar el mensaje. Inténtalo otra vez o escríbeme por LinkedIn.",
-    notConnected: "Este formulario todavía no envía mensajes. Mientras tanto, escríbeme por LinkedIn.",
+    sendError: "No se pudo enviar el mensaje. Inténtalo otra vez o escríbeme por",
+    notConnected: "Este formulario todavía no envía mensajes. Copia lo que escribiste y mándamelo por",
   },
   // TODO: crear un formulario gratis en https://formspree.io y pegar aquí su URL
   // (por ejemplo "https://formspree.io/f/abcdwxyz"). Con null, el formulario avisa que no está conectado.

@@ -17,11 +17,11 @@ export const projectsContent: ProjectsContent = {
   allFilter: "Todos",
   categoryLabels: { class: "De clase", work: "Trabajo", freelance: "Freelance" },
   statusLabels: { live: "Publicado", completed: "Terminado", "in-progress": "En desarrollo" },
-  viewDetails: "Ver detalles",
+  viewDetails: "Ver el proyecto",
   repoButton: "Ver el código",
   demoButton: "Ver demo",
   builtWith: "Hecho con",
-  emptyFilter: "Todavía no hay proyectos de este tipo.",
+  emptyFilter: "Todavía no hay proyectos de este tipo. Mira todos con el filtro «Todos».",
   resultsLabel: "Mostrando {n} proyectos",
   repoLinkLabel: "Ver el código de {name} en GitHub",
   detail: {
