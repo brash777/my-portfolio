@@ -1,8 +1,8 @@
 import { Icon } from "@/components/ui/Icon";
+import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { kindIcon, TimelineItem } from "@/components/ui/TimelineItem";
 import { experience, experienceContent as content } from "@/data/experience";
-import { cn } from "@/lib/utils";
 
 /**
  * Experiencia (azul): línea de tiempo vertical.
@@ -34,14 +34,13 @@ export function Experience() {
                   {/* nodo de la línea con el ícono del tipo */}
                   <span
                     aria-hidden="true"
-                    className="absolute top-5 left-5 z-10 grid size-11 -translate-x-1/2 place-items-center rounded-full border-3 border-ink bg-paper text-ink lg:left-1/2"
+                    className="timeline-node absolute top-5 left-5 z-10 grid size-11 -translate-x-1/2 place-items-center rounded-full border-3 border-ink bg-paper text-ink lg:left-1/2"
                   >
                     <Icon name={kindIcon[item.kind]} />
                   </span>
-                  <TimelineItem
-                    item={item}
-                    className={cn(isLeft ? "lg:col-start-1 lg:-rotate-1" : "lg:col-start-2 lg:rotate-1")}
-                  />
+                  <Reveal className={isLeft ? "lg:col-start-1" : "lg:col-start-2"}>
+                    <TimelineItem item={item} className={isLeft ? "lg:-rotate-1" : "lg:rotate-1"} />
+                  </Reveal>
                 </li>
               );
             })}

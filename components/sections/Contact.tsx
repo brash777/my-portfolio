@@ -1,7 +1,9 @@
 import Image from "next/image";
 import { ContactForm } from "@/components/ui/ContactForm";
 import { Icon } from "@/components/ui/Icon";
+import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { TiltCard } from "@/components/ui/TiltCard";
 import { contactContent as content } from "@/data/contact";
 import { site, socialLinks, ui } from "@/data/site";
 import { cn, displayUrl } from "@/lib/utils";
@@ -21,22 +23,28 @@ export function Contact() {
           <ul className="mt-5 space-y-5">
             {socialLinks.map((link, index) => (
               <li key={link.label}>
-                <a
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={cn(
-                    "sticker flex items-center gap-4 rounded-2xl bg-paper p-4 transition-transform duration-200 hover:-translate-y-1",
-                    tilts[index % tilts.length],
-                  )}
-                >
-                  {link.icon && <Image src={link.icon} alt="" width={36} height={36} unoptimized className="size-9" />}
-                  <span className="flex min-w-0 flex-col">
-                    <span className="text-lg font-bold">{link.label}</span>
-                    <span className="text-sm break-all">{displayUrl(link.href)}</span>
-                  </span>
-                  <span className="sr-only"> {ui.opensNewTab}</span>
-                </a>
+                <Reveal variant="slap" delay={index * 120}>
+                  <TiltCard>
+                    <a
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={cn(
+                        "sticker flex items-center gap-4 rounded-2xl bg-paper p-4 transition-transform duration-200 hover:-translate-y-1",
+                        tilts[index % tilts.length],
+                      )}
+                    >
+                      {link.icon && (
+                        <Image src={link.icon} alt="" width={36} height={36} unoptimized className="size-9" />
+                      )}
+                      <span className="flex min-w-0 flex-col">
+                        <span className="text-lg font-bold">{link.label}</span>
+                        <span className="text-sm break-all">{displayUrl(link.href)}</span>
+                      </span>
+                      <span className="sr-only"> {ui.opensNewTab}</span>
+                    </a>
+                  </TiltCard>
+                </Reveal>
               </li>
             ))}
             {site.emails.map((email) => (

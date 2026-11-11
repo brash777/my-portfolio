@@ -30,7 +30,13 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="es" className={`${hubot.variable} ${mona.variable} ${jetbrains.variable} antialiased`}>
-      <body>{children}</body>
+      <body>
+        {/* sin JavaScript no hay animaciones de entrada: se muestra todo de una */}
+        <noscript>
+          <style>{"[data-reveal]{opacity:1!important;transform:none!important}"}</style>
+        </noscript>
+        {children}
+      </body>
     </html>
   );
 }

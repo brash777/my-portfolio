@@ -2,6 +2,7 @@ import Image from "next/image";
 import { CodePanel } from "@/components/ui/CodePanel";
 import { CvButton } from "@/components/ui/CvButton";
 import { FlipCard } from "@/components/ui/FlipCard";
+import { HeroDecor } from "@/components/ui/HeroDecor";
 import { TechBadge } from "@/components/ui/TechBadge";
 import { hero } from "@/data/hero";
 import { services } from "@/data/services";
@@ -74,15 +75,16 @@ export function Hero() {
     <section
       id="hero"
       aria-labelledby="hero-title"
-      className="overflow-hidden bg-blue px-5 pt-32 pb-24 text-paper [--focus:var(--color-paper)] sm:px-8 lg:pt-40"
+      className="relative overflow-hidden bg-blue px-5 pt-32 pb-24 text-paper [--focus:var(--color-paper)] sm:px-8 lg:pt-40"
     >
+      <HeroDecor />
       {/* en celular el orden es: intro, foto y panel de código; en computador la foto va a la derecha */}
-      <div className="mx-auto grid max-w-6xl items-center gap-x-12 gap-y-14 lg:grid-cols-12">
+      <div className="relative mx-auto grid max-w-6xl items-center gap-x-12 gap-y-14 lg:grid-cols-12">
         <div className="lg:col-span-7 lg:row-start-1">
           <p className="text-lg font-semibold">{hero.kicker}</p>
           <h1 id="hero-title" className="mt-4">
             <span className="block text-title">{hero.greeting}</span>
-            <span className="-ml-1 block text-hero">{site.name}</span>
+            <span className="-ml-1 block origin-bottom-left animate-slap-in text-hero [animation-delay:120ms]">{site.name}</span>
           </h1>
           <p className="mt-8 max-w-xl text-lg leading-relaxed">{hero.description}</p>
 
@@ -102,8 +104,8 @@ export function Hero() {
         </div>
 
         <div className="lg:col-span-5 lg:col-start-8 lg:row-span-2 lg:row-start-1">
-          <div className="relative mx-auto max-w-sm">
-            <p className="sticker-sm absolute -top-5 -left-3 z-10 -rotate-6 rounded-full bg-red px-4 py-1.5 font-display text-xl font-extrabold text-paper font-stretch-condensed">
+          <div className="relative mx-auto max-w-sm animate-slap-in [animation-delay:250ms]">
+            <p className="sticker-sm absolute -top-5 -left-3 z-10 -rotate-6 animate-pop-in rounded-full bg-red [animation-delay:650ms] px-4 py-1.5 font-display text-xl font-extrabold text-paper font-stretch-condensed">
               {site.role}
             </p>
             <FlipCard
@@ -131,7 +133,7 @@ export function Hero() {
 
           <ul aria-label={hero.stackLabel} className="mx-auto mt-6 flex max-w-sm flex-wrap gap-3">
             {hero.stack.map((item, index) => (
-              <li key={item.name}>
+              <li key={item.name} className="animate-pop-in" style={{ animationDelay: `${800 + index * 70}ms` }}>
                 <TechBadge tech={item} className={tilts[index % tilts.length]} />
               </li>
             ))}
@@ -142,7 +144,7 @@ export function Hero() {
           fileName={hero.code.fileName}
           variable={hero.code.variable}
           fields={hero.code.fields}
-          className="w-full max-w-lg -rotate-1 self-start lg:col-span-7 lg:row-start-2"
+          className="w-full max-w-lg -rotate-1 animate-rise-in self-start [animation-delay:400ms] lg:col-span-7 lg:row-start-2"
         />
       </div>
     </section>

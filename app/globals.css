@@ -30,6 +30,40 @@
   --text-title--line-height: 0.92;
 
   --ease-slap: cubic-bezier(0.34, 1.56, 0.64, 1); /* rebote de un sticker al pegarse */
+
+  /* animaciones de entrada del hero (solo transform y opacity) */
+  --animate-slap-in: slap-in 0.8s var(--ease-slap) both;
+  --animate-pop-in: pop-in 0.5s var(--ease-slap) both;
+  --animate-rise-in: rise-in 0.7s ease-out both;
+
+  @keyframes slap-in {
+    from {
+      transform: scale(1.18) rotate(-6deg);
+    }
+    to {
+      transform: none;
+    }
+  }
+  @keyframes pop-in {
+    from {
+      opacity: 0;
+      transform: scale(0.3) rotate(-12deg);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes rise-in {
+    from {
+      opacity: 0;
+      transform: translateY(1.5rem);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
 }
 
 /* las fuentes vienen de next/font (app/layout.tsx); "inline" usa el valor final */
@@ -123,5 +157,100 @@
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
     }
+  }
+}
+
+/* ---------- Movimiento al hacer scroll ---------- */
+
+/* Reveal: el contenido entra cuando aparece en pantalla (components/ui/Reveal.tsx) */
+[data-reveal] {
+  transition:
+    opacity 0.5s ease-out,
+    transform 0.8s var(--ease-slap);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+[data-reveal="rise"]:not([data-visible]) {
+  opacity: 0;
+  transform: translateY(2.5rem);
+}
+[data-reveal="slap"]:not([data-visible]) {
+  opacity: 0;
+  transform: scale(1.18) rotate(-5deg);
+}
+
+/* Borde troquelado en zigzag entre secciones (components/ui/SectionDivider.tsx) */
+.zigzag {
+  height: 12px;
+  background:
+    linear-gradient(135deg, var(--zz-from) 25%, transparent 25%) -12px 0 / 24px 24px repeat-x,
+    linear-gradient(225deg, var(--zz-from) 25%, transparent 25%) -12px 0 / 24px 24px repeat-x,
+    var(--zz-to);
+}
+
+/*
+  Animaciones ligadas al scroll, solo en CSS ("scroll-driven animations").
+  Si el navegador no las soporta, la línea se ve completa y los stickers quietos.
+*/
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    /* la línea de tiempo se dibuja: su punta sigue la mitad de la pantalla */
+    .timeline-line {
+      transform-origin: top;
+      animation: draw-line linear both;
+      animation-timeline: view();
+      animation-range: cover 50vh cover calc(100% - 50vh);
+    }
+    /* cada punto de la línea aparece al entrar */
+    .timeline-node {
+      animation: pop-node linear both;
+      animation-timeline: view();
+      animation-range: entry 10% entry 90%;
+    }
+    /* parallax: los stickers sueltos del hero se mueven a otra velocidad */
+    .parallax-slow {
+      animation: drift-slow linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 120vh;
+    }
+    .parallax-fast {
+      animation: drift-fast linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 120vh;
+    }
+  }
+}
+
+@keyframes draw-line {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+@keyframes pop-node {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+@keyframes drift-slow {
+  to {
+    transform: translateY(-90px) rotate(10deg);
+  }
+}
+@keyframes drift-fast {
+  to {
+    transform: translateY(-240px) rotate(-25deg);
+  }
+}
+
+/* con "reducir movimiento" todo se muestra quieto y completo */
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }

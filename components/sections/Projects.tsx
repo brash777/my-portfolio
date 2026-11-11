@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ProjectCover } from "@/components/ui/ProjectCover";
 import { ProjectsGrid } from "@/components/ui/ProjectsGrid";
+import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { StatusTag } from "@/components/ui/StatusTag";
 import { TechBadge } from "@/components/ui/TechBadge";
@@ -71,7 +72,9 @@ export function Projects() {
         <ul className="mt-8 space-y-12">
           {featured.map((project, index) => (
             <li key={project.slug} className="lg:sticky" style={{ top: `${7 + index * 1.5}rem` }}>
-              <FeaturedProject project={project} />
+              <Reveal>
+                <FeaturedProject project={project} />
+              </Reveal>
             </li>
           ))}
         </ul>
