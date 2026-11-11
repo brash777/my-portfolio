@@ -1,13 +1,118 @@
-import { SectionHeading } from "@/components/ui/SectionHeading";
-import { navLabel, ui } from "@/data/site";
+import Image from "next/image";
+import { HobbyCard } from "@/components/ui/HobbyCard";
+import { Icon } from "@/components/ui/Icon";
+import { about } from "@/data/about";
+import { hobbies } from "@/data/hobbies";
+import { profileImages, site, socialLinks, ui } from "@/data/site";
+import { displayUrl } from "@/lib/utils";
 
-/** Acerca de mí (amarillo). Base vacía: el contenido llega en la Fase 2. */
+// giro de cada sticker de hobby, para que se vean "pegados a mano"
+const tilts = ["-rotate-2", "rotate-1", "-rotate-1"];
+
+/** Enlaces con la URL visible como texto (lo pidió el profe): CV, LinkedIn y GitHub */
+function AboutLinks() {
+  return (
+    <ul className="mt-5 grid gap-4 sm:grid-cols-2">
+      <li>
+        {site.cvUrl ? (
+          <a
+            href={site.cvUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="sticker-sm flex h-full flex-col rounded-2xl bg-paper px-4 py-3 transition-transform duration-200 hover:-translate-y-0.5"
+          >
+            <span className="font-bold">{ui.cvLabel}</span>
+            <span className="text-sm break-all underline decoration-2 underline-offset-2">{displayUrl(site.cvUrl)}</span>
+            <span className="sr-only"> {ui.opensNewTab}</span>
+          </a>
+        ) : (
+          <p className="flex h-full flex-col rounded-2xl border-3 border-dashed border-ink px-4 py-3">
+            <span className="font-bold">{ui.cvLabel}</span>
+            <span className="text-sm">{ui.cvPendingDetail}</span>
+          </p>
+        )}
+      </li>
+      {socialLinks.map((link) => (
+        <li key={link.label}>
+          <a
+            href={link.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="sticker-sm flex h-full items-center gap-3 rounded-2xl bg-paper px-4 py-3 transition-transform duration-200 hover:-translate-y-0.5"
+          >
+            {link.icon && <Image src={link.icon} alt="" width={24} height={24} unoptimized className="size-6" />}
+            <span className="flex min-w-0 flex-col">
+              <span className="font-bold">{link.label}</span>
+              <span className="text-sm break-all underline decoration-2 underline-offset-2">{displayUrl(link.href)}</span>
+            </span>
+            <span className="sr-only"> {ui.opensNewTab}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+/** Acerca de mí (amarillo): texto, avatar, datos, enlaces y hobbies */
 export function About() {
   return (
-    <section id="about" aria-labelledby="about-title" className="min-h-[80svh] bg-yellow text-ink px-5 py-24 sm:px-8">
+    <section id="about" aria-labelledby="about-title" className="bg-yellow px-5 py-24 text-ink sm:px-8 lg:py-32">
       <div className="mx-auto max-w-6xl">
-        <SectionHeading id="about-title">{navLabel("about")}</SectionHeading>
-        <p className="mt-4 text-lg">{ui.sectionPending}</p>
+        <div className="grid gap-14 lg:grid-cols-12 lg:gap-16">
+          <div className="lg:col-span-7">
+            <h2 id="about-title" className="text-title">
+              {about.title}
+              {/* el nombre va en azul: sobre amarillo da 5:1 de contraste */}
+              <span className="mt-1 block text-blue">{site.fullName}</span>
+            </h2>
+            {about.paragraphs.map((paragraph) => (
+              <p key={paragraph} className="mt-6 max-w-2xl text-lg leading-relaxed">
+                {paragraph}
+              </p>
+            ))}
+
+            <h3 className="mt-12 text-3xl">{about.linksTitle}</h3>
+            <AboutLinks />
+          </div>
+
+          <div className="lg:order-first lg:col-span-5">
+            <div className="sticker relative mx-auto size-56 rotate-3 overflow-hidden rounded-full sm:size-64 lg:mx-0">
+              <Image
+                src={profileImages.avatar.src}
+                alt={profileImages.avatar.alt}
+                fill
+                placeholder="blur"
+                sizes="256px"
+                className="object-cover"
+              />
+            </div>
+            <dl className="mt-10 space-y-5">
+              {about.facts.map((fact) => (
+                <div key={fact.label} className="flex items-start gap-3">
+                  <span className="grid size-11 shrink-0 place-items-center rounded-full border-2 border-ink bg-paper">
+                    <Icon name={fact.icon} />
+                  </span>
+                  <div>
+                    <dt className="text-sm font-semibold">{fact.label}</dt>
+                    <dd className="text-lg leading-snug font-bold">{fact.value}</dd>
+                  </div>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </div>
+
+        <div className="mt-24">
+          <h3 className="text-5xl sm:text-6xl">{about.hobbiesTitle}</h3>
+          <p className="mt-3 text-lg">{about.hobbiesLead}</p>
+          <ul className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            {hobbies.map((hobby, index) => (
+              <li key={hobby.id}>
+                <HobbyCard hobby={hobby} className={tilts[index % tilts.length]} />
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </section>
   );
