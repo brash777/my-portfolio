@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { HobbyCard } from "@/components/ui/HobbyCard";
 import { Icon } from "@/components/ui/Icon";
+import { Reveal } from "@/components/ui/Reveal";
 import { about } from "@/data/about";
 import { hobbies } from "@/data/hobbies";
 import { profileImages, site, socialLinks, ui } from "@/data/site";
@@ -22,7 +23,9 @@ function AboutLinks() {
             className="sticker-sm flex h-full flex-col rounded-2xl bg-paper px-4 py-3 transition-transform duration-200 hover:-translate-y-0.5"
           >
             <span className="font-bold">{ui.cvLabel}</span>
-            <span className="text-sm break-all underline decoration-2 underline-offset-2">{displayUrl(site.cvUrl)}</span>
+            <span className="text-sm break-all underline decoration-2 underline-offset-2">
+              {displayUrl(site.cvUrl)}
+            </span>
             <span className="sr-only"> {ui.opensNewTab}</span>
           </a>
         ) : (
@@ -43,7 +46,9 @@ function AboutLinks() {
             {link.icon && <Image src={link.icon} alt="" width={24} height={24} unoptimized className="size-6" />}
             <span className="flex min-w-0 flex-col">
               <span className="font-bold">{link.label}</span>
-              <span className="text-sm break-all underline decoration-2 underline-offset-2">{displayUrl(link.href)}</span>
+              <span className="text-sm break-all underline decoration-2 underline-offset-2">
+                {displayUrl(link.href)}
+              </span>
             </span>
             <span className="sr-only"> {ui.opensNewTab}</span>
           </a>
@@ -76,16 +81,18 @@ export function About() {
           </div>
 
           <div className="lg:order-first lg:col-span-5">
-            <div className="sticker relative mx-auto size-56 rotate-3 overflow-hidden rounded-full sm:size-64 lg:mx-0">
-              <Image
-                src={profileImages.avatar.src}
-                alt={profileImages.avatar.alt}
-                fill
-                placeholder="blur"
-                sizes="256px"
-                className="object-cover"
-              />
-            </div>
+            <Reveal variant="slap">
+              <div className="sticker relative mx-auto size-56 rotate-3 overflow-hidden rounded-full sm:size-64 lg:mx-0">
+                <Image
+                  src={profileImages.avatar.src}
+                  alt={profileImages.avatar.alt}
+                  fill
+                  placeholder="blur"
+                  sizes="256px"
+                  className="object-cover"
+                />
+              </div>
+            </Reveal>
             <dl className="mt-10 space-y-5">
               {about.facts.map((fact) => (
                 <div key={fact.label} className="flex items-start gap-3">
@@ -108,7 +115,10 @@ export function About() {
           <ul className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {hobbies.map((hobby, index) => (
               <li key={hobby.id}>
-                <HobbyCard hobby={hobby} className={tilts[index % tilts.length]} />
+                {/* los hobbies se "pegan" uno tras otro */}
+                <Reveal variant="slap" delay={index * 140} className="h-full">
+                  <HobbyCard hobby={hobby} className={tilts[index % tilts.length]} />
+                </Reveal>
               </li>
             ))}
           </ul>
