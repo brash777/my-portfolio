@@ -56,6 +56,22 @@
     3px 3px 0 2px var(--color-ink);
 }
 
+/*
+  Esquina doblada ("dog-ear") de la tarjeta del hero: corta la esquina inferior
+  derecha en diagonal (--ear). Los puntos salen 24px por fuera de la tarjeta para
+  no recortar el contorno negro ni la sombra dura del sticker.
+*/
+@utility dog-ear {
+  --ear: 3.5rem;
+  clip-path: polygon(
+    -24px -24px,
+    calc(100% + 24px) -24px,
+    calc(100% + 24px) calc(100% - var(--ear) - 24px),
+    calc(100% - var(--ear) - 24px) calc(100% + 24px),
+    -24px calc(100% + 24px)
+  );
+}
+
 @layer base {
   html {
     color-scheme: light;
