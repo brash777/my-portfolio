@@ -48,6 +48,50 @@ export interface SiteInfo {
   };
 }
 
+export interface Service {
+  title: string;
+  description: string;
+}
+
+/** una línea del panel tipo editor de código del hero */
+export interface CodeField {
+  key: string;
+  value: string | boolean | string[];
+}
+
+export interface HeroContent {
+  /** línea pequeña sobre el saludo */
+  kicker: string;
+  greeting: string;
+  description: string;
+  githubButton: string;
+  /** tecnologías que se muestran como stickers */
+  stack: string[];
+  code: {
+    fileName: string;
+    variable: string;
+    fields: CodeField[];
+  };
+  flip: {
+    hint: string;
+    toBack: string;
+    toFront: string;
+  };
+  /** reverso de la tarjeta: CV resumido */
+  cv: {
+    title: string;
+    whoTitle: string;
+    who: string;
+    doTitle: string;
+    do: string;
+    servicesTitle: string;
+    experienceTitle: string;
+    experience: string[];
+    moreButton: string;
+    cvLinkLabel: string;
+  };
+}
+
 /** textos cortos de la interfaz (botones, etiquetas de accesibilidad) */
 export interface UiText {
   skipToContent: string;
