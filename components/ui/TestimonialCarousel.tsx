@@ -50,6 +50,7 @@ export function TestimonialCarousel({ testimonials }: { testimonials: Testimonia
     <div>
       <ul
         ref={trackRef}
+        aria-label={content.title}
         className="relative -mx-4 flex snap-x snap-mandatory scroll-px-4 gap-6 overflow-x-auto px-4 pt-6 pb-6 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         {testimonials.map((testimonial, index) => (
