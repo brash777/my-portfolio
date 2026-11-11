@@ -28,8 +28,8 @@ export const site: SiteInfo = {
 
 // Redes (se usan en el menú móvil, Contacto y Footer)
 export const socialLinks: SocialLink[] = [
-  { label: "GitHub", href: site.githubUrl },
-  { label: "LinkedIn", href: site.linkedinUrl },
+  { label: "GitHub", href: site.githubUrl, icon: "/images/icons/github.svg" },
+  { label: "LinkedIn", href: site.linkedinUrl, icon: "/images/icons/linkedin.svg" },
 ];
 
 // Fotos de perfil con su texto alternativo (borrador)
@@ -69,6 +69,8 @@ export const ui: UiText = {
   closeMenu: "Cerrar menú",
   cvButton: "Ver CV",
   cvPending: "CV en camino",
+  cvLabel: "CV",
+  cvPendingDetail: "Pronto en Google Drive",
   opensNewTab: "(se abre en otra pestaña)",
   homeLink: "Ir al inicio",
   sectionPending: "Sección en construcción",

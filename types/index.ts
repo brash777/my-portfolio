@@ -18,6 +18,8 @@ export interface NavItem {
 export interface SocialLink {
   label: string;
   href: string;
+  /** ícono de marca en public/images/icons/ */
+  icon?: string;
 }
 
 /** tecnología con su ícono (ruta en public/images/icons/); sin ícono se muestra solo el nombre */
@@ -119,6 +121,8 @@ export interface UiText {
   closeMenu: string;
   cvButton: string;
   cvPending: string;
+  cvLabel: string;
+  cvPendingDetail: string;
   opensNewTab: string;
   homeLink: string;
   sectionPending: string;
