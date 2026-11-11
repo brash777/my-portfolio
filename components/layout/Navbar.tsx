@@ -55,7 +55,10 @@ export function Navbar() {
           </ul>
 
           <div className="flex items-center gap-2">
-            <CvButton className="hidden sm:inline-flex" />
+            {/* el envoltorio oculta el botón en celular; en el menú móvil sí aparece */}
+            <div className="hidden sm:block">
+              <CvButton />
+            </div>
             <MobileMenu activeId={activeId} />
           </div>
         </nav>
