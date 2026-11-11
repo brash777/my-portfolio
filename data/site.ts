@@ -1,4 +1,6 @@
-import type { NavItem, SiteInfo, UiText } from "@/types";
+import aboutAvatar from "@/public/images/about/about-avatar.webp";
+import heroProfile from "@/public/images/profile/hero-profile.webp";
+import type { NavItem, SiteImage, SiteInfo, UiText } from "@/types";
 
 // Datos personales. Lo marcado TODO está pendiente de confirmar.
 export const site: SiteInfo = {
@@ -17,6 +19,18 @@ export const site: SiteInfo = {
     title: "Johan Mosquera | Full Stack Developer junior",
     description:
       "Portafolio de Johan Mosquera, estudiante de desarrollo de software en Pasto. Aquí muestro las apps que construyo, como Flux IA y FlowStore.",
+  },
+};
+
+// Fotos de perfil con su texto alternativo (borrador)
+export const profileImages: { hero: SiteImage; avatar: SiteImage } = {
+  hero: {
+    src: heroProfile,
+    alt: "Johan con gorra negra y gafas, sentado frente a su portátil en una sala de estudio",
+  },
+  avatar: {
+    src: aboutAvatar,
+    alt: "Retrato de Johan con gorra negra y gafas",
   },
 };
 
