@@ -14,21 +14,21 @@ const tilts = ["-rotate-3", "rotate-2", "-rotate-1", "rotate-3", "rotate-1", "-r
 function CvSummary() {
   const { cv } = hero;
   return (
-    <div className="flex h-full flex-col gap-4 bg-yellow px-5 pt-10 pb-16 text-ink [--focus:var(--color-ink)] sm:px-6">
-      <h2 className="text-4xl leading-none">{cv.title}</h2>
+    <div className="flex h-full flex-col gap-3 bg-yellow px-4 pt-9 pb-14 text-ink [--focus:var(--color-ink)] sm:gap-4 sm:px-6 sm:pt-10 sm:pb-16">
+      <h2 className="text-3xl leading-none sm:text-4xl">{cv.title}</h2>
 
       <div>
-        <h3 className="text-xl leading-tight">{cv.whoTitle}</h3>
+        <h3 className="text-lg leading-tight sm:text-xl">{cv.whoTitle}</h3>
         <p className="mt-1 text-sm leading-snug">{cv.who}</p>
       </div>
 
       <div>
-        <h3 className="text-xl leading-tight">{cv.doTitle}</h3>
+        <h3 className="text-lg leading-tight sm:text-xl">{cv.doTitle}</h3>
         <p className="mt-1 text-sm leading-snug">{cv.do}</p>
       </div>
 
       <div>
-        <h3 className="text-xl leading-tight">{cv.servicesTitle}</h3>
+        <h3 className="text-lg leading-tight sm:text-xl">{cv.servicesTitle}</h3>
         <ul className="mt-1.5 flex flex-wrap gap-1.5">
           {services.map((service) => (
             <li key={service.title} className="rounded-full border-2 border-ink px-2.5 py-0.5 text-xs font-semibold">
@@ -39,7 +39,7 @@ function CvSummary() {
       </div>
 
       <div>
-        <h3 className="text-xl leading-tight">{cv.experienceTitle}</h3>
+        <h3 className="text-lg leading-tight sm:text-xl">{cv.experienceTitle}</h3>
         <ul className="mt-1 list-disc space-y-1 pl-4 text-sm leading-snug">
           {cv.experience.map((item) => (
             <li key={item}>{item}</li>
@@ -76,8 +76,9 @@ export function Hero() {
       aria-labelledby="hero-title"
       className="overflow-hidden bg-blue px-5 pt-32 pb-24 text-paper [--focus:var(--color-paper)] sm:px-8 lg:pt-40"
     >
-      <div className="mx-auto grid max-w-6xl items-center gap-x-12 gap-y-16 lg:grid-cols-12">
-        <div className="lg:col-span-7">
+      {/* en celular el orden es: intro, foto y panel de código; en computador la foto va a la derecha */}
+      <div className="mx-auto grid max-w-6xl items-center gap-x-12 gap-y-14 lg:grid-cols-12">
+        <div className="lg:col-span-7 lg:row-start-1">
           <p className="text-lg font-semibold">{hero.kicker}</p>
           <h1 id="hero-title" className="mt-4">
             <span className="block text-title">{hero.greeting}</span>
@@ -98,15 +99,9 @@ export function Hero() {
             </a>
           </div>
 
-          <CodePanel
-            fileName={hero.code.fileName}
-            variable={hero.code.variable}
-            fields={hero.code.fields}
-            className="mt-14 max-w-lg -rotate-1"
-          />
         </div>
 
-        <div className="lg:col-span-5">
+        <div className="lg:col-span-5 lg:col-start-8 lg:row-span-2 lg:row-start-1">
           <div className="relative mx-auto max-w-sm">
             <p className="sticker-sm absolute -top-5 -left-3 z-10 -rotate-6 rounded-full bg-red px-4 py-1.5 font-display text-xl font-extrabold text-paper font-stretch-condensed">
               {site.role}
@@ -142,6 +137,13 @@ export function Hero() {
             ))}
           </ul>
         </div>
+
+        <CodePanel
+          fileName={hero.code.fileName}
+          variable={hero.code.variable}
+          fields={hero.code.fields}
+          className="w-full max-w-lg -rotate-1 self-start lg:col-span-7 lg:row-start-2"
+        />
       </div>
     </section>
   );
