@@ -63,7 +63,9 @@ export function TimelineItem({ item, className }: { item: ExperienceItem; classN
           >
             {item.link.label}
             <Icon name="external" className="size-4" />
-            <span className="sr-only"> {ui.opensNewTab}</span>
+            <span className="sr-only">
+              : {item.title} {ui.opensNewTab}
+            </span>
           </a>
         ) : (
           <Link
