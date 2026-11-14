@@ -33,7 +33,7 @@ export function Navbar() {
       <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-5 sm:pt-4">
         <nav
           aria-label={ui.mainNav}
-          className="mx-auto flex max-w-6xl items-center justify-between gap-3 rounded-sticker border-3 border-ink bg-paper p-2 text-ink shadow-hard lg:pr-3"
+          className="mx-auto flex max-w-6xl items-center justify-between gap-3 rounded-sticker border-3 border-ink bg-paper p-2 text-ink shadow-hard [--focus:var(--color-ink)] lg:pr-3"
         >
           <Logo href={`${linkPrefix}#hero`} />
 

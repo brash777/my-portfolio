@@ -4,7 +4,9 @@ import { Icon } from "@/components/ui/Icon";
 import { Reveal } from "@/components/ui/Reveal";
 import { about } from "@/data/about";
 import { hobbies } from "@/data/hobbies";
+import { sectionPalettes } from "@/data/palettes";
 import { profileImages, site, socialLinks, ui } from "@/data/site";
+import { paletteZone } from "@/lib/palette";
 import { displayUrl } from "@/lib/utils";
 
 // giro de cada sticker de hobby, para que se vean "pegados a mano"
@@ -20,7 +22,7 @@ function AboutLinks() {
             href={site.cvUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="sticker-sm flex h-full flex-col rounded-2xl bg-paper px-4 py-3 transition-transform duration-200 hover:-translate-y-0.5"
+            className="sticker-sm flex h-full flex-col rounded-2xl bg-paper px-4 py-3 text-ink transition-transform duration-200 hover:-translate-y-0.5"
           >
             <span className="font-bold">{ui.cvLabel}</span>
             <span className="text-sm break-all underline decoration-2 underline-offset-2">
@@ -29,7 +31,7 @@ function AboutLinks() {
             <span className="sr-only"> {ui.opensNewTab}</span>
           </a>
         ) : (
-          <p className="flex h-full flex-col rounded-2xl border-3 border-dashed border-ink px-4 py-3">
+          <p className="flex h-full flex-col rounded-2xl border-3 border-dashed border-paper px-4 py-3">
             <span className="font-bold">{ui.cvLabel}</span>
             <span className="text-sm">{ui.cvPendingDetail}</span>
           </p>
@@ -41,7 +43,7 @@ function AboutLinks() {
             href={link.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="sticker-sm flex h-full items-center gap-3 rounded-2xl bg-paper px-4 py-3 transition-transform duration-200 hover:-translate-y-0.5"
+            className="sticker-sm flex h-full items-center gap-3 rounded-2xl bg-paper px-4 py-3 text-ink transition-transform duration-200 hover:-translate-y-0.5"
           >
             {link.icon && <Image src={link.icon} alt="" width={24} height={24} unoptimized className="size-6" />}
             <span className="flex min-w-0 flex-col">
@@ -58,17 +60,22 @@ function AboutLinks() {
   );
 }
 
-/** Acerca de mí (amarillo): texto, avatar, datos, enlaces y hobbies */
+/** Acerca de mí (fondo atardecer): texto, avatar, datos, enlaces y hobbies */
 export function About() {
   return (
-    <section id="about" aria-labelledby="about-title" className="bg-yellow px-5 py-24 text-ink sm:px-8 lg:py-32">
+    <section
+      id="about"
+      aria-labelledby="about-title"
+      {...paletteZone(sectionPalettes.about)}
+      className="px-5 py-24 text-paper [--focus:var(--color-paper)] sm:px-8 lg:py-32"
+    >
       <div className="mx-auto max-w-6xl">
         <div className="grid gap-14 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-7">
             <h2 id="about-title" className="text-title">
               {about.title}
-              {/* el nombre va en azul: sobre amarillo da 5:1 de contraste */}
-              <span className="mt-1 block text-blue">{site.fullName}</span>
+              {/* el nombre va en amarillo: da 4:1 o más aun donde brilla el fondo (es texto grande, pide 3:1) */}
+              <span className="mt-1 block text-yellow">{site.fullName}</span>
             </h2>
             {about.paragraphs.map((paragraph) => (
               <p key={paragraph} className="mt-6 max-w-2xl text-lg leading-relaxed">
@@ -98,7 +105,7 @@ export function About() {
                 // cada grupo es un div con su <dt> y su <dd> directos (así lo exige HTML)
                 <div key={fact.label} className="relative min-h-11 pl-14">
                   <dt className="text-sm font-semibold">
-                    <span className="absolute top-0 left-0 grid size-11 place-items-center rounded-full border-2 border-ink bg-paper">
+                    <span className="absolute top-0 left-0 grid size-11 place-items-center rounded-full border-2 border-ink bg-paper text-ink">
                       <Icon name={fact.icon} />
                     </span>
                     {fact.label}

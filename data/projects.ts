@@ -65,6 +65,11 @@ export const projects: Project[] = [
     role: "Proyecto propio: backend, frontend y diseño",
     year: 2026,
     accent: "violet",
+    // los colores reales de Flux IA (su fondo "aurora": base casi negra y brillos violeta, magenta e índigo)
+    palette: {
+      base: "#0A0614",
+      glows: ["rgb(109 43 239 / 0.55)", "rgb(178 59 255 / 0.35)", "rgb(42 26 168 / 0.45)"],
+    },
     cover: { src: fluxCover, alt: "Pantalla de inicio de Flux IA con saldo total, ingresos, gastos y movimientos recientes (datos de prueba)" },
     logo: { src: fluxIcon, alt: "Ícono de Flux IA: dos tarjetas de vidrio sobre fondo morado" },
     gallery: [
@@ -95,6 +100,11 @@ export const projects: Project[] = [
     role: "Proyecto universitario individual: backend y app de escritorio",
     year: 2026,
     accent: "red",
+    // los colores de la marca OFFGRID: negro tinta, rojo y un brillo verde lima
+    palette: {
+      base: "#0C0B0A",
+      glows: ["rgb(212 35 27 / 0.55)", "rgb(212 255 58 / 0.18)", "rgb(61 8 6 / 0.8)"],
+    },
     logo: { src: offgridLogo, alt: "Logo de OFFGRID, la marca de FlowStore" },
     gallery: [],
     repoUrl: "https://github.com/brash777/offgrid",

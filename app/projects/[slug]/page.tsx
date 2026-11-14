@@ -4,13 +4,15 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
+import { ChameleonBackground } from "@/components/ui/ChameleonBackground";
 import { Icon } from "@/components/ui/Icon";
 import { ProjectCover } from "@/components/ui/ProjectCover";
 import { StatusTag } from "@/components/ui/StatusTag";
 import { TechBadge } from "@/components/ui/TechBadge";
 import { getProject, projects, projectsContent as content } from "@/data/projects";
 import { site, ui } from "@/data/site";
-import { accentSurface } from "@/lib/accent";
+import { accentFill } from "@/lib/accent";
+import { paletteZone, projectPalette } from "@/lib/palette";
 import { statusIcon } from "@/lib/projects";
 import { cn } from "@/lib/utils";
 
@@ -37,13 +39,16 @@ export default async function ProjectPage(props: PageProps<"/projects/[slug]">) 
 
   const others = projects.filter((item) => item.slug !== project.slug);
   const { detail } = content;
+  // toda la página toma los colores de la app (Flux IA en violeta, FlowStore con los de OFFGRID…)
+  const palette = projectPalette(project);
 
   return (
     <>
+      <ChameleonBackground initial={palette} />
       <Navbar />
       <main id="main-content" tabIndex={-1} className="outline-none">
-        <article>
-          <header className={cn("px-5 pt-32 pb-16 sm:px-8 lg:pt-40", accentSurface[project.accent])}>
+        <article {...paletteZone(palette)} className="text-paper [--focus:var(--color-paper)]">
+          <header className="px-5 pt-32 pb-16 sm:px-8 lg:pt-40">
             <div className="mx-auto max-w-6xl">
               <Link
                 href="/#projects"
@@ -103,7 +108,7 @@ export default async function ProjectPage(props: PageProps<"/projects/[slug]">) 
             </div>
           </header>
 
-          <div className="bg-paper px-5 py-20 text-ink sm:px-8">
+          <div className="px-5 py-20 sm:px-8">
             <div className="mx-auto grid max-w-6xl gap-14 lg:grid-cols-12">
               <div className="lg:col-span-7">
                 {project.description.map((paragraph) => (
@@ -171,7 +176,7 @@ export default async function ProjectPage(props: PageProps<"/projects/[slug]">) 
                       href={`/projects/${item.slug}`}
                       className={cn(
                         "sticker-sm inline-flex rounded-full px-5 py-2.5 font-bold transition-transform duration-200 hover:-translate-y-0.5",
-                        accentSurface[item.accent],
+                        accentFill[item.accent],
                       )}
                     >
                       {item.name}

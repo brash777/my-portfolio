@@ -5,8 +5,10 @@ import { FlipCard } from "@/components/ui/FlipCard";
 import { HeroDecor } from "@/components/ui/HeroDecor";
 import { TechBadge } from "@/components/ui/TechBadge";
 import { hero } from "@/data/hero";
+import { sectionPalettes } from "@/data/palettes";
 import { services } from "@/data/services";
 import { profileImages, site, ui } from "@/data/site";
+import { paletteZone } from "@/lib/palette";
 
 // giro de cada sticker del stack, para que se vean "pegados a mano"
 const tilts = ["-rotate-3", "rotate-2", "-rotate-1", "rotate-3", "rotate-1", "-rotate-2"];
@@ -69,13 +71,14 @@ function CvSummary() {
   );
 }
 
-/** Inicio (azul): saludo, intro, botones, panel de código, foto flip y stack */
+/** Inicio (fondo azul eléctrico): saludo, intro, botones, panel de código, foto flip y stack */
 export function Hero() {
   return (
     <section
       id="hero"
       aria-labelledby="hero-title"
-      className="relative overflow-hidden bg-blue px-5 pt-32 pb-24 text-paper [--focus:var(--color-paper)] sm:px-8 lg:pt-40"
+      {...paletteZone(sectionPalettes.hero)}
+      className="relative overflow-hidden px-5 pt-32 pb-24 text-paper [--focus:var(--color-paper)] sm:px-8 lg:pt-40"
     >
       <HeroDecor />
       {/* en celular el orden es: intro, foto y panel de código; en computador la foto va a la derecha */}

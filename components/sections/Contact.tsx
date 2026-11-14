@@ -5,15 +5,22 @@ import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { TiltCard } from "@/components/ui/TiltCard";
 import { contactContent as content } from "@/data/contact";
+import { sectionPalettes } from "@/data/palettes";
 import { site, socialLinks, ui } from "@/data/site";
+import { paletteZone } from "@/lib/palette";
 import { cn, displayUrl } from "@/lib/utils";
 
 const tilts = ["-rotate-1", "rotate-1", "-rotate-2"];
 
-/** Contacto (amarillo): redes y correos como stickers + formulario */
+/** Contacto (fondo naranja dorado): redes y correos como stickers + formulario */
 export function Contact() {
   return (
-    <section id="contact" aria-labelledby="contact-title" className="bg-yellow px-5 py-24 text-ink sm:px-8 lg:py-32">
+    <section
+      id="contact"
+      aria-labelledby="contact-title"
+      {...paletteZone(sectionPalettes.contact)}
+      className="px-5 py-24 text-paper [--focus:var(--color-paper)] sm:px-8 lg:py-32"
+    >
       <div className="mx-auto grid max-w-6xl gap-14 lg:grid-cols-12 lg:gap-16">
         <div className="lg:col-span-5">
           <SectionHeading id="contact-title">{content.title}</SectionHeading>
@@ -30,7 +37,7 @@ export function Contact() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className={cn(
-                        "sticker flex items-center gap-4 rounded-2xl bg-paper p-4 transition-transform duration-200 hover:-translate-y-1",
+                        "sticker flex items-center gap-4 rounded-2xl bg-paper p-4 text-ink transition-transform duration-200 hover:-translate-y-1",
                         tilts[index % tilts.length],
                       )}
                     >
@@ -49,7 +56,10 @@ export function Contact() {
             ))}
             {site.emails.map((email) => (
               <li key={email}>
-                <a href={`mailto:${email}`} className="sticker flex items-center gap-4 rounded-2xl bg-paper p-4">
+                <a
+                  href={`mailto:${email}`}
+                  className="sticker flex items-center gap-4 rounded-2xl bg-paper p-4 text-ink"
+                >
                   <Icon name="mail" className="size-9" />
                   <span className="text-lg font-bold break-all">{email}</span>
                 </a>
