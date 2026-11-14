@@ -1,6 +1,6 @@
 # Portafolio de Johan Mosquera
 
-Mi portafolio personal y la vitrina de las apps que estoy construyendo. Es una página de una sola sección larga (landing) con mucho movimiento al hacer scroll, colores primarios y estilo "sticker".
+Mi portafolio personal y la vitrina de las apps que estoy construyendo. Es una página de una sola sección larga (landing) con mucho movimiento al hacer scroll, colores primarios y estilo "sticker". El fondo es un **camaleón**: al bajar, cambia poco a poco al color de la sección o de la app que se está mostrando.
 
 **Stack:** Next.js 16 (App Router) · TypeScript en modo estricto · Tailwind CSS 4 · Vercel. Sin librerías de animación: todo el movimiento es CSS + `IntersectionObserver`.
 
@@ -68,6 +68,7 @@ assets/fonts/           letra para la imagen de Open Graph
 | Línea de tiempo | `data/experience.ts` |
 | Contacto y formulario | `data/contact.ts` |
 | Skills | `data/skills.ts` (y los íconos en `data/tech.ts`) |
+| Colores del fondo de cada sección | `data/palettes.ts` |
 | Pie de página | `data/footer.ts` |
 
 ## Cómo agregar una app nueva
@@ -75,6 +76,16 @@ assets/fonts/           letra para la imagen de Open Graph
 1. Guarda sus capturas en `public/images/projects/<nombre-de-la-app>/` (ver "Imágenes").
 2. En `data/projects.ts`, importa las imágenes arriba y agrega un objeto a la lista `projects` con: `slug`, `name`, `tagline`, `description`, `highlights`, `category` (`"class"`, `"work"` o `"freelance"`), `status` (`"live"`, `"completed"` o `"in-progress"`), `featured`, `stack`, `role`, `year`, `accent`, `cover`, `gallery` y `repoUrl`.
 3. Listo: la tarjeta aparece en la cuadrícula y su página se crea sola en `/projects/<slug>`. Con `featured: true` también sale grande arriba.
+4. Opcional: dale los colores de su marca al fondo con `palette` (una base oscura y tres brillos). Si no le pones, usa la paleta de su `accent`. Ejemplo (el de Flux IA):
+
+```ts
+palette: {
+  base: "#0A0614",
+  glows: ["rgb(109 43 239 / 0.55)", "rgb(178 59 255 / 0.35)", "rgb(42 26 168 / 0.45)"],
+},
+```
+
+El texto encima es blanco, así que la base debe ser oscura y los brillos con transparencia. Revisa el contraste en [webaim.org/resources/contrastchecker](https://webaim.org/resources/contrastchecker/) (mínimo 4.5:1 contra blanco).
 
 Si usa una tecnología nueva, agrega su ícono SVG en `public/images/icons/` y regístrala en `data/tech.ts`.
 
@@ -119,9 +130,11 @@ No hay claves secretas en el navegador: Formspree recibe el mensaje y te lo mand
 
 **La idea visual: "la tapa del portátil".** Los developers llenan la tapa de su portátil de stickers. Aquí todo lo que se puede tocar es un sticker: borde blanco, contorno negro y sombra dura (las utilidades `sticker` y `sticker-sm` en `app/globals.css`). Los textos van sin caja.
 
-**Colores y letras (tokens).** En `app/globals.css` está el bloque `@theme` de Tailwind con los únicos colores que existen: azul `#1A43D9`, rojo `#D7261E`, amarillo `#FFD100`, violeta `#6A2EE8` (el de Flux IA), negro y blanco. Los colores que trae Tailwind están borrados (`--color-*: initial`), así ninguna sección puede inventarse un color. Todos los textos tienen contraste de 4.5:1 o más. Las letras son **Hubot Sans** (títulos, en versión angosta) y **Mona Sans** (textos), las dos de GitHub; **JetBrains Mono** solo va en el panel de código. Se cargan con `next/font`, que las descarga al hacer el build y no depende de Google al abrir la página.
+**Colores y letras (tokens).** En `app/globals.css` está el bloque `@theme` de Tailwind con los únicos colores que existen: azul `#1A43D9`, rojo `#D7261E`, amarillo `#FFD100`, violeta `#6A2EE8` (el de Flux IA), negro y blanco. Los colores que trae Tailwind están borrados (`--color-*: initial`), así ninguna sección puede inventarse un color. Los únicos otros colores son los del fondo camaleón, en `data/palettes.ts`. Todos los textos tienen contraste de 4.5:1 o más. Las letras son **Hubot Sans** (títulos, en versión angosta) y **Mona Sans** (textos), las dos de GitHub; **JetBrains Mono** solo va en el panel de código. Se cargan con `next/font`, que las descarga al hacer el build y no depende de Google al abrir la página.
 
 **Una página, muchas secciones.** `app/page.tsx` pone el menú, las 7 secciones en orden y el footer. Cada sección tiene un `id` (`hero`, `about`…) al que apuntan los enlaces del menú.
+
+**El fondo camaleón.** Detrás de toda la página hay una capa fija (`ChameleonBackground`) con una base oscura y tres brillos de color, como el fondo "aurora" de Flux IA. Cada sección, cada app destacada y el footer son "zonas" con su propia paleta (`paletteZone()` en `lib/palette.ts`). Un `IntersectionObserver` avisa qué zona cruza la mitad de la pantalla y el fondo copia sus colores. El cambio es suave gracias a `@property` de CSS: registra los colores como `<color>`, así el navegador sabe mezclarlos durante la transición (sin eso cambiarían de golpe). Si dos zonas están en el centro a la vez, gana la de más adentro: Flux IA le gana a la sección Proyectos que la contiene. En la página de detalle de una app, todo el fondo toma los colores de esa app. Como el texto encima siempre es blanco, cada paleta se probó para dar 4.5:1 o más incluso donde se juntan los tres brillos.
 
 **El menú siempre visible.** `Navbar` está fijo arriba. El hook `useScrollSpy` usa `IntersectionObserver`: el navegador avisa qué sección cruza la mitad de la pantalla y ese enlace se pone negro (`aria-current`). En celular, `MobileMenu` usa el elemento `<dialog>` del navegador, que ya cierra con Esc y deja el foco del teclado dentro del menú.
 
@@ -131,13 +144,14 @@ No hay claves secretas en el navegador: Formspree recibe el mensaje y te lo mand
 - `Reveal` + `useInView`: cuando un elemento entra en pantalla se le pone `data-visible` y CSS hace la transición (subir o "pegarse" con rebote).
 - La línea de tiempo se dibuja y los stickers del hero hacen parallax con **animaciones ligadas al scroll** de CSS (`animation-timeline: view()` y `scroll()`); si el navegador no las soporta, se ven quietos y completos.
 - `TiltCard` inclina tarjetas siguiendo el mouse.
+- Los brillos del fondo flotan despacio (solo `transform`) y se quedan quietos con "reducir movimiento".
 - Solo se animan `transform` y `opacity` (no hacen recalcular el diseño de la página), y con **"reducir movimiento"** activado en el sistema todo se muestra quieto.
 
 **Proyectos y páginas de detalle.** Los datos están en `data/projects.ts`. La cuadrícula filtra por tipo con un estado de React. `app/projects/[slug]/page.tsx` usa `generateStaticParams` para crear una página estática por proyecto al hacer el build.
 
 **El año automático.** `CurrentYear` calcula `new Date().getFullYear()` en el navegador de quien visita (con `useSyncExternalStore`), así nunca queda viejo aunque la página se haya generado antes.
 
-**Calidad.** Lighthouse (11-nov-2026, en local): computador 100/100/100/100; celular 90 de rendimiento y 100 en accesibilidad, buenas prácticas y SEO. Se revisó con teclado (foco visible en todo), lector de pantalla (títulos en orden, textos alternativos) y a 320 px de ancho sin scroll horizontal. Ninguna parte usa barras de progreso ni porcentajes.
+**Calidad.** Lighthouse (13-nov-2026, en local): computador 100/100/100/100; celular 91 de rendimiento y 100 en accesibilidad, buenas prácticas y SEO. Se revisó con teclado (foco visible en todo, con 3:1 o más contra el fondo), lector de pantalla (títulos en orden, textos alternativos) y a 320 px de ancho sin scroll horizontal. Ninguna parte usa barras de progreso ni porcentajes.
 
 ## Créditos y licencias
 
