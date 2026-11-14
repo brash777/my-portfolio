@@ -31,6 +31,16 @@ export interface Tech {
 /** colores de la paleta que puede usar una tarjeta o proyecto */
 export type Accent = "blue" | "red" | "yellow" | "violet";
 
+/**
+ * Colores del fondo camaleón: una base oscura y tres brillos con transparencia.
+ * El texto encima siempre es blanco, así que cada paleta debe dar 4.5:1 o más
+ * incluso donde se juntan los tres brillos.
+ */
+export interface Palette {
+  base: string;
+  glows: [string, string, string];
+}
+
 /** título y texto corto de una sección */
 export interface SectionIntro {
   title: string;
@@ -178,6 +188,8 @@ export interface Project {
   role: string;
   year: number;
   accent: Accent;
+  /** colores del fondo cuando se presenta esta app; si no tiene, usa los de su acento */
+  palette?: Palette;
   /** captura principal (portada) */
   cover?: SiteImage;
   /** logo o ícono de la app, si no hay capturas */
