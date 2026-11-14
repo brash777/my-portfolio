@@ -136,9 +136,12 @@
     color: var(--color-ink);
   }
 
-  /* foco visible: cada sección define --focus según su fondo (negro en claros, blanco en oscuros) */
+  /*
+    foco visible: blanco por defecto porque el fondo de la página es oscuro.
+    Las superficies blancas (menú, tarjetas) cambian --focus a negro.
+  */
   :focus-visible {
-    outline: 3px solid var(--focus, var(--color-ink));
+    outline: 3px solid var(--focus, var(--color-paper));
     outline-offset: 3px;
   }
 
