@@ -5,8 +5,8 @@
 export function HeroDecor() {
   return (
     <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
-      {/* estrella amarilla */}
-      <svg viewBox="0 0 100 100" className="parallax-fast absolute top-28 right-[6%] size-16 rotate-12 sm:size-20 lg:top-24 lg:right-[44%]">
+      {/* estrella amarilla: en celular va junto a "Johan" para no tapar el texto de arriba */}
+      <svg viewBox="0 0 100 100" className="parallax-fast absolute top-60 right-[6%] size-16 rotate-12 sm:top-28 sm:size-20 lg:top-24 lg:right-[44%]">
         <path
           d="M50 4 61 36l33-4-25 23 16 30-35-14-35 14 16-30L6 32l33 4Z"
           fill="var(--color-yellow)"
