@@ -33,10 +33,10 @@ export const sectionPalettes: Record<SectionId, Palette> = {
     base: "#061033",
     glows: ["rgb(26 67 217 / 0.6)", "rgb(255 209 0 / 0.14)", "rgb(0 150 255 / 0.25)"],
   },
-  // Contacto: dorado y naranja
+  // Contacto: naranja dorado con rojo
   contact: {
-    base: "#241400",
-    glows: ["rgb(255 176 32 / 0.35)", "rgb(215 38 30 / 0.35)", "rgb(255 209 0 / 0.2)"],
+    base: "#301000",
+    glows: ["rgb(255 140 0 / 0.45)", "rgb(215 38 30 / 0.4)", "rgb(255 200 0 / 0.12)"],
   },
   // Skills: turquesa y azul
   skills: {

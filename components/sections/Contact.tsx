@@ -12,7 +12,7 @@ import { cn, displayUrl } from "@/lib/utils";
 
 const tilts = ["-rotate-1", "rotate-1", "-rotate-2"];
 
-/** Contacto (fondo dorado y naranja): redes y correos como stickers + formulario */
+/** Contacto (fondo naranja dorado): redes y correos como stickers + formulario */
 export function Contact() {
   return (
     <section
