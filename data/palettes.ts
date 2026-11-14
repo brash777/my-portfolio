@@ -1,8 +1,8 @@
 import type { Accent, Palette, SectionId } from "@/types";
 
 /*
-  Paletas del fondo camaleón: al bajar por la página, el fondo cambia poco a poco
-  a la paleta de la sección (o de la app) que está en el centro de la pantalla.
+  Paletas del fondo camaleón: cada sección (y cada app destacada) pinta su fondo con
+  su paleta, y en la división con la siguiente los dos colores se mezclan al bajar.
   Cada una es una base oscura + tres brillos (colores con transparencia).
   El texto encima es blanco: todas dan 4.5:1 o más aun donde se juntan los brillos.
   Si cambias un color, revisa el contraste (por ejemplo en webaim.org/resources/contrastchecker).

@@ -1,4 +1,6 @@
 import Link from "next/link";
+import type { CSSProperties } from "react";
+import { ChameleonBackground } from "@/components/ui/ChameleonBackground";
 import { ProjectCover } from "@/components/ui/ProjectCover";
 import { ProjectsGrid } from "@/components/ui/ProjectsGrid";
 import { Reveal } from "@/components/ui/Reveal";
@@ -8,7 +10,7 @@ import { TechBadge } from "@/components/ui/TechBadge";
 import { sectionPalettes } from "@/data/palettes";
 import { projects, projectsContent as content } from "@/data/projects";
 import { ui } from "@/data/site";
-import { paletteZone, projectPalette } from "@/lib/palette";
+import { projectPalette } from "@/lib/palette";
 import { statusIcon } from "@/lib/projects";
 import type { Project } from "@/types";
 
@@ -59,43 +61,58 @@ function FeaturedProject({ project }: { project: Project }) {
   );
 }
 
-/** Proyectos (fondo noche): apps destacadas que se apilan al hacer scroll + cuadrícula con filtro */
+/**
+ * Proyectos: el título (fondo noche), cada app destacada con sus propios colores y la cuadrícula
+ * con filtro (fondo noche otra vez). Cada bloque va de lado a lado y pegado al siguiente, sin
+ * márgenes, para que el fondo de uno empiece justo donde termina el otro.
+ */
 export function Projects() {
   const featured = projects.filter((project) => project.featured);
 
   return (
-    <section
-      id="projects"
-      aria-labelledby="projects-title"
-      {...paletteZone(sectionPalettes.projects)}
-      className="px-5 py-24 text-paper [--focus:var(--color-paper)] sm:px-8 lg:py-32"
-    >
-      <div className="mx-auto max-w-6xl">
-        <SectionHeading id="projects-title">{content.title}</SectionHeading>
-        <p className="mt-4 max-w-2xl text-lg">{content.lead}</p>
+    <section id="projects" aria-labelledby="projects-title" className="text-paper [--focus:var(--color-paper)]">
+      <div className="relative px-5 pt-24 pb-8 sm:px-8 lg:pt-32">
+        <ChameleonBackground palette={sectionPalettes.projects} />
+        <div className="mx-auto max-w-6xl">
+          <SectionHeading id="projects-title">{content.title}</SectionHeading>
+          <p className="mt-4 max-w-2xl text-lg">{content.lead}</p>
+          <h3 className="mt-16 text-4xl sm:text-5xl">{content.featuredTitle}</h3>
+        </div>
+      </div>
 
-        <h3 className="mt-16 text-4xl sm:text-5xl">{content.featuredTitle}</h3>
-        {/*
-          En computador cada tarjeta se queda pegada arriba y la siguiente se le apila encima.
-          Cada app es una zona del fondo camaleón: al llegar al centro, el fondo toma sus colores.
-          El espacio entre tarjetas va por dentro (pb-12) para que no queden huecos entre zonas.
-        */}
-        <ul className="mt-8">
+      {/*
+        Apps destacadas. En computador cada tarjeta se queda pegada arriba (a la altura --stick) y la
+        siguiente se le apila encima. El fondo de cada app va aparte, en la misma fila de la cuadrícula
+        que su tarjeta (subgrid): si fuera dentro de la tarjeta pegada, se movería con ella y taparía
+        lo de arriba. El espacio entre tarjetas va por dentro (pb-12) para no dejar huecos.
+      */}
+      <div className="grid" style={{ gridTemplateRows: `repeat(${featured.length}, auto)` }}>
+        {featured.map((project, index) => (
+          <div key={project.slug} className="relative col-start-1" style={{ gridRow: index + 1 }}>
+            <ChameleonBackground palette={projectPalette(project)} />
+          </div>
+        ))}
+        <ul className="col-start-1 row-span-full grid grid-rows-subgrid">
           {featured.map((project, index) => (
             <li
               key={project.slug}
-              {...paletteZone(projectPalette(project), { top: `${7 + index * 1.5}rem` })}
-              className="pb-12 last:pb-0 lg:sticky"
+              style={{ "--stick": `${7 + index * 1.5}rem` } as CSSProperties}
+              className="px-5 pb-12 last:pb-0 sm:px-8 lg:sticky lg:top-(--stick)"
             >
-              <Reveal>
+              <Reveal className="mx-auto max-w-6xl">
                 <FeaturedProject project={project} />
               </Reveal>
             </li>
           ))}
         </ul>
+      </div>
 
-        <h3 className="mt-28 text-4xl sm:text-5xl">{content.moreTitle}</h3>
-        <ProjectsGrid projects={projects} />
+      <div className="relative px-5 pt-28 pb-24 sm:px-8 lg:pb-32">
+        <ChameleonBackground palette={sectionPalettes.projects} />
+        <div className="mx-auto max-w-6xl">
+          <h3 className="text-4xl sm:text-5xl">{content.moreTitle}</h3>
+          <ProjectsGrid projects={projects} />
+        </div>
       </div>
     </section>
   );

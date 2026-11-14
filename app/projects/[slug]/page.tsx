@@ -12,7 +12,7 @@ import { TechBadge } from "@/components/ui/TechBadge";
 import { getProject, projects, projectsContent as content } from "@/data/projects";
 import { site, ui } from "@/data/site";
 import { accentFill } from "@/lib/accent";
-import { paletteZone, projectPalette } from "@/lib/palette";
+import { projectPalette } from "@/lib/palette";
 import { statusIcon } from "@/lib/projects";
 import { cn } from "@/lib/utils";
 
@@ -39,15 +39,14 @@ export default async function ProjectPage(props: PageProps<"/projects/[slug]">) 
 
   const others = projects.filter((item) => item.slug !== project.slug);
   const { detail } = content;
-  // toda la página toma los colores de la app (Flux IA en violeta, FlowStore con los de OFFGRID…)
-  const palette = projectPalette(project);
 
   return (
     <>
-      <ChameleonBackground initial={palette} />
       <Navbar />
       <main id="main-content" tabIndex={-1} className="outline-none">
-        <article {...paletteZone(palette)} className="text-paper [--focus:var(--color-paper)]">
+        <article className="relative text-paper [--focus:var(--color-paper)]">
+          {/* la página toma los colores de la app (Flux IA en violeta, FlowStore con los de OFFGRID…) */}
+          <ChameleonBackground palette={projectPalette(project)} />
           <header className="px-5 pt-32 pb-16 sm:px-8 lg:pt-40">
             <div className="mx-auto max-w-6xl">
               <Link
