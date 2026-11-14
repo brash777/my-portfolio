@@ -90,7 +90,7 @@ export function ContactForm() {
     ) : null;
 
   return (
-    <form ref={formRef} onSubmit={handleSubmit} noValidate className="sticker rounded-sticker bg-paper p-6 text-ink sm:p-8">
+    <form ref={formRef} onSubmit={handleSubmit} noValidate className="sticker rounded-sticker bg-paper p-6 text-ink [--focus:var(--color-ink)] sm:p-8">
       <h3 className="text-4xl">{form.title}</h3>
 
       <div className="mt-6">
