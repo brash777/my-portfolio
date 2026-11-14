@@ -3,17 +3,22 @@ import { CurrentYear } from "@/components/ui/CurrentYear";
 import { Icon } from "@/components/ui/Icon";
 import { TechBadge } from "@/components/ui/TechBadge";
 import { footerContent as content } from "@/data/footer";
+import { footerPalette } from "@/data/palettes";
 import { navItems, site, socialLinks, ui } from "@/data/site";
+import { paletteZone } from "@/lib/palette";
 
 interface FooterProps {
   /** "" en la página principal, "/" en las demás */
   linkPrefix?: string;
 }
 
-/** Pie de página (negro): frase, tecnologías, secciones, contacto y año automático */
+/** Pie de página (fondo casi negro): frase, tecnologías, secciones, contacto y año automático */
 export function Footer({ linkPrefix = "" }: FooterProps) {
   return (
-    <footer className="bg-ink px-5 pt-20 pb-10 text-paper [--focus:var(--color-paper)] sm:px-8">
+    <footer
+      {...paletteZone(footerPalette)}
+      className="px-5 pt-20 pb-10 text-paper [--focus:var(--color-paper)] sm:px-8"
+    >
       <div className="mx-auto max-w-6xl">
         <p className="max-w-3xl font-display text-5xl leading-[0.9] font-extrabold font-stretch-condensed sm:text-7xl">
           {content.phrase}
