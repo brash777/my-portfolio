@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { CSSProperties } from "react";
 import { ProjectCover } from "@/components/ui/ProjectCover";
 import { ProjectsGrid } from "@/components/ui/ProjectsGrid";
 import { Reveal } from "@/components/ui/Reveal";
@@ -59,43 +60,47 @@ function FeaturedProject({ project }: { project: Project }) {
   );
 }
 
-/** Proyectos (fondo noche): apps destacadas que se apilan al hacer scroll + cuadrícula con filtro */
+/**
+ * Proyectos: el título (fondo noche), cada app destacada con sus propios colores y la cuadrícula
+ * con filtro (fondo noche otra vez). Cada bloque va de lado a lado y pegado al siguiente, sin
+ * márgenes, para que el fondo de uno empiece justo donde termina el otro.
+ */
 export function Projects() {
   const featured = projects.filter((project) => project.featured);
 
   return (
-    <section
-      id="projects"
-      aria-labelledby="projects-title"
-      {...paletteZone(sectionPalettes.projects)}
-      className="px-5 py-24 text-paper [--focus:var(--color-paper)] sm:px-8 lg:py-32"
-    >
-      <div className="mx-auto max-w-6xl">
-        <SectionHeading id="projects-title">{content.title}</SectionHeading>
-        <p className="mt-4 max-w-2xl text-lg">{content.lead}</p>
+    <section id="projects" aria-labelledby="projects-title" className="text-paper [--focus:var(--color-paper)]">
+      <div {...paletteZone(sectionPalettes.projects)} className="px-5 pt-24 pb-8 sm:px-8 lg:pt-32">
+        <div className="mx-auto max-w-6xl">
+          <SectionHeading id="projects-title">{content.title}</SectionHeading>
+          <p className="mt-4 max-w-2xl text-lg">{content.lead}</p>
+          <h3 className="mt-16 text-4xl sm:text-5xl">{content.featuredTitle}</h3>
+        </div>
+      </div>
 
-        <h3 className="mt-16 text-4xl sm:text-5xl">{content.featuredTitle}</h3>
-        {/*
-          En computador cada tarjeta se queda pegada arriba y la siguiente se le apila encima.
-          Cada app es una zona del fondo camaleón: al llegar al centro, el fondo toma sus colores.
-          El espacio entre tarjetas va por dentro (pb-12) para que no queden huecos entre zonas.
-        */}
-        <ul className="mt-8">
-          {featured.map((project, index) => (
-            <li
-              key={project.slug}
-              {...paletteZone(projectPalette(project), { top: `${7 + index * 1.5}rem` })}
-              className="pb-12 last:pb-0 lg:sticky"
-            >
-              <Reveal>
-                <FeaturedProject project={project} />
-              </Reveal>
-            </li>
-          ))}
-        </ul>
+      {/*
+        En computador cada app se queda pegada arriba (a la altura --stick) y la siguiente se le
+        apila encima. El espacio entre tarjetas va por dentro (pb-12) para que no queden huecos.
+      */}
+      <ul>
+        {featured.map((project, index) => (
+          <li
+            key={project.slug}
+            {...paletteZone(projectPalette(project), { "--stick": `${7 + index * 1.5}rem` } as CSSProperties)}
+            className="px-5 pb-12 last:pb-0 sm:px-8 lg:sticky lg:top-(--stick)"
+          >
+            <Reveal className="mx-auto max-w-6xl">
+              <FeaturedProject project={project} />
+            </Reveal>
+          </li>
+        ))}
+      </ul>
 
-        <h3 className="mt-28 text-4xl sm:text-5xl">{content.moreTitle}</h3>
-        <ProjectsGrid projects={projects} />
+      <div {...paletteZone(sectionPalettes.projects)} className="px-5 pt-28 pb-24 sm:px-8 lg:pb-32">
+        <div className="mx-auto max-w-6xl">
+          <h3 className="text-4xl sm:text-5xl">{content.moreTitle}</h3>
+          <ProjectsGrid projects={projects} />
+        </div>
       </div>
     </section>
   );
