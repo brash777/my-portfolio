@@ -282,15 +282,6 @@
   transform: scale(1.18) rotate(-5deg);
 }
 
-/* Borde troquelado en zigzag entre secciones (components/ui/SectionDivider.tsx) */
-.zigzag {
-  height: 12px;
-  background:
-    linear-gradient(135deg, var(--zz-from) 25%, transparent 25%) -12px 0 / 24px 24px repeat-x,
-    linear-gradient(225deg, var(--zz-from) 25%, transparent 25%) -12px 0 / 24px 24px repeat-x,
-    var(--zz-to);
-}
-
 /*
   Animaciones ligadas al scroll, solo en CSS ("scroll-driven animations").
   Si el navegador no las soporta, la línea se ve completa y los stickers quietos.
