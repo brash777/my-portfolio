@@ -8,7 +8,7 @@ import { TechBadge } from "@/components/ui/TechBadge";
 import { sectionPalettes } from "@/data/palettes";
 import { projects, projectsContent as content } from "@/data/projects";
 import { ui } from "@/data/site";
-import { paletteZone } from "@/lib/palette";
+import { paletteZone, projectPalette } from "@/lib/palette";
 import { statusIcon } from "@/lib/projects";
 import type { Project } from "@/types";
 
@@ -75,10 +75,18 @@ export function Projects() {
         <p className="mt-4 max-w-2xl text-lg">{content.lead}</p>
 
         <h3 className="mt-16 text-4xl sm:text-5xl">{content.featuredTitle}</h3>
-        {/* en computador cada tarjeta se queda pegada arriba y la siguiente se le apila encima */}
-        <ul className="mt-8 space-y-12">
+        {/*
+          En computador cada tarjeta se queda pegada arriba y la siguiente se le apila encima.
+          Cada app es una zona del fondo camaleón: al llegar al centro, el fondo toma sus colores.
+          El espacio entre tarjetas va por dentro (pb-12) para que no queden huecos entre zonas.
+        */}
+        <ul className="mt-8">
           {featured.map((project, index) => (
-            <li key={project.slug} className="lg:sticky" style={{ top: `${7 + index * 1.5}rem` }}>
+            <li
+              key={project.slug}
+              {...paletteZone(projectPalette(project), { top: `${7 + index * 1.5}rem` })}
+              className="pb-12 last:pb-0 lg:sticky"
+            >
               <Reveal>
                 <FeaturedProject project={project} />
               </Reveal>
