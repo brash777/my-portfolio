@@ -1,10 +1,10 @@
+import { ChameleonBackground } from "@/components/ui/ChameleonBackground";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { TechBadge } from "@/components/ui/TechBadge";
 import { sectionPalettes } from "@/data/palettes";
 import { skillGroups, skillsContent as content } from "@/data/skills";
 import { accentSurface } from "@/lib/accent";
-import { paletteZone } from "@/lib/palette";
 import { cn } from "@/lib/utils";
 
 const tilts = ["lg:-rotate-1", "lg:rotate-1", "lg:rotate-1", "lg:-rotate-1"];
@@ -15,9 +15,9 @@ export function Skills() {
     <section
       id="skills"
       aria-labelledby="skills-title"
-      {...paletteZone(sectionPalettes.skills)}
-      className="px-5 py-24 text-paper [--focus:var(--color-paper)] sm:px-8 lg:py-32"
+      className="relative px-5 py-24 text-paper [--focus:var(--color-paper)] sm:px-8 lg:py-32"
     >
+      <ChameleonBackground palette={sectionPalettes.skills} />
       <div className="mx-auto max-w-6xl">
         <SectionHeading id="skills-title">{content.title}</SectionHeading>
         <p className="mt-4 max-w-2xl text-lg">{content.lead}</p>

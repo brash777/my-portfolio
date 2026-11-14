@@ -1,10 +1,10 @@
+import { ChameleonBackground } from "@/components/ui/ChameleonBackground";
 import { Icon } from "@/components/ui/Icon";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { kindIcon, TimelineItem } from "@/components/ui/TimelineItem";
 import { experience, experienceContent as content } from "@/data/experience";
 import { sectionPalettes } from "@/data/palettes";
-import { paletteZone } from "@/lib/palette";
 
 /**
  * Experiencia (fondo azul con brillo dorado): línea de tiempo vertical.
@@ -16,9 +16,9 @@ export function Experience() {
     <section
       id="experience"
       aria-labelledby="experience-title"
-      {...paletteZone(sectionPalettes.experience)}
-      className="px-5 py-24 text-paper [--focus:var(--color-paper)] sm:px-8 lg:py-32"
+      className="relative px-5 py-24 text-paper [--focus:var(--color-paper)] sm:px-8 lg:py-32"
     >
+      <ChameleonBackground palette={sectionPalettes.experience} />
       <div className="mx-auto max-w-6xl">
         <SectionHeading id="experience-title">{content.title}</SectionHeading>
         <p className="mt-4 max-w-2xl text-lg">{content.lead}</p>

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { ChameleonBackground } from "@/components/ui/ChameleonBackground";
 import { CodePanel } from "@/components/ui/CodePanel";
 import { CvButton } from "@/components/ui/CvButton";
 import { FlipCard } from "@/components/ui/FlipCard";
@@ -8,7 +9,6 @@ import { hero } from "@/data/hero";
 import { sectionPalettes } from "@/data/palettes";
 import { services } from "@/data/services";
 import { profileImages, site, ui } from "@/data/site";
-import { paletteZone } from "@/lib/palette";
 
 // giro de cada sticker del stack, para que se vean "pegados a mano"
 const tilts = ["-rotate-3", "rotate-2", "-rotate-1", "rotate-3", "rotate-1", "-rotate-2"];
@@ -77,9 +77,9 @@ export function Hero() {
     <section
       id="hero"
       aria-labelledby="hero-title"
-      {...paletteZone(sectionPalettes.hero)}
       className="relative overflow-hidden px-5 pt-32 pb-24 text-paper [--focus:var(--color-paper)] sm:px-8 lg:pt-40"
     >
+      <ChameleonBackground palette={sectionPalettes.hero} />
       <HeroDecor />
       {/* en celular el orden es: intro, foto y panel de código; en computador la foto va a la derecha */}
       <div className="relative mx-auto grid max-w-6xl items-center gap-x-12 gap-y-14 lg:grid-cols-12">

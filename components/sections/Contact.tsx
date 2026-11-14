@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { ChameleonBackground } from "@/components/ui/ChameleonBackground";
 import { ContactForm } from "@/components/ui/ContactForm";
 import { Icon } from "@/components/ui/Icon";
 import { Reveal } from "@/components/ui/Reveal";
@@ -7,7 +8,6 @@ import { TiltCard } from "@/components/ui/TiltCard";
 import { contactContent as content } from "@/data/contact";
 import { sectionPalettes } from "@/data/palettes";
 import { site, socialLinks, ui } from "@/data/site";
-import { paletteZone } from "@/lib/palette";
 import { cn, displayUrl } from "@/lib/utils";
 
 const tilts = ["-rotate-1", "rotate-1", "-rotate-2"];
@@ -18,9 +18,9 @@ export function Contact() {
     <section
       id="contact"
       aria-labelledby="contact-title"
-      {...paletteZone(sectionPalettes.contact)}
-      className="px-5 py-24 text-paper [--focus:var(--color-paper)] sm:px-8 lg:py-32"
+      className="relative px-5 py-24 text-paper [--focus:var(--color-paper)] sm:px-8 lg:py-32"
     >
+      <ChameleonBackground palette={sectionPalettes.contact} />
       <div className="mx-auto grid max-w-6xl gap-14 lg:grid-cols-12 lg:gap-16">
         <div className="lg:col-span-5">
           <SectionHeading id="contact-title">{content.title}</SectionHeading>

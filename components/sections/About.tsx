@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { ChameleonBackground } from "@/components/ui/ChameleonBackground";
 import { HobbyCard } from "@/components/ui/HobbyCard";
 import { Icon } from "@/components/ui/Icon";
 import { Reveal } from "@/components/ui/Reveal";
@@ -6,7 +7,6 @@ import { about } from "@/data/about";
 import { hobbies } from "@/data/hobbies";
 import { sectionPalettes } from "@/data/palettes";
 import { profileImages, site, socialLinks, ui } from "@/data/site";
-import { paletteZone } from "@/lib/palette";
 import { displayUrl } from "@/lib/utils";
 
 // giro de cada sticker de hobby, para que se vean "pegados a mano"
@@ -66,9 +66,9 @@ export function About() {
     <section
       id="about"
       aria-labelledby="about-title"
-      {...paletteZone(sectionPalettes.about)}
-      className="px-5 py-24 text-paper [--focus:var(--color-paper)] sm:px-8 lg:py-32"
+      className="relative px-5 py-24 text-paper [--focus:var(--color-paper)] sm:px-8 lg:py-32"
     >
+      <ChameleonBackground palette={sectionPalettes.about} />
       <div className="mx-auto max-w-6xl">
         <div className="grid gap-14 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-7">
