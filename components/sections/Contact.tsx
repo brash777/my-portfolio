@@ -56,7 +56,10 @@ export function Contact() {
             ))}
             {site.emails.map((email) => (
               <li key={email}>
-                <a href={`mailto:${email}`} className="sticker flex items-center gap-4 rounded-2xl bg-paper p-4 text-ink">
+                <a
+                  href={`mailto:${email}`}
+                  className="sticker flex items-center gap-4 rounded-2xl bg-paper p-4 text-ink"
+                >
                   <Icon name="mail" className="size-9" />
                   <span className="text-lg font-bold break-all">{email}</span>
                 </a>
