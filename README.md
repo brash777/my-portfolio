@@ -1,6 +1,6 @@
 # Portafolio de Johan Mosquera
 
-Mi portafolio personal y la vitrina de las apps que estoy construyendo. Es una página de una sola sección larga (landing) con mucho movimiento al hacer scroll, colores primarios y estilo "sticker". El fondo es un **camaleón**: al bajar, cambia poco a poco al color de la sección o de la app que se está mostrando.
+Mi portafolio personal y la vitrina de las apps que estoy construyendo. Es una página de una sola sección larga (landing) con mucho movimiento al hacer scroll, colores primarios y estilo "sticker". El fondo es un **camaleón**: cada sección y cada app tiene su propio color, y en la división entre una y otra los colores se mezclan mientras bajas.
 
 **Stack:** Next.js 16 (App Router) · TypeScript en modo estricto · Tailwind CSS 4 · Vercel. Sin librerías de animación: todo el movimiento es CSS + `IntersectionObserver`.
 
@@ -134,7 +134,7 @@ No hay claves secretas en el navegador: Formspree recibe el mensaje y te lo mand
 
 **Una página, muchas secciones.** `app/page.tsx` pone el menú, las 7 secciones en orden y el footer. Cada sección tiene un `id` (`hero`, `about`…) al que apuntan los enlaces del menú.
 
-**El fondo camaleón.** Detrás de toda la página hay una capa fija (`ChameleonBackground`) con una base oscura y tres brillos de color, como el fondo "aurora" de Flux IA. Cada sección, cada app destacada y el footer son "zonas" con su propia paleta (`paletteZone()` en `lib/palette.ts`). Un `IntersectionObserver` avisa qué zona cruza la mitad de la pantalla y el fondo copia sus colores. El cambio es suave gracias a `@property` de CSS: registra los colores como `<color>`, así el navegador sabe mezclarlos durante la transición (sin eso cambiarían de golpe). Si dos zonas están en el centro a la vez, gana la de más adentro: Flux IA le gana a la sección Proyectos que la contiene. En la página de detalle de una app, todo el fondo toma los colores de esa app. Como el texto encima siempre es blanco, cada paleta se probó para dar 4.5:1 o más incluso donde se juntan los tres brillos.
+**El fondo camaleón.** Cada sección, cada app destacada y el footer pintan su propio fondo con `ChameleonBackground`: una base oscura y tres brillos de color, como el fondo "aurora" de Flux IA. Así cada parte se ve como una página de otro color. La mezcla está en la división: el fondo de cada zona empieza un poco más arriba que ella (`--blend`) y aparece de a poco con `mask-image` (de transparente a sólido) encima del final de la zona anterior. Mientras bajas, un color se va convirtiendo en el otro. No usa JavaScript: es solo CSS, y el fondo va con `z-index: -1` para quedar detrás del texto. En Proyectos las tarjetas de las apps son *sticky* y un elemento sticky arrastra lo que tiene adentro, así que sus fondos van en una capa aparte alineada fila por fila con las tarjetas (`subgrid`). En la página de detalle de una app, la página toma los colores de esa app. Como el texto encima siempre es blanco, cada paleta se probó para dar 4.5:1 o más incluso donde se juntan los tres brillos, y la mezcla de dos paletas nunca queda más clara que la más clara de las dos.
 
 **El menú siempre visible.** `Navbar` está fijo arriba. El hook `useScrollSpy` usa `IntersectionObserver`: el navegador avisa qué sección cruza la mitad de la pantalla y ese enlace se pone negro (`aria-current`). En celular, `MobileMenu` usa el elemento `<dialog>` del navegador, que ya cierra con Esc y deja el foco del teclado dentro del menú.
 
@@ -151,7 +151,7 @@ No hay claves secretas en el navegador: Formspree recibe el mensaje y te lo mand
 
 **El año automático.** `CurrentYear` calcula `new Date().getFullYear()` en el navegador de quien visita (con `useSyncExternalStore`), así nunca queda viejo aunque la página se haya generado antes.
 
-**Calidad.** Lighthouse (13-nov-2026, en local): computador 100/100/100/100; celular 91 de rendimiento y 100 en accesibilidad, buenas prácticas y SEO. Se revisó con teclado (foco visible en todo, con 3:1 o más contra el fondo), lector de pantalla (títulos en orden, textos alternativos) y a 320 px de ancho sin scroll horizontal. Ninguna parte usa barras de progreso ni porcentajes.
+**Calidad.** Lighthouse (14-nov-2026, en local): computador 100/100/100/100; celular 91 de rendimiento y 100 en accesibilidad, buenas prácticas y SEO. Se revisó con teclado (foco visible en todo, con 3:1 o más contra el fondo), lector de pantalla (títulos en orden, textos alternativos) y a 320 px de ancho sin scroll horizontal. Ninguna parte usa barras de progreso ni porcentajes.
 
 ## Créditos y licencias
 
