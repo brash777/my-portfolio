@@ -38,8 +38,9 @@ export function ProjectsGrid({ projects }: { projects: Project[] }) {
               aria-pressed={isActive}
               onClick={() => setFilter(item.id)}
               className={cn(
-                "rounded-full border-3 border-ink px-4 py-2 font-bold transition-transform duration-200 hover:-translate-y-0.5",
-                isActive ? "bg-ink text-paper" : "bg-paper text-ink",
+                // sobre el fondo oscuro: el filtro activo va relleno de blanco y los demás solo con borde
+                "rounded-full border-3 border-paper px-4 py-2 font-bold transition-transform duration-200 hover:-translate-y-0.5",
+                isActive ? "bg-paper text-ink" : "text-paper",
               )}
             >
               {item.label} <span className="font-semibold">({item.count})</span>

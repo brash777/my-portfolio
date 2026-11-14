@@ -15,7 +15,7 @@ export function ProjectCard({ project }: { project: Project }) {
   const hidden = project.stack.length - MAX_BADGES;
 
   return (
-    <article className="sticker relative flex h-full flex-col overflow-hidden rounded-sticker bg-paper text-ink">
+    <article className="sticker relative flex h-full flex-col overflow-hidden rounded-sticker bg-paper text-ink [--focus:var(--color-ink)]">
       <ProjectCover project={project} className="border-b-3 border-ink" />
 
       {project.repoUrl && (

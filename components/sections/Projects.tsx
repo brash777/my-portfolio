@@ -5,15 +5,17 @@ import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { StatusTag } from "@/components/ui/StatusTag";
 import { TechBadge } from "@/components/ui/TechBadge";
+import { sectionPalettes } from "@/data/palettes";
 import { projects, projectsContent as content } from "@/data/projects";
 import { ui } from "@/data/site";
+import { paletteZone } from "@/lib/palette";
 import { statusIcon } from "@/lib/projects";
 import type { Project } from "@/types";
 
 /** Tarjeta grande de una app destacada */
 function FeaturedProject({ project }: { project: Project }) {
   return (
-    <article className="sticker grid overflow-hidden rounded-sticker bg-paper text-ink lg:grid-cols-2">
+    <article className="sticker grid overflow-hidden rounded-sticker bg-paper text-ink [--focus:var(--color-ink)] lg:grid-cols-2">
       <div className="order-2 flex flex-col p-6 sm:p-10 lg:order-1">
         <div className="flex flex-wrap gap-2">
           <StatusTag label={content.statusLabels[project.status]} icon={statusIcon[project.status]} />
@@ -57,12 +59,17 @@ function FeaturedProject({ project }: { project: Project }) {
   );
 }
 
-/** Proyectos (papel): apps destacadas que se apilan al hacer scroll + cuadrícula con filtro */
+/** Proyectos (fondo noche): apps destacadas que se apilan al hacer scroll + cuadrícula con filtro */
 export function Projects() {
   const featured = projects.filter((project) => project.featured);
 
   return (
-    <section id="projects" aria-labelledby="projects-title" className="bg-paper px-5 py-24 text-ink sm:px-8 lg:py-32">
+    <section
+      id="projects"
+      aria-labelledby="projects-title"
+      {...paletteZone(sectionPalettes.projects)}
+      className="px-5 py-24 text-paper [--focus:var(--color-paper)] sm:px-8 lg:py-32"
+    >
       <div className="mx-auto max-w-6xl">
         <SectionHeading id="projects-title">{content.title}</SectionHeading>
         <p className="mt-4 max-w-2xl text-lg">{content.lead}</p>
