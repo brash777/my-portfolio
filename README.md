@@ -39,6 +39,7 @@ app/
   page.tsx              orden de las secciones (mover una = mover su línea)
   globals.css           colores, sombras, tamaños de letra y animaciones (tokens)
   projects/[slug]/      página de detalle de cada proyecto
+  not-found.tsx         página 404 (sale en cualquier dirección que no existe)
   opengraph-image.tsx   imagen que se ve al compartir el link
   icon.svg              ícono de la pestaña
 components/
@@ -70,6 +71,7 @@ assets/fonts/           letra para la imagen de Open Graph
 | Skills | `data/skills.ts` (y los íconos en `data/tech.ts`) |
 | Colores del fondo de cada sección | `data/palettes.ts` |
 | Pie de página | `data/footer.ts` |
+| Página 404 (dirección que no existe) | `data/not-found.ts` |
 
 ## Cómo agregar una app nueva
 
