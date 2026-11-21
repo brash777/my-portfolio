@@ -153,7 +153,7 @@ No hay claves secretas en el navegador: Formspree recibe el mensaje y te lo mand
 
 **El año automático.** `CurrentYear` calcula `new Date().getFullYear()` en el navegador de quien visita (con `useSyncExternalStore`), así nunca queda viejo aunque la página se haya generado antes.
 
-**Calidad.** Lighthouse (14-nov-2026, en local): computador 100/100/100/100; celular 91 de rendimiento y 100 en accesibilidad, buenas prácticas y SEO. Se revisó con teclado (foco visible en todo, con 3:1 o más contra el fondo), lector de pantalla (títulos en orden, textos alternativos) y a 320 px de ancho sin scroll horizontal. Ninguna parte usa barras de progreso ni porcentajes.
+**Calidad.** Lighthouse (21-nov-2026, en local): computador 100/100/100/100; celular 91 de rendimiento y 100 en accesibilidad, buenas prácticas y SEO. Se revisó con teclado (foco visible en todo, con 3:1 o más contra el fondo), lector de pantalla (títulos en orden, textos alternativos) y a 320 px de ancho sin scroll horizontal. Ninguna parte usa barras de progreso ni porcentajes.
 
 ## Créditos y licencias
 
