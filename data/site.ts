@@ -51,8 +51,8 @@ export const navItems: NavItem[] = [
   { id: "projects", label: "Proyectos" },
   { id: "testimonials", label: "Testimonios" },
   { id: "experience", label: "Experiencia" },
-  { id: "contact", label: "Contacto" },
   { id: "skills", label: "Skills" },
+  { id: "contact", label: "Contacto" },
 ];
 
 /** nombre de una sección tal como aparece en el menú */

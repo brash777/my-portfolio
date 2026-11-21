@@ -7,8 +7,8 @@ export type SectionId =
   | "projects"
   | "testimonials"
   | "experience"
-  | "contact"
-  | "skills";
+  | "skills"
+  | "contact";
 
 export interface NavItem {
   id: SectionId;
