@@ -16,7 +16,7 @@ export const site: SiteInfo = {
   githubUrl: "https://github.com/brash777",
   linkedinUrl: "https://www.linkedin.com/in/joan-stib-mosquera-montilla-30b370449/",
   cvUrl: null, // TODO: URL pública del CV en Google Drive ("cualquier persona con el enlace puede ver")
-  emails: [], // TODO: confirmar qué correo mostrar (dijo "el de GitHub")
+  emails: [], // por ahora no se muestra correo (decidido el 21-nov-2026); el formulario manda a LinkedIn
   relationship: null, // TODO: el profe lo pidió; falta el texto (ej. "Soltero"). Con null no se muestra
   meta: {
     // borrador
@@ -51,8 +51,8 @@ export const navItems: NavItem[] = [
   { id: "projects", label: "Proyectos" },
   { id: "testimonials", label: "Testimonios" },
   { id: "experience", label: "Experiencia" },
-  { id: "contact", label: "Contacto" },
   { id: "skills", label: "Skills" },
+  { id: "contact", label: "Contacto" },
 ];
 
 /** nombre de una sección tal como aparece en el menú */

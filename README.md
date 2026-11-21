@@ -26,7 +26,7 @@ Otros comandos:
 - [ ] **CV:** sube el Word a Google Drive y pega la URL en `cvUrl` (`data/site.ts`). Mientras sea `null`, los botones dicen "CV en camino".
 - [ ] **Testimonios:** cambia los ejemplos de `data/testimonials.ts` por testimonios reales (con permiso) y pon `isExample: false`.
 - [ ] **Cursos:** elige cuáles se quedan en `data/experience.ts`. Cuando termines uno, cambia `status` a `"completed"` y agrega `period` con las fechas reales.
-- [ ] **Correo:** si quieres mostrar uno, agrégalo en `emails` (`data/site.ts`).
+- [x] **Correo:** por ahora no se muestra (decidido el 21-nov-2026); quien quiera escribir llega por GitHub o LinkedIn (mientras el formulario no esté conectado, también manda a LinkedIn). Si luego quieres mostrar uno, agrégalo en `emails` (`data/site.ts`).
 - [ ] **Estado de relación:** escríbelo en `relationship` (`data/site.ts`). Con `null` no se muestra.
 - [ ] **Formulario:** conéctalo con Formspree (ver abajo).
 - [ ] **Textos:** todos los textos en `data/` son borradores. Cámbialos con tus palabras.

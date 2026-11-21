@@ -7,8 +7,8 @@ export type SectionId =
   | "projects"
   | "testimonials"
   | "experience"
-  | "contact"
-  | "skills";
+  | "skills"
+  | "contact";
 
 export interface NavItem {
   id: SectionId;
@@ -103,7 +103,10 @@ export interface HeroContent {
     fields: CodeField[];
   };
   flip: {
+    /** pista para quien usa mouse (al pasar por la foto se voltea) */
     hint: string;
+    /** pista para pantallas táctiles, donde no hay "pasar el mouse" */
+    hintTouch: string;
     toBack: string;
     toFront: string;
   };

@@ -132,7 +132,11 @@ export function Hero() {
             />
           </div>
 
-          <p className="mx-auto mt-6 max-w-sm text-sm">{hero.flip.hint}</p>
+          {/* en pantallas táctiles (pointer-coarse) no hay mouse: se muestra la otra pista */}
+          <p className="mx-auto mt-6 max-w-sm text-sm">
+            <span className="pointer-coarse:hidden">{hero.flip.hint}</span>
+            <span className="hidden pointer-coarse:inline">{hero.flip.hintTouch}</span>
+          </p>
 
           <ul aria-label={hero.stackLabel} className="mx-auto mt-6 flex max-w-sm flex-wrap gap-3">
             {hero.stack.map((item, index) => (
