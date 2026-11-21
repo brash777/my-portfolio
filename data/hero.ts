@@ -24,6 +24,7 @@ export const hero: HeroContent = {
   },
   flip: {
     hint: "Pasa el mouse por la foto o toca la esquina doblada para ver mi CV en corto.",
+    hintTouch: "Toca la esquina doblada de la foto para ver mi CV en corto.",
     toBack: "Voltear la foto y ver mi CV en corto",
     toFront: "Volver a la foto",
   },
