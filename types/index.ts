@@ -321,3 +321,16 @@ export interface FooterContent {
   madeBy: string;
   backToTop: string;
 }
+
+/* ---------- Página 404 ---------- */
+
+export interface NotFoundContent {
+  /** título de la pestaña del navegador */
+  tabTitle: string;
+  /** el número grande del sticker */
+  code: string;
+  title: string;
+  lead: string;
+  homeButton: string;
+  projectsButton: string;
+}
