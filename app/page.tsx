@@ -8,7 +8,8 @@ import { Projects } from "@/components/sections/Projects";
 import { Skills } from "@/components/sections/Skills";
 import { Testimonials } from "@/components/sections/Testimonials";
 
-// Orden de las secciones. Para mover una (por ejemplo Skills), basta con mover su línea.
+// Orden de las secciones: el mismo de la guía del profe (structure-portfolio.vercel.app):
+// Hero, Acerca de mí, Proyectos, Testimonios, Experiencia, Contactos, sección adicional (Skills) y footer.
 // Cada sección pinta su propio fondo de color (ChameleonBackground) y se mezcla con la anterior.
 export default function Home() {
   return (
@@ -20,8 +21,8 @@ export default function Home() {
         <Projects />
         <Testimonials />
         <Experience />
-        <Skills />
         <Contact />
+        <Skills />
       </main>
       <Footer />
     </>
