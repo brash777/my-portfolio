@@ -4,7 +4,17 @@ import type { ExperienceContent, ExperienceItem } from "@/types";
 
 export const experienceContent: ExperienceContent = {
   title: "Experiencia",
-  lead: "Mi camino hasta ahora: la universidad, las apps que construyo por mi cuenta, los proyectos de clase y los cursos que voy a tomar.",
+  lead: "Mi camino hasta ahora, en dos partes: lo que estudio y lo que trabajo. De lo más reciente a lo más antiguo.",
+  areas: {
+    academic: {
+      title: "Experiencia académica",
+      lead: "La universidad, los proyectos de clase y los cursos que voy a tomar.",
+    },
+    work: {
+      title: "Experiencia laboral",
+      lead: "Las apps que construyo como freelance.",
+    },
+  },
   kindLabels: {
     education: "Formación",
     freelance: "Freelance",
@@ -20,56 +30,67 @@ export const experienceContent: ExperienceContent = {
 };
 
 /*
-  Línea de tiempo (borrador). Regla de honestidad:
-  - Sin fechas hasta que las confirmes (campo "period").
-  - Los cursos quedan como "planned" hasta que tengas el certificado.
+  Línea de tiempo, en dos partes (area): "academic" y "work", como pide la guía del profe.
+  Dentro de cada parte va de lo más reciente a lo más antiguo. Regla de honestidad:
+  - Fechas solo confirmadas: la carrera empezó en 2024 (dicho el 22-nov-2026); los proyectos
+    tienen el año de data/projects.ts y los de clase van de 2024 a 2026 (fechas de los repos).
+  - Los cursos quedan como "planned" (sin fecha) hasta que tengas el certificado.
   TODO: elegir cuáles cursos se quedan. Verificados el 11-nov-2026: freeCodeCamp
   (certificaciones gratis) y CS50x (certificado gratis de CS50, versión 2026 hasta el 31-dic).
 */
 export const experience: ExperienceItem[] = [
   {
     id: "universidad",
+    area: "academic",
     kind: "education",
     title: site.career,
     place: site.university,
     description:
       "Estudio en Pasto. En la carrera aprendí Java, estructuras de datos y patrones de diseño, la base de lo que construyo.",
     status: "current",
+    period: `${site.studyStart} – actualidad (${site.semester})`,
   },
   {
     id: "flux-ia",
+    area: "work",
     kind: "freelance",
     title: "Flux IA",
     place: "Proyecto propio",
     description:
       "Diseño y programo una app de finanzas personales con asistente de IA: backend en Spring Boot, base de datos PostgreSQL y app instalable.",
     status: "in-progress",
+    period: "2026 – actualidad",
     stack: [tech.java, tech.springBoot, tech.postgresql, tech.groq],
     link: { label: "Ver el proyecto", href: "/projects/flux-ia" },
   },
   {
     id: "flowstore",
+    area: "academic",
     kind: "project",
     title: "FlowStore",
     place: "Proyecto universitario",
     description: "Tienda de ropa de escritorio con avatar 3D e IA estilista, hecha con Electron, React y Spring Boot.",
     status: "in-progress",
+    period: "2026 – actualidad",
     stack: [tech.electron, tech.react, tech.springBoot],
     link: { label: "Ver el proyecto", href: "/projects/flowstore" },
   },
   {
     id: "proyectos-de-clase",
+    area: "academic",
     kind: "project",
     title: "Proyectos de clase",
     place: site.university,
     description:
       "Backends en Java con patrones de diseño (Facade, Factory, Decorator), estructuras de datos en Python y TypeScript, e interfaces en React.",
     status: "completed",
+    period: "2024 – 2026",
     stack: [tech.java, tech.python, tech.typescript, tech.react],
     link: { label: "Ver mis repositorios", href: site.githubUrl },
   },
   {
     id: "fcc-bases-de-datos",
+    area: "academic",
     kind: "course",
     title: "Bases de datos relacionales",
     place: "freeCodeCamp",
@@ -80,6 +101,7 @@ export const experience: ExperienceItem[] = [
   },
   {
     id: "fcc-javascript",
+    area: "academic",
     kind: "course",
     title: "JavaScript",
     place: "freeCodeCamp",
@@ -90,6 +112,7 @@ export const experience: ExperienceItem[] = [
   },
   {
     id: "cs50x",
+    area: "academic",
     kind: "course",
     title: "CS50x: introducción a la ciencia de la computación",
     place: "Harvard (edX)",
@@ -99,6 +122,7 @@ export const experience: ExperienceItem[] = [
   },
   {
     id: "nextjs-learn",
+    area: "academic",
     kind: "course",
     title: "Next.js Learn",
     place: "Vercel",

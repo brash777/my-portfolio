@@ -265,22 +265,26 @@ export interface TestimonialsContent extends SectionIntro {
 /* ---------- Experiencia ---------- */
 
 export type ExperienceKind = "education" | "freelance" | "project" | "course";
+/** la guía del profe divide la experiencia en dos partes: académica y laboral */
+export type ExperienceArea = "academic" | "work";
 export type ExperienceStatus = "current" | "in-progress" | "planned" | "completed";
 
 export interface ExperienceItem {
   id: string;
+  area: ExperienceArea;
   kind: ExperienceKind;
   title: string;
   place: string;
   description: string;
   status: ExperienceStatus;
-  /** fechas reales; vacío mientras no estén confirmadas */
+  /** fechas de inicio y fin (por ejemplo "2024 – actualidad"); vacío si es un curso planeado */
   period?: string;
   stack?: Tech[];
   link?: { label: string; href: string };
 }
 
 export interface ExperienceContent extends SectionIntro {
+  areas: Record<ExperienceArea, { title: string; lead: string }>;
   kindLabels: Record<ExperienceKind, string>;
   statusLabels: Record<ExperienceStatus, string>;
 }
