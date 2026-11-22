@@ -39,7 +39,7 @@ export function TimelineItem({ item, className }: { item: ExperienceItem; classN
         <StatusTag label={content.statusLabels[item.status]} icon={statusIcon[item.status]} />
         {item.period && <span className="text-sm font-semibold">{item.period}</span>}
       </div>
-      <h3 className="mt-4 text-3xl leading-none">{item.title}</h3>
+      <h4 className="mt-4 text-3xl leading-none">{item.title}</h4>
       <p className="mt-1 font-semibold">{item.place}</p>
       <p className="mt-3 leading-relaxed">{item.description}</p>
 

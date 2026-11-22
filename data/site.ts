@@ -12,10 +12,17 @@ export const site: SiteInfo = {
   location: "Pasto, Colombia",
   university: "Universidad Cooperativa de Colombia",
   career: "Ingeniería de Software",
+  // confirmados el 22-nov-2026
+  semester: "5.º semestre",
+  studyStart: "2024",
+  languages: "Español (nativo) e inglés básico (A2)",
   githubUser: "brash777",
   githubUrl: "https://github.com/brash777",
   linkedinUrl: "https://www.linkedin.com/in/joan-stib-mosquera-montilla-30b370449/",
-  cvUrl: null, // TODO: URL pública del CV en Google Drive ("cualquier persona con el enlace puede ver")
+  // el CV vive en public/cv.pdf (así lo pide la guía del profe) y el botón lo descarga.
+  // Está armado solo con datos confirmados del portafolio: sin teléfono, dirección ni correo.
+  cvUrl: "/cv.pdf",
+  cvFileName: "CV-Johan-Mosquera.pdf",
   emails: [], // por ahora no se muestra correo (decidido el 21-nov-2026); el formulario manda a LinkedIn
   relationship: null, // TODO: el profe lo pidió; falta el texto (ej. "Soltero"). Con null no se muestra
   meta: {
@@ -51,8 +58,8 @@ export const navItems: NavItem[] = [
   { id: "projects", label: "Proyectos" },
   { id: "testimonials", label: "Testimonios" },
   { id: "experience", label: "Experiencia" },
-  { id: "skills", label: "Skills" },
   { id: "contact", label: "Contacto" },
+  { id: "skills", label: "Skills" },
 ];
 
 /** nombre de una sección tal como aparece en el menú */
@@ -67,7 +74,7 @@ export const ui: UiText = {
   mobileNav: "Menú del sitio",
   openMenu: "Abrir menú",
   closeMenu: "Cerrar menú",
-  cvButton: "Ver CV",
+  cvButton: "Descargar CV",
   cvPending: "CV en camino",
   cvLabel: "CV",
   cvPendingDetail: "Pronto en Google Drive",

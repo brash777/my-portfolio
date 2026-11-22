@@ -1,9 +1,11 @@
 import { tech } from "@/data/tech";
-import type { SectionIntro, SkillGroup } from "@/types";
+import type { SkillGroup, SkillsContent } from "@/types";
 
-export const skillsContent: SectionIntro = {
+export const skillsContent: SkillsContent = {
   title: "Skills",
-  lead: "Las tecnologías que uso de verdad en mis proyectos. Sin barras ni porcentajes: lo que cuenta es lo que construyo con ellas.",
+  lead: "Lo que puedo hacer y las tecnologías que uso de verdad en mis proyectos. Sin barras ni porcentajes: lo que cuenta es lo que construyo con ellas.",
+  servicesTitle: "Qué puedo hacer",
+  stackTitle: "Con qué lo hago",
 };
 
 /*

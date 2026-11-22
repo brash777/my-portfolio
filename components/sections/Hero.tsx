@@ -9,6 +9,8 @@ import { hero } from "@/data/hero";
 import { sectionPalettes } from "@/data/palettes";
 import { services } from "@/data/services";
 import { profileImages, site, ui } from "@/data/site";
+import { cvFullUrl } from "@/lib/cv";
+import { displayUrl } from "@/lib/utils";
 
 // giro de cada sticker del stack, para que se vean "pegados a mano"
 const tilts = ["-rotate-3", "rotate-2", "-rotate-1", "rotate-3", "rotate-1", "-rotate-2"];
@@ -62,9 +64,9 @@ function CvSummary() {
           <span className="sr-only"> {ui.opensNewTab}</span>
         </a>
       </div>
-      {site.cvUrl && (
+      {cvFullUrl && (
         <p className="text-xs break-all">
-          {cv.cvLinkLabel} {site.cvUrl}
+          {cv.cvLinkLabel} {displayUrl(cvFullUrl)}
         </p>
       )}
     </div>
@@ -93,14 +95,12 @@ export function Hero() {
 
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <CvButton />
+            {/* la guía del profe pide un botón secundario a Proyectos o Contacto */}
             <a
-              href={site.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#projects"
               className="sticker-sm inline-flex min-h-11 items-center rounded-full bg-paper px-5 py-2 font-bold text-ink transition-transform duration-200 hover:-translate-y-0.5"
             >
-              {hero.githubButton}
-              <span className="sr-only"> {ui.opensNewTab}</span>
+              {hero.projectsButton}
             </a>
           </div>
 

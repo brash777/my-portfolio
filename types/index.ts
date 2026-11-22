@@ -1,4 +1,5 @@
 import type { StaticImageData } from "next/image";
+import type { IconName } from "@/components/ui/Icon";
 
 /** id de cada sección de la página (se usa en el menú y en el scroll-spy) */
 export type SectionId =
@@ -7,8 +8,8 @@ export type SectionId =
   | "projects"
   | "testimonials"
   | "experience"
-  | "skills"
-  | "contact";
+  | "contact"
+  | "skills";
 
 export interface NavItem {
   id: SectionId;
@@ -63,11 +64,19 @@ export interface SiteInfo {
   location: string;
   university: string;
   career: string;
+  /** semestre actual de la carrera */
+  semester: string;
+  /** año en que empezó la carrera */
+  studyStart: string;
+  /** idiomas que habla, con su nivel */
+  languages: string;
   githubUser: string;
   githubUrl: string;
   linkedinUrl: string;
-  /** URL pública del CV en Google Drive; null mientras no exista */
+  /** CV: "/cv.pdf" si es el archivo de public/, o una URL externa (por ejemplo Google Drive); null = "CV en camino" */
   cvUrl: string | null;
+  /** nombre con el que se guarda el PDF al descargarlo */
+  cvFileName: string;
   emails: string[];
   /** estado de relación (lo pidió el profe); null = no se muestra */
   relationship: string | null;
@@ -75,6 +84,12 @@ export interface SiteInfo {
     title: string;
     description: string;
   };
+}
+
+/** Skills: además de las tecnologías, muestra los servicios ("Qué puedo hacer") */
+export interface SkillsContent extends SectionIntro {
+  servicesTitle: string;
+  stackTitle: string;
 }
 
 export interface Service {
@@ -93,7 +108,7 @@ export interface HeroContent {
   kicker: string;
   greeting: string;
   description: string;
-  githubButton: string;
+  projectsButton: string;
   /** tecnologías que se muestran como stickers */
   stackLabel: string;
   stack: Tech[];
@@ -159,13 +174,16 @@ export interface Hobby {
 export interface AboutFact {
   label: string;
   value: string;
-  icon: "pin" | "book" | "heart";
+  icon: IconName;
 }
 
 export interface AboutContent {
   title: string;
   paragraphs: string[];
   facts: AboutFact[];
+  /** tecnologías que maneja (la guía las pide en esta sección) */
+  stackTitle: string;
+  stack: Tech[];
   linksTitle: string;
   hobbiesTitle: string;
   hobbiesLead: string;
@@ -253,22 +271,26 @@ export interface TestimonialsContent extends SectionIntro {
 /* ---------- Experiencia ---------- */
 
 export type ExperienceKind = "education" | "freelance" | "project" | "course";
+/** la guía del profe divide la experiencia en dos partes: académica y laboral */
+export type ExperienceArea = "academic" | "work";
 export type ExperienceStatus = "current" | "in-progress" | "planned" | "completed";
 
 export interface ExperienceItem {
   id: string;
+  area: ExperienceArea;
   kind: ExperienceKind;
   title: string;
   place: string;
   description: string;
   status: ExperienceStatus;
-  /** fechas reales; vacío mientras no estén confirmadas */
+  /** fechas de inicio y fin (por ejemplo "2024 – actualidad"); vacío si es un curso planeado */
   period?: string;
   stack?: Tech[];
   link?: { label: string; href: string };
 }
 
 export interface ExperienceContent extends SectionIntro {
+  areas: Record<ExperienceArea, { title: string; lead: string }>;
   kindLabels: Record<ExperienceKind, string>;
   statusLabels: Record<ExperienceStatus, string>;
 }
