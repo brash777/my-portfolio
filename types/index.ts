@@ -86,6 +86,12 @@ export interface SiteInfo {
   };
 }
 
+/** Skills: además de las tecnologías, muestra los servicios ("Qué puedo hacer") */
+export interface SkillsContent extends SectionIntro {
+  servicesTitle: string;
+  stackTitle: string;
+}
+
 export interface Service {
   title: string;
   description: string;
