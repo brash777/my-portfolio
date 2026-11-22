@@ -66,8 +66,10 @@ export interface SiteInfo {
   githubUser: string;
   githubUrl: string;
   linkedinUrl: string;
-  /** URL pública del CV en Google Drive; null mientras no exista */
+  /** CV: "/cv.pdf" si es el archivo de public/, o una URL externa (por ejemplo Google Drive); null = "CV en camino" */
   cvUrl: string | null;
+  /** nombre con el que se guarda el PDF al descargarlo */
+  cvFileName: string;
   emails: string[];
   /** estado de relación (lo pidió el profe); null = no se muestra */
   relationship: string | null;

@@ -9,6 +9,8 @@ import { hero } from "@/data/hero";
 import { sectionPalettes } from "@/data/palettes";
 import { services } from "@/data/services";
 import { profileImages, site, ui } from "@/data/site";
+import { cvFullUrl } from "@/lib/cv";
+import { displayUrl } from "@/lib/utils";
 
 // giro de cada sticker del stack, para que se vean "pegados a mano"
 const tilts = ["-rotate-3", "rotate-2", "-rotate-1", "rotate-3", "rotate-1", "-rotate-2"];
@@ -62,9 +64,9 @@ function CvSummary() {
           <span className="sr-only"> {ui.opensNewTab}</span>
         </a>
       </div>
-      {site.cvUrl && (
+      {cvFullUrl && (
         <p className="text-xs break-all">
-          {cv.cvLinkLabel} {site.cvUrl}
+          {cv.cvLinkLabel} {displayUrl(cvFullUrl)}
         </p>
       )}
     </div>

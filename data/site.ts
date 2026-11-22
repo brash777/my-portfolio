@@ -15,7 +15,10 @@ export const site: SiteInfo = {
   githubUser: "brash777",
   githubUrl: "https://github.com/brash777",
   linkedinUrl: "https://www.linkedin.com/in/joan-stib-mosquera-montilla-30b370449/",
-  cvUrl: null, // TODO: URL pública del CV en Google Drive ("cualquier persona con el enlace puede ver")
+  // el CV vive en public/cv.pdf (así lo pide la guía del profe) y el botón lo descarga.
+  // Está armado solo con datos confirmados del portafolio: sin teléfono, dirección ni correo.
+  cvUrl: "/cv.pdf",
+  cvFileName: "CV-Johan-Mosquera.pdf",
   emails: [], // por ahora no se muestra correo (decidido el 21-nov-2026); el formulario manda a LinkedIn
   relationship: null, // TODO: el profe lo pidió; falta el texto (ej. "Soltero"). Con null no se muestra
   meta: {
@@ -67,7 +70,7 @@ export const ui: UiText = {
   mobileNav: "Menú del sitio",
   openMenu: "Abrir menú",
   closeMenu: "Cerrar menú",
-  cvButton: "Ver CV",
+  cvButton: "Descargar CV",
   cvPending: "CV en camino",
   cvLabel: "CV",
   cvPendingDetail: "Pronto en Google Drive",

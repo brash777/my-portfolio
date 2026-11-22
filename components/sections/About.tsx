@@ -7,6 +7,7 @@ import { about } from "@/data/about";
 import { hobbies } from "@/data/hobbies";
 import { sectionPalettes } from "@/data/palettes";
 import { profileImages, site, socialLinks, ui } from "@/data/site";
+import { cvFullUrl, cvIsFile, cvLinkProps } from "@/lib/cv";
 import { displayUrl } from "@/lib/utils";
 
 // giro de cada sticker de hobby, para que se vean "pegados a mano"
@@ -17,18 +18,17 @@ function AboutLinks() {
   return (
     <ul className="mt-5 grid gap-4 sm:grid-cols-2">
       <li>
-        {site.cvUrl ? (
+        {site.cvUrl && cvFullUrl ? (
           <a
             href={site.cvUrl}
-            target="_blank"
-            rel="noopener noreferrer"
+            {...cvLinkProps()}
             className="sticker-sm flex h-full flex-col rounded-2xl bg-paper px-4 py-3 text-ink transition-transform duration-200 hover:-translate-y-0.5"
           >
             <span className="font-bold">{ui.cvLabel}</span>
             <span className="text-sm break-all underline decoration-2 underline-offset-2">
-              {displayUrl(site.cvUrl)}
+              {displayUrl(cvFullUrl)}
             </span>
-            <span className="sr-only"> {ui.opensNewTab}</span>
+            {!cvIsFile && <span className="sr-only"> {ui.opensNewTab}</span>}
           </a>
         ) : (
           <p className="flex h-full flex-col rounded-2xl border-3 border-dashed border-paper px-4 py-3">
