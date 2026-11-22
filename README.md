@@ -21,14 +21,36 @@ Otros comandos:
 | `npm run build` | Arma la versión de producción (si falla, no se puede publicar) |
 | `npm start` | Corre la versión de producción en el computador |
 
+## Lo que pide la guía del profe
+
+La guía es [structure-portfolio.vercel.app](https://structure-portfolio.vercel.app). Este es el estado de cada requisito:
+
+| Requisito de la guía | Dónde está | Estado |
+|---|---|---|
+| Next.js + TypeScript + Tailwind CSS | todo el proyecto | Listo |
+| 1. Menú fijo, con logo, anclas, menú hamburguesa y scroll suave | `components/layout/Navbar.tsx` | Listo |
+| 2. Hero con nombre, rol, foto, frase, **Descargar CV** y botón a Proyectos | `components/sections/Hero.tsx`, `public/cv.pdf` | Listo |
+| 3. Acerca de mí: presentación, foto, tecnologías, ubicación, semestre e intereses | `components/sections/About.tsx`, `data/about.ts` | Listo |
+| 4. Proyectos: imagen, descripción, tecnologías, **GitHub** y **demo en vivo** | `components/sections/Projects.tsx`, `data/projects.ts` | Falta la demo de cada proyecto |
+| 5. Testimonios: mínimo 3, con **nombre**, cargo, avatar y texto | `data/testimonials.ts` | Faltan los reales con nombre |
+| 6. Experiencia **académica** y **laboral**, con fechas, de lo más reciente a lo más antiguo | `components/sections/Experience.tsx`, `data/experience.ts` | Listo |
+| 7. Contactos: **correo**, LinkedIn, GitHub y formulario con validación y confirmación | `components/sections/Contact.tsx`, `data/contact.ts` | Falta el correo y Formspree |
+| Sección adicional antes del pie (Skills con servicios) | `components/sections/Skills.tsx` | Listo |
+| 8. Pie con nombre, © año, redes, enlaces, volver arriba y créditos | `components/layout/Footer.tsx` | Listo |
+| Se ve bien en celular | todo | Listo (revisado hasta 320 px) |
+| Código en GitHub y publicado en Vercel | ver "Cómo publicar en Vercel" | Falta Vercel |
+
+El orden de `app/page.tsx` es el de la guía: Hero, Acerca de mí, Proyectos, Testimonios, Experiencia, Contactos, Skills (adicional) y pie.
+
 ## Pendientes antes de publicar
 
-- [ ] **CV:** sube el Word a Google Drive y pega la URL en `cvUrl` (`data/site.ts`). Mientras sea `null`, los botones dicen "CV en camino".
-- [ ] **Testimonios:** cambia los ejemplos de `data/testimonials.ts` por testimonios reales (con permiso) y pon `isExample: false`.
+- [x] **CV:** está en `public/cv.pdf` (armado el 22-nov-2026 solo con datos confirmados: sin teléfono, dirección ni correo). Para cambiarlo, reemplaza ese archivo por tu PDF con el mismo nombre.
+- [ ] **Testimonios:** cambia los ejemplos de `data/testimonials.ts` por testimonios reales (con permiso), con el **nombre** de la persona, y pon `isExample: false`. La guía pide mínimo 3.
+- [ ] **Demos de los proyectos:** la guía pide un enlace de demo en cada proyecto (`demoUrl` en `data/projects.ts`). Choose Seats ya está publicado en `choose-seats-psi.vercel.app`.
+- [ ] **Correo:** la guía lo pide en Contactos. Por ahora no se muestra (decidido el 22-nov-2026); si luego quieres mostrar uno, agrégalo en `emails` (`data/site.ts`).
 - [ ] **Cursos:** elige cuáles se quedan en `data/experience.ts`. Cuando termines uno, cambia `status` a `"completed"` y agrega `period` con las fechas reales.
-- [x] **Correo:** por ahora no se muestra (decidido el 21-nov-2026); quien quiera escribir llega por GitHub o LinkedIn (mientras el formulario no esté conectado, también manda a LinkedIn). Si luego quieres mostrar uno, agrégalo en `emails` (`data/site.ts`).
 - [ ] **Estado de relación:** escríbelo en `relationship` (`data/site.ts`). Con `null` no se muestra.
-- [ ] **Formulario:** conéctalo con Formspree (ver abajo).
+- [ ] **Formulario:** conéctalo con Formspree (ver abajo). Sin eso no sale el mensaje de confirmación al enviar.
 - [ ] **Textos:** todos los textos en `data/` son borradores. Cámbialos con tus palabras.
 
 ## Dónde está cada cosa
@@ -60,9 +82,9 @@ assets/fonts/           letra para la imagen de Open Graph
 
 | Quiero cambiar… | Archivo |
 |---|---|
-| Nombre, ciudad, enlaces, CV, correo, menú | `data/site.ts` |
+| Nombre, ciudad, semestre, idiomas, enlaces, CV, correo, menú | `data/site.ts` |
 | Saludo, intro, panel de código, CV resumido | `data/hero.ts` |
-| Servicios | `data/services.ts` |
+| Servicios ("Qué puedo hacer", en Skills y en el CV resumido) | `data/services.ts` |
 | Acerca de mí | `data/about.ts` y `data/hobbies.ts` |
 | Proyectos | `data/projects.ts` |
 | Testimonios | `data/testimonials.ts` |
@@ -100,16 +122,15 @@ Si usa una tecnología nueva, agrega su ícono SVG en `public/images/icons/` y r
 - **Texto alternativo:** cada imagen lleva un `alt` en español que describe lo que se ve (está junto a la imagen en `data/`).
 - Los originales viven fuera del repo, en `Portafoleo/source-imagenes/`, para no subir archivos pesados.
 
-## Cómo subir el CV a Google Drive
+## Cómo cambiar el CV
 
-1. Haz tu CV de una página en Word.
-2. Súbelo a Google Drive.
-3. Clic derecho → **Compartir** → en "Acceso general" elige **"Cualquier persona con el enlace"** → rol **Lector**.
-4. **Copiar enlace** y pégalo en `cvUrl` en `data/site.ts`:
+El botón «Descargar CV» baja `public/cv.pdf` (así lo pide la guía). Para poner otro CV:
 
-```ts
-cvUrl: "https://drive.google.com/file/d/…/view?usp=sharing",
-```
+1. Exporta tu CV de una página como PDF.
+2. Guárdalo en `public/` con el nombre `cv.pdf` (reemplaza el que hay).
+3. `git add public/cv.pdf`, commit y `git push`: Vercel lo publica solo.
+
+Al descargarlo se guarda como `CV-Johan-Mosquera.pdf` (`cvFileName` en `data/site.ts`). Si prefieres un enlace de Google Drive, pega la URL en `cvUrl`: el botón la abrirá en otra pestaña en vez de descargar.
 
 ## Cómo conectar el formulario de contacto (Formspree)
 
