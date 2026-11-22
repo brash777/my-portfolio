@@ -3,6 +3,7 @@ import { ChameleonBackground } from "@/components/ui/ChameleonBackground";
 import { HobbyCard } from "@/components/ui/HobbyCard";
 import { Icon } from "@/components/ui/Icon";
 import { Reveal } from "@/components/ui/Reveal";
+import { TechBadge } from "@/components/ui/TechBadge";
 import { about } from "@/data/about";
 import { hobbies } from "@/data/hobbies";
 import { sectionPalettes } from "@/data/palettes";
@@ -82,6 +83,15 @@ export function About() {
                 {paragraph}
               </p>
             ))}
+
+            <h3 className="mt-12 text-3xl">{about.stackTitle}</h3>
+            <ul className="mt-5 flex flex-wrap gap-3">
+              {about.stack.map((item, index) => (
+                <li key={item.name}>
+                  <TechBadge tech={item} className={tilts[index % tilts.length]} />
+                </li>
+              ))}
+            </ul>
 
             <h3 className="mt-12 text-3xl">{about.linksTitle}</h3>
             <AboutLinks />

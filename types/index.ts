@@ -1,4 +1,5 @@
 import type { StaticImageData } from "next/image";
+import type { IconName } from "@/components/ui/Icon";
 
 /** id de cada sección de la página (se usa en el menú y en el scroll-spy) */
 export type SectionId =
@@ -63,6 +64,12 @@ export interface SiteInfo {
   location: string;
   university: string;
   career: string;
+  /** semestre actual de la carrera */
+  semester: string;
+  /** año en que empezó la carrera */
+  studyStart: string;
+  /** idiomas que habla, con su nivel */
+  languages: string;
   githubUser: string;
   githubUrl: string;
   linkedinUrl: string;
@@ -161,13 +168,16 @@ export interface Hobby {
 export interface AboutFact {
   label: string;
   value: string;
-  icon: "pin" | "book" | "heart";
+  icon: IconName;
 }
 
 export interface AboutContent {
   title: string;
   paragraphs: string[];
   facts: AboutFact[];
+  /** tecnologías que maneja (la guía las pide en esta sección) */
+  stackTitle: string;
+  stack: Tech[];
   linksTitle: string;
   hobbiesTitle: string;
   hobbiesLead: string;

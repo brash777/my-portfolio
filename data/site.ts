@@ -12,6 +12,10 @@ export const site: SiteInfo = {
   location: "Pasto, Colombia",
   university: "Universidad Cooperativa de Colombia",
   career: "Ingeniería de Software",
+  // confirmados el 22-nov-2026
+  semester: "5.º semestre",
+  studyStart: "2024",
+  languages: "Español (nativo) e inglés básico (A2)",
   githubUser: "brash777",
   githubUrl: "https://github.com/brash777",
   linkedinUrl: "https://www.linkedin.com/in/joan-stib-mosquera-montilla-30b370449/",
