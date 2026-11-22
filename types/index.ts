@@ -95,7 +95,7 @@ export interface HeroContent {
   kicker: string;
   greeting: string;
   description: string;
-  githubButton: string;
+  projectsButton: string;
   /** tecnologías que se muestran como stickers */
   stackLabel: string;
   stack: Tech[];

@@ -95,14 +95,12 @@ export function Hero() {
 
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <CvButton />
+            {/* la guía del profe pide un botón secundario a Proyectos o Contacto */}
             <a
-              href={site.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#projects"
               className="sticker-sm inline-flex min-h-11 items-center rounded-full bg-paper px-5 py-2 font-bold text-ink transition-transform duration-200 hover:-translate-y-0.5"
             >
-              {hero.githubButton}
-              <span className="sr-only"> {ui.opensNewTab}</span>
+              {hero.projectsButton}
             </a>
           </div>
 
