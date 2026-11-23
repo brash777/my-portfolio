@@ -1,4 +1,5 @@
 import Image from "next/image";
+import type { CSSProperties } from "react";
 import { CurrentYear } from "@/components/ui/CurrentYear";
 import { Icon } from "@/components/ui/Icon";
 import { Logo } from "@/components/ui/Logo";
@@ -20,7 +21,7 @@ export function Footer({ linkPrefix = "" }: FooterProps) {
     <footer className="border-t border-line bg-night/60 px-5 pt-16 pb-10 sm:px-8">
       <div className="mx-auto max-w-6xl">
         <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-12">
-          <div className="lg:col-span-4">
+          <div data-reveal="left" className="lg:col-span-4">
             <Logo href={`${linkPrefix}#hero`} />
             <p className="mt-5 max-w-xs text-sm text-muted">{content.bio}</p>
             <ul className="mt-6 flex gap-3">
@@ -42,7 +43,7 @@ export function Footer({ linkPrefix = "" }: FooterProps) {
             </ul>
           </div>
 
-          <nav aria-labelledby="footer-nav-title" className="lg:col-span-2">
+          <nav data-reveal="up" aria-labelledby="footer-nav-title" className="lg:col-span-2">
             <h2 id="footer-nav-title" className="text-sm font-semibold text-white">
               {content.navTitle}
             </h2>
@@ -57,7 +58,7 @@ export function Footer({ linkPrefix = "" }: FooterProps) {
             </ul>
           </nav>
 
-          <div className="lg:col-span-3">
+          <div data-reveal="up" style={{ "--reveal-delay": "100ms" } as CSSProperties} className="lg:col-span-3">
             <h2 className="text-sm font-semibold text-white">{content.specialtiesTitle}</h2>
             <ul className="mt-4 space-y-2.5">
               {services.map((service) => (
@@ -68,7 +69,7 @@ export function Footer({ linkPrefix = "" }: FooterProps) {
             </ul>
           </div>
 
-          <div className="lg:col-span-3">
+          <div data-reveal="up" style={{ "--reveal-delay": "200ms" } as CSSProperties} className="lg:col-span-3">
             <h2 className="text-sm font-semibold text-white">{content.contactTitle}</h2>
             <ul className="mt-4 space-y-2.5 text-sm text-muted">
               {site.emails.map((email) => (

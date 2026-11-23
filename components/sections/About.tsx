@@ -1,4 +1,5 @@
 import Image from "next/image";
+import type { CSSProperties } from "react";
 import { CvButton } from "@/components/ui/CvButton";
 import { Icon } from "@/components/ui/Icon";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -15,7 +16,7 @@ export function About() {
     <section id="about" aria-labelledby="about-title" className="px-5 py-24 sm:px-8 lg:py-28">
       <div className="mx-auto grid max-w-6xl gap-14 lg:grid-cols-12 lg:gap-16">
         <div className="lg:col-span-5">
-          <div className="relative mx-auto max-w-sm lg:sticky lg:top-28">
+          <div data-reveal="left" className="relative mx-auto max-w-sm lg:sticky lg:top-28">
             <div className="glass overflow-hidden rounded-panel p-2">
               <div className="relative aspect-[4/5] overflow-hidden rounded-[1.35rem]">
                 <Image
@@ -37,18 +38,22 @@ export function About() {
         </div>
 
         <div className="lg:col-span-7">
-          <SectionHeading id="about-title" lead={about.lead}>
-            {about.title}
-          </SectionHeading>
+          <div data-reveal="up">
+            <SectionHeading id="about-title" lead={about.lead}>
+              {about.title}
+            </SectionHeading>
+          </div>
 
-          {about.paragraphs.map((paragraph) => (
-            <p key={paragraph} className="mt-6 text-lg">
-              {paragraph}
-            </p>
-          ))}
+          <div data-reveal="up">
+            {about.paragraphs.map((paragraph) => (
+              <p key={paragraph} className="mt-6 text-lg">
+                {paragraph}
+              </p>
+            ))}
+          </div>
 
           {/* datos rápidos que pide la guía (ubicación, universidad y desde cuándo estudio) */}
-          <ul className="mt-8 grid gap-4 sm:grid-cols-3">
+          <ul data-reveal="up" className="mt-8 grid gap-4 sm:grid-cols-3">
             {about.facts.map((fact) => (
               <li key={fact.label} className="flex items-start gap-3 text-sm">
                 <span aria-hidden="true" className="glass grid size-10 shrink-0 place-items-center rounded-xl text-blue-soft">
@@ -63,14 +68,14 @@ export function About() {
           </ul>
 
           <div className="mt-10 grid gap-5 sm:grid-cols-2">
-            <div className="glass rounded-card p-6">
+            <div data-reveal="up" className="glass rounded-card p-6">
               <h3 className="flex items-center gap-2.5 text-lg">
                 <Icon name="heart" className="text-blue-soft" />
                 {about.outside.title}
               </h3>
               <p className="mt-3 text-muted">{about.outside.text}</p>
             </div>
-            <div className="glass rounded-card p-6">
+            <div data-reveal="up" style={{ "--reveal-delay": "100ms" } as CSSProperties} className="glass rounded-card p-6">
               <h3 className="flex items-center gap-2.5 text-lg">
                 <Icon name="language" className="text-blue-soft" />
                 {about.languages.title}
@@ -85,10 +90,17 @@ export function About() {
             </div>
           </div>
 
-          <h3 className="mt-12 text-2xl">{about.focusTitle}</h3>
+          <h3 data-reveal="up" className="mt-12 text-2xl">
+            {about.focusTitle}
+          </h3>
           <ul className="mt-5 grid gap-5 sm:grid-cols-3">
-            {about.focus.map((item) => (
-              <li key={item.title} className="glass rounded-card p-5">
+            {about.focus.map((item, index) => (
+              <li
+                key={item.title}
+                data-reveal="up"
+                style={{ "--reveal-delay": `${index * 90}ms` } as CSSProperties}
+                className="glass rounded-card p-5"
+              >
                 <Icon name={item.icon} className="size-6 text-blue-soft" />
                 <p className="mt-3 font-semibold text-white">{item.title}</p>
                 <p className="mt-1 text-sm text-muted">{item.techs}</p>
@@ -96,7 +108,7 @@ export function About() {
             ))}
           </ul>
 
-          <div className="mt-10 flex flex-wrap gap-3">
+          <div data-reveal="up" className="mt-10 flex flex-wrap gap-3">
             <CvButton />
             <a href="#projects" className={buttonSecondary}>
               {about.projectsButton}
