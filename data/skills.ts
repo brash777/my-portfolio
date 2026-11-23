@@ -18,28 +18,24 @@ export const skillGroups: SkillGroup[] = [
     id: "backend",
     title: "Backend",
     description: "Servidores, APIs y bases de datos.",
-    accent: "blue",
     items: [tech.java, tech.springBoot, tech.postgresql, tech.supabase, tech.flyway, tech.jwt, tech.nodejs, tech.express, tech.python],
   },
   {
     id: "frontend",
     title: "Frontend",
     description: "Lo que se ve y se toca, en el navegador, el celular y el escritorio.",
-    accent: "red",
     items: [tech.html, tech.css, tech.javascript, tech.typescript, tech.react, tech.nextjs, tech.tailwind, tech.gsap, tech.pwa, tech.electron],
   },
   {
     id: "tools",
     title: "Herramientas",
     description: "Con lo que trabajo todos los días.",
-    accent: "yellow",
     items: [tech.git, tech.github, tech.vscode, tech.vite, tech.vercel],
   },
   {
     id: "ai",
     title: "IA",
     description: "Asistentes de IA dentro de mis apps y como ayuda para programar.",
-    accent: "violet",
     items: [tech.groq, tech.anthropic, tech.claudeCode],
   },
 ];

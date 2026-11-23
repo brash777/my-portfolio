@@ -1,14 +1,13 @@
 import { site } from "@/data/site";
-import { tech } from "@/data/tech";
 import type { FooterContent } from "@/types";
 
 // Textos del pie de página (borrador)
 export const footerContent: FooterContent = {
-  phrase: "Hecho a mano en Pasto, sticker por sticker.",
-  builtWithTitle: "Este portafolio está hecho con",
-  builtWith: [tech.nextjs, tech.typescript, tech.tailwind, tech.vercel],
-  navTitle: "Secciones",
+  bio: `Estudiante de ${site.career} en Pasto. Construyo aplicaciones completas, desde la base de datos hasta la pantalla.`,
+  navTitle: "Enlaces",
+  specialtiesTitle: "Especialidades",
   contactTitle: "Contacto",
   madeBy: site.fullName,
+  credits: "Hecho con Next.js, TypeScript y Tailwind CSS.",
   backToTop: "Volver arriba",
 };

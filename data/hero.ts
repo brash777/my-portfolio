@@ -1,46 +1,27 @@
+import { projects } from "@/data/projects";
 import { site } from "@/data/site";
-import { tech } from "@/data/tech";
+import { skillGroups } from "@/data/skills";
 import type { HeroContent } from "@/types";
 
-// Textos del Hero y del CV resumido (borrador: edítalos con tus palabras)
+// cuántas tecnologías distintas hay en Skills (se cuenta sola si agregas una)
+const techCount = new Set(skillGroups.flatMap((group) => group.items.map((item) => item.name))).size;
+
+// Textos del Inicio (borrador: edítalos con tus palabras)
 export const hero: HeroContent = {
   kicker: `Estudiante de ${site.career} en Pasto`,
   greeting: "Hola, soy",
   description:
-    "Construyo aplicaciones completas, desde la base de datos hasta la pantalla. Mi proyecto más fuerte es Flux IA, una app de finanzas personales con asistente de IA. Estoy aprendiendo todos los días y me gusta que lo que hago funcione y se vea bien.",
+    "Construyo aplicaciones completas, desde la base de datos hasta la pantalla. Mi proyecto más fuerte es Flux IA, una app de finanzas personales con asistente de IA.",
   projectsButton: "Ver mis proyectos",
-  stackLabel: "Tecnologías que uso",
-  stack: [tech.java, tech.springBoot, tech.postgresql, tech.supabase, tech.typescript, tech.nextjs, tech.tailwind, tech.gsap],
-  code: {
-    fileName: "johan.ts",
-    variable: "johan",
-    fields: [
-      { key: "rol", value: site.role },
-      { key: "nivel", value: "junior" },
-      { key: "estudia", value: site.career },
-      { key: "stack", value: ["Java", "Spring Boot", "Next.js", "PostgreSQL"] },
-      { key: "aprendiendo", value: true },
-    ],
-  },
-  flip: {
-    hint: "Pasa el mouse por la foto o toca la esquina doblada para ver mi CV en corto.",
-    hintTouch: "Toca la esquina doblada de la foto para ver mi CV en corto.",
-    toBack: "Voltear la foto y ver mi CV en corto",
-    toFront: "Volver a la foto",
-  },
-  cv: {
-    title: "Mi CV en corto",
-    whoTitle: "Quién soy",
-    who: `${site.fullName}. Estudio ${site.career} en la ${site.university}, en Pasto.`,
-    doTitle: "A qué me dedico",
-    do: "Apps completas: frontend, backend y base de datos.",
-    servicesTitle: "Servicios",
-    experienceTitle: "Experiencia",
-    experience: [
-      `${site.career} en la ${site.university} (en curso)`,
-      "Freelance: mis propias apps, Flux IA y FlowStore (en desarrollo)",
-    ],
-    moreButton: "Ver más en GitHub",
-    cvLinkLabel: "Enlace del CV:",
+  // datos reales: salen de data/projects.ts, data/skills.ts y data/site.ts
+  stats: [
+    { value: String(projects.length), label: "Proyectos" },
+    { value: String(techCount), label: "Tecnologías" },
+    { value: site.semester.replace(" semestre", ""), label: "Semestre" },
+  ],
+  featured: {
+    label: "Mi proyecto más fuerte",
+    slug: "flux-ia",
+    linkLabel: "Ver Flux IA",
   },
 };

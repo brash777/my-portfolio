@@ -6,7 +6,7 @@ export type SectionId =
   | "hero"
   | "about"
   | "projects"
-  | "testimonials"
+  | "references"
   | "experience"
   | "contact"
   | "skills";
@@ -27,19 +27,6 @@ export interface SocialLink {
 export interface Tech {
   name: string;
   icon?: string;
-}
-
-/** colores de la paleta que puede usar una tarjeta o proyecto */
-export type Accent = "blue" | "red" | "yellow" | "violet";
-
-/**
- * Colores del fondo camaleón: una base oscura y tres brillos con transparencia.
- * El texto encima siempre es blanco, así que cada paleta debe dar 4.5:1 o más
- * incluso donde se juntan los tres brillos.
- */
-export interface Palette {
-  base: string;
-  glows: [string, string, string];
 }
 
 /** título y texto corto de una sección */
@@ -95,12 +82,13 @@ export interface SkillsContent extends SectionIntro {
 export interface Service {
   title: string;
   description: string;
+  icon: IconName;
 }
 
-/** una línea del panel tipo editor de código del hero */
-export interface CodeField {
-  key: string;
-  value: string | boolean | string[];
+/** un dato corto del hero: un número grande y lo que significa */
+export interface HeroStat {
+  value: string;
+  label: string;
 }
 
 export interface HeroContent {
@@ -109,34 +97,13 @@ export interface HeroContent {
   greeting: string;
   description: string;
   projectsButton: string;
-  /** tecnologías que se muestran como stickers */
-  stackLabel: string;
-  stack: Tech[];
-  code: {
-    fileName: string;
-    variable: string;
-    fields: CodeField[];
-  };
-  flip: {
-    /** pista para quien usa mouse (al pasar por la foto se voltea) */
-    hint: string;
-    /** pista para pantallas táctiles, donde no hay "pasar el mouse" */
-    hintTouch: string;
-    toBack: string;
-    toFront: string;
-  };
-  /** reverso de la tarjeta: CV resumido */
-  cv: {
-    title: string;
-    whoTitle: string;
-    who: string;
-    doTitle: string;
-    do: string;
-    servicesTitle: string;
-    experienceTitle: string;
-    experience: string[];
-    moreButton: string;
-    cvLinkLabel: string;
+  stats: HeroStat[];
+  /** tarjeta de la derecha: la app más fuerte */
+  featured: {
+    label: string;
+    /** slug del proyecto en data/projects.ts */
+    slug: string;
+    linkLabel: string;
   };
 }
 
@@ -149,27 +116,11 @@ export interface UiText {
   closeMenu: string;
   cvButton: string;
   cvPending: string;
-  cvLabel: string;
-  cvPendingDetail: string;
   opensNewTab: string;
   homeLink: string;
-  sectionPending: string;
 }
 
 /* ---------- Acerca de mí ---------- */
-
-export type HobbyIcon = "gamepad" | "pencil" | "music" | "spotify" | "ball" | "glove";
-
-export interface Hobby {
-  id: string;
-  title: string;
-  description: string;
-  items: string[];
-  icons: HobbyIcon[];
-  accent: Accent;
-  /** enlace opcional (por ejemplo, el perfil de Spotify) */
-  link?: { label: string; href: string };
-}
 
 export interface AboutFact {
   label: string;
@@ -177,16 +128,24 @@ export interface AboutFact {
   icon: IconName;
 }
 
-export interface AboutContent {
+/** un área en la que me enfoco, con las tecnologías que uso en ella */
+export interface AboutFocus {
   title: string;
+  icon: IconName;
+  techs: string;
+}
+
+export interface AboutContent extends SectionIntro {
   paragraphs: string[];
+  /** insignia sobre la foto */
+  badge: { title: string; text: string };
   facts: AboutFact[];
-  /** tecnologías que maneja (la guía las pide en esta sección) */
-  stackTitle: string;
-  stack: Tech[];
-  linksTitle: string;
-  hobbiesTitle: string;
-  hobbiesLead: string;
+  /** "Fuera del código": intereses */
+  outside: { title: string; text: string };
+  languages: { title: string; items: { name: string; level: string }[] };
+  focusTitle: string;
+  focus: AboutFocus[];
+  projectsButton: string;
 }
 
 /* ---------- Proyectos ---------- */
@@ -208,9 +167,6 @@ export interface Project {
   stack: Tech[];
   role: string;
   year: number;
-  accent: Accent;
-  /** colores del fondo cuando se presenta esta app; si no tiene, usa los de su acento */
-  palette?: Palette;
   /** captura principal (portada) */
   cover?: SiteImage;
   /** logo o ícono de la app, si no hay capturas */
@@ -221,21 +177,12 @@ export interface Project {
 }
 
 export interface ProjectsContent extends SectionIntro {
-  featuredTitle: string;
-  moreTitle: string;
-  filterLabel: string;
-  allFilter: string;
   categoryLabels: Record<ProjectCategory, string>;
   statusLabels: Record<ProjectStatus, string>;
   viewDetails: string;
   repoButton: string;
   demoButton: string;
   builtWith: string;
-  emptyFilter: string;
-  /** "{n}" se reemplaza por la cantidad de proyectos que se están mostrando */
-  resultsLabel: string;
-  /** "{name}" se reemplaza por el nombre del proyecto */
-  repoLinkLabel: string;
   detail: {
     back: string;
     roleLabel: string;
@@ -260,12 +207,9 @@ export interface Testimonial {
   isExample: boolean;
 }
 
+/** Referencias (en la guía del profe se llaman Testimonios) */
 export interface TestimonialsContent extends SectionIntro {
   exampleLabel: string;
-  previous: string;
-  next: string;
-  /** "{n}" y "{total}" se reemplazan por el número de la tarjeta */
-  slideLabel: string;
 }
 
 /* ---------- Experiencia ---------- */
@@ -291,6 +235,8 @@ export interface ExperienceItem {
 
 export interface ExperienceContent extends SectionIntro {
   areas: Record<ExperienceArea, { title: string; lead: string }>;
+  /** los cursos planeados van aparte, en una lista corta */
+  coursesTitle: string;
   kindLabels: Record<ExperienceKind, string>;
   statusLabels: Record<ExperienceStatus, string>;
 }
@@ -298,6 +244,8 @@ export interface ExperienceContent extends SectionIntro {
 /* ---------- Contacto ---------- */
 
 export interface ContactContent extends SectionIntro {
+  locationLabel: string;
+  emailLabel: string;
   linksTitle: string;
   form: {
     title: string;
@@ -328,19 +276,20 @@ export interface SkillGroup {
   id: SkillCategory;
   title: string;
   description: string;
-  accent: Accent;
   items: Tech[];
 }
 
 /* ---------- Footer ---------- */
 
 export interface FooterContent {
-  phrase: string;
-  builtWithTitle: string;
-  builtWith: Tech[];
+  /** frase corta debajo del logo */
+  bio: string;
   navTitle: string;
+  specialtiesTitle: string;
   contactTitle: string;
   madeBy: string;
+  /** créditos: con qué está hecho (lo pide la guía del profe) */
+  credits: string;
   backToTop: string;
 }
 
@@ -349,7 +298,7 @@ export interface FooterContent {
 export interface NotFoundContent {
   /** título de la pestaña del navegador */
   tabTitle: string;
-  /** el número grande del sticker */
+  /** el número grande */
   code: string;
   title: string;
   lead: string;
