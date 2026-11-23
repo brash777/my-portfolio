@@ -2,62 +2,43 @@
 
 /*
   Tokens de diseño del portafolio.
-  Idea visual: "la tapa del portátil": lo que se puede tocar es un sticker
-  (borde blanco recortado + contorno negro + sombra dura).
+  Idea visual: "noche azul". Un solo tono en toda la página: fondo azul casi negro,
+  tarjetas de vidrio (transparentes, con borde fino) y un solo color de acento, el azul eléctrico.
   Se borran los colores y sombras que trae Tailwind para que solo existan los nuestros.
 */
 @theme {
   --color-*: initial;
-  --color-ink: #000000; /* contornos, sombras y texto */
-  --color-paper: #ffffff; /* borde de los stickers y fondos claros */
-  --color-blue: #1a43d9; /* Hero y Experiencia, texto blanco encima (7.4:1) */
-  --color-red: #d7261e; /* Testimonios y acciones, texto blanco encima (5.0:1) */
-  --color-yellow: #ffd100; /* Acerca de mí, Contacto y CV, texto negro encima (14.4:1) */
-  --color-violet: #6a2ee8; /* acento: IA y Flux IA, texto blanco encima (6.6:1) */
+  --color-night: #060a1a; /* fondo de toda la página */
+  --color-night-2: #0a1130; /* fondo un poco más claro (campos del formulario, degradados) */
+  --color-text: #eef2ff; /* texto principal: 17:1 sobre el fondo */
+  --color-muted: #a6b1d1; /* texto secundario: 9.2:1 sobre el fondo */
+  --color-blue: #2f5bff; /* acento: botones; texto blanco encima (5.2:1) */
+  --color-blue-soft: #8aa6ff; /* acento en textos pequeños y enlaces: 8.4:1 sobre el fondo */
+  --color-line: rgb(150 175 255 / 0.16); /* borde de las tarjetas de vidrio */
+  --color-white: #ffffff;
+  --color-error: #ff9b9b; /* errores del formulario: 9.7:1 sobre el fondo */
 
   --shadow-*: initial;
-  --shadow-hard: 6px 6px 0 0 var(--color-ink);
-  --shadow-hard-sm: 3px 3px 0 0 var(--color-ink);
+  --shadow-glow: 0 12px 40px -12px rgb(47 91 255 / 0.65); /* brillo de los botones azules */
 
-  --radius-sticker: 1.25rem;
+  --radius-panel: 1.75rem; /* paneles grandes (fotos, proyectos, formulario) */
+  --radius-card: 1.25rem; /* tarjetas */
 
   /* escala de títulos fluida: crece con el ancho de la pantalla */
-  --text-hero: clamp(5.5rem, 2.5rem + 12vw, 12rem); /* solo el nombre del hero */
-  --text-hero--line-height: 0.8;
-  --text-display: clamp(3.25rem, 2rem + 6vw, 7.5rem);
-  --text-display--line-height: 0.88;
-  --text-title: clamp(2.5rem, 1.75rem + 3.5vw, 4.75rem);
-  --text-title--line-height: 0.92;
+  --text-hero: clamp(3.25rem, 1.9rem + 5.6vw, 6.25rem);
+  --text-hero--line-height: 0.98;
+  --text-title: clamp(2.25rem, 1.65rem + 2.4vw, 3.6rem);
+  --text-title--line-height: 1.05;
 
-  --ease-slap: cubic-bezier(0.34, 1.56, 0.64, 1); /* rebote de un sticker al pegarse */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 
-  /* animaciones de entrada del hero (solo transform y opacity) */
-  --animate-slap-in: slap-in 0.8s var(--ease-slap) both;
-  --animate-pop-in: pop-in 0.5s var(--ease-slap) both;
-  --animate-rise-in: rise-in 0.7s ease-out both;
+  /* única animación de entrada: el hero al cargar la página (solo transform y opacity) */
+  --animate-rise-in: rise-in 0.9s var(--ease-out) both;
 
-  @keyframes slap-in {
-    from {
-      transform: scale(1.18) rotate(-6deg);
-    }
-    to {
-      transform: none;
-    }
-  }
-  @keyframes pop-in {
-    from {
-      opacity: 0;
-      transform: scale(0.3) rotate(-12deg);
-    }
-    to {
-      opacity: 1;
-      transform: none;
-    }
-  }
   @keyframes rise-in {
     from {
       opacity: 0;
-      transform: translateY(1.5rem);
+      transform: translateY(1.25rem);
     }
     to {
       opacity: 1;
@@ -66,82 +47,90 @@
   }
 }
 
-/* las fuentes vienen de next/font (app/layout.tsx); "inline" usa el valor final */
+/* Mona Sans (la letra de GitHub) en todo; los títulos la usan ancha y gruesa */
 @theme inline {
   --font-*: initial;
-  --font-display: var(--font-hubot), ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-mona), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
-}
-
-/* sticker grande: borde blanco recortado, contorno negro y sombra dura */
-@utility sticker {
-  border: 4px solid var(--color-paper);
-  box-shadow:
-    0 0 0 3px var(--color-ink),
-    6px 6px 0 3px var(--color-ink);
-}
-
-/* sticker pequeño: para insignias del stack y botones */
-@utility sticker-sm {
-  border: 3px solid var(--color-paper);
-  box-shadow:
-    0 0 0 2px var(--color-ink),
-    3px 3px 0 2px var(--color-ink);
 }
 
 /*
-  Esquina doblada ("dog-ear") de la tarjeta del hero: corta la esquina inferior
-  derecha en diagonal (--ear). Los puntos salen 24px por fuera de la tarjeta para
-  no recortar el contorno negro ni la sombra dura del sticker.
+  Tarjeta de vidrio: fondo azul muy transparente (deja ver el fondo de la página),
+  borde fino y un brillo de luz en el borde de arriba.
 */
-@utility dog-ear {
-  --ear: 3.5rem;
-  clip-path: polygon(
-    -24px -24px,
-    calc(100% + 24px) -24px,
-    calc(100% + 24px) calc(100% - var(--ear) - 24px),
-    calc(100% - var(--ear) - 24px) calc(100% + 24px),
-    -24px calc(100% + 24px)
-  );
+@utility glass {
+  background: linear-gradient(180deg, rgb(140 165 255 / 0.085), rgb(140 165 255 / 0.03));
+  border: 1px solid var(--color-line);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.07),
+    0 24px 60px -32px rgb(0 0 0 / 0.9);
+}
+
+/* vidrio esmerilado: casi opaco y difumina lo que pasa por detrás (menú fijo e insignias). El borde se pone aparte. */
+@utility glass-blur {
+  background: rgb(8 13 34 / 0.88);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+}
+
+/* íconos de tecnologías: son SVG negros; así quedan claros, en el mismo tono de la página */
+@utility icon-light {
+  filter: brightness(0) invert(1);
+  opacity: 0.85;
 }
 
 @layer base {
   html {
-    /* cada sección pinta su fondo (el fondo camaleón); este color solo se ve al estirar el scroll */
     color-scheme: dark;
-    background-color: #050505;
+    background-color: var(--color-night);
     scroll-behavior: smooth;
-    scroll-padding-top: 6rem; /* para que el menú fijo no tape el título de la sección */
+    scroll-padding-top: 5.5rem; /* para que el menú fijo no tape el título de la sección */
   }
 
-  /* sin fondo propio: así se ve el fondo camaleón que está detrás */
   body {
-    color: var(--color-paper);
+    position: relative;
+    min-height: 100vh;
+    color: var(--color-text);
     font-family: var(--font-sans);
+    line-height: 1.6;
+  }
+
+  /*
+    Fondo de toda la página (fijo, detrás de todo): un brillo azul arriba, otro más suave abajo
+    a la derecha y una cuadrícula muy tenue, como un plano. Es el mismo en todas las secciones.
+  */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      radial-gradient(60rem 36rem at 15% -10%, rgb(47 91 255 / 0.28), transparent 70%),
+      radial-gradient(50rem 40rem at 110% 110%, rgb(47 91 255 / 0.16), transparent 70%),
+      linear-gradient(rgb(150 175 255 / 0.045) 1px, transparent 1px) 0 0 / 64px 64px,
+      linear-gradient(90deg, rgb(150 175 255 / 0.045) 1px, transparent 1px) 0 0 / 64px 64px;
+    mask-image: radial-gradient(ellipse 120% 90% at 50% 30%, #000 40%, transparent 100%);
   }
 
   h1,
   h2,
   h3,
   h4 {
-    font-family: var(--font-display);
-    font-stretch: 75%;
-    font-weight: 800;
+    font-stretch: 112%;
+    font-weight: 700;
+    letter-spacing: -0.02em;
     text-wrap: balance;
+    color: var(--color-white);
   }
 
   ::selection {
-    background-color: var(--color-yellow);
-    color: var(--color-ink);
+    background-color: var(--color-blue);
+    color: var(--color-white);
   }
 
-  /*
-    foco visible: blanco por defecto porque el fondo de la página es oscuro.
-    Las superficies blancas (menú, tarjetas) cambian --focus a negro.
-  */
+  /* foco visible en todo: anillo azul claro (8.4:1 sobre el fondo) */
   :focus-visible {
-    outline: 3px solid var(--focus, var(--color-paper));
+    outline: 2px solid var(--color-blue-soft);
     outline-offset: 3px;
   }
 
@@ -162,165 +151,5 @@
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
     }
-  }
-}
-
-/* ---------- Fondo camaleón (components/ui/ChameleonBackground.tsx) ---------- */
-
-/*
-  Cada sección (y cada app destacada) pinta su propio fondo: una base oscura y tres brillos.
-  El fondo empieza --blend más arriba que su zona y aparece de a poco (mask-image) encima
-  del final de la zona anterior: en esa división un color se va convirtiendo en el otro.
-  Va con z-index -1, detrás del texto de todas las zonas; como las zonas siguen el orden
-  de la página, la de abajo siempre queda encima de la de arriba. Por eso no va dentro de
-  algo sticky o fixed: eso lo sube de capa y taparía el texto de arriba (ver Projects.tsx).
-*/
-.chameleon {
-  --blend: clamp(8rem, 30vh, 18rem); /* alto de la mezcla entre dos colores */
-  position: absolute;
-  inset: calc(-1 * var(--blend)) 0 0;
-  z-index: -1;
-  overflow: hidden;
-  pointer-events: none;
-  background-color: var(--bg-base);
-  mask-image: linear-gradient(to bottom, transparent, #000 var(--blend));
-}
-
-/* cada brillo es un óvalo de color que se desvanece hacia sus bordes (como en Flux IA) */
-.chameleon-glow {
-  position: absolute;
-}
-/* arriba a la izquierda, justo en la división: aparece mientras se mezclan los colores */
-.chameleon-glow-1 {
-  top: calc(var(--blend) - 30vh);
-  left: -25vw;
-  width: 95vw;
-  height: 80vh;
-  background: radial-gradient(closest-side, var(--bg-glow-1), transparent);
-}
-/* a la derecha, a mitad de la zona */
-.chameleon-glow-2 {
-  top: calc(50% + var(--blend) / 2 - 32vh);
-  right: -20vw;
-  width: 75vw;
-  height: 65vh;
-  background: radial-gradient(closest-side, var(--bg-glow-2), transparent);
-}
-/* abajo, cerca de la siguiente división */
-.chameleon-glow-3 {
-  bottom: -20vh;
-  left: 5vw;
-  width: 110vw;
-  height: 80vh;
-  background: radial-gradient(closest-side, var(--bg-glow-3), transparent);
-}
-
-/* los brillos flotan despacio; solo se mueve transform, que no hace recalcular la página */
-@media (prefers-reduced-motion: no-preference) {
-  .chameleon-glow {
-    animation: glow-drift 26s ease-in-out infinite alternate;
-  }
-  .chameleon-glow-2 {
-    animation-duration: 32s;
-    animation-direction: alternate-reverse;
-  }
-  .chameleon-glow-3 {
-    animation-duration: 38s;
-    animation-delay: -12s;
-  }
-}
-
-@keyframes glow-drift {
-  from {
-    transform: translate(-4%, -3%) scale(1);
-  }
-  to {
-    transform: translate(5%, 4%) scale(1.15);
-  }
-}
-
-/* ---------- Movimiento al hacer scroll ---------- */
-
-/* Reveal: el contenido entra cuando aparece en pantalla (components/ui/Reveal.tsx) */
-[data-reveal] {
-  transition:
-    opacity 0.5s ease-out,
-    transform 0.8s var(--ease-slap);
-  transition-delay: var(--reveal-delay, 0ms);
-}
-[data-reveal="rise"]:not([data-visible]) {
-  opacity: 0;
-  transform: translateY(2.5rem);
-}
-[data-reveal="slap"]:not([data-visible]) {
-  opacity: 0;
-  transform: scale(1.18) rotate(-5deg);
-}
-
-/*
-  Animaciones ligadas al scroll, solo en CSS ("scroll-driven animations").
-  Si el navegador no las soporta, la línea se ve completa y los stickers quietos.
-*/
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    /* la línea de tiempo se dibuja: su punta sigue la mitad de la pantalla */
-    .timeline-line {
-      transform-origin: top;
-      animation: draw-line linear both;
-      animation-timeline: view();
-      animation-range: cover 50vh cover calc(100% - 50vh);
-    }
-    /* cada punto de la línea aparece al entrar */
-    .timeline-node {
-      animation: pop-node linear both;
-      animation-timeline: view();
-      animation-range: entry 10% entry 90%;
-    }
-    /* parallax: los stickers sueltos del hero se mueven a otra velocidad */
-    .parallax-slow {
-      animation: drift-slow linear both;
-      animation-timeline: scroll(root);
-      animation-range: 0 120vh;
-    }
-    .parallax-fast {
-      animation: drift-fast linear both;
-      animation-timeline: scroll(root);
-      animation-range: 0 120vh;
-    }
-  }
-}
-
-@keyframes draw-line {
-  from {
-    transform: scaleY(0);
-  }
-  to {
-    transform: scaleY(1);
-  }
-}
-@keyframes pop-node {
-  from {
-    transform: scale(0);
-  }
-  to {
-    transform: scale(1);
-  }
-}
-@keyframes drift-slow {
-  to {
-    transform: translateY(-90px) rotate(10deg);
-  }
-}
-@keyframes drift-fast {
-  to {
-    transform: translateY(-240px) rotate(-25deg);
-  }
-}
-
-/* con "reducir movimiento" todo se muestra quieto y completo */
-@media (prefers-reduced-motion: reduce) {
-  [data-reveal] {
-    opacity: 1 !important;
-    transform: none !important;
   }
 }
