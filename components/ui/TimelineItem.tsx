@@ -1,50 +1,33 @@
 import Link from "next/link";
 import { Icon, type IconName } from "@/components/ui/Icon";
-import { StatusTag } from "@/components/ui/StatusTag";
 import { TechBadge } from "@/components/ui/TechBadge";
 import { experienceContent as content } from "@/data/experience";
 import { ui } from "@/data/site";
-import { cn } from "@/lib/utils";
-import type { ExperienceItem, ExperienceKind, ExperienceStatus } from "@/types";
+import type { ExperienceItem, ExperienceKind } from "@/types";
 
 export const kindIcon: Record<ExperienceKind, IconName> = {
   education: "book",
-  freelance: "sparkle",
+  freelance: "briefcase",
   project: "code",
   course: "flag",
 };
 
-const statusIcon: Record<ExperienceStatus, IconName> = {
-  current: "clock",
-  "in-progress": "clock",
-  planned: "flag",
-  completed: "check",
-};
-
-/** Tarjeta de un punto de la línea de tiempo */
-export function TimelineItem({ item, className }: { item: ExperienceItem; className?: string }) {
+/** Contenido de un punto de la experiencia: fechas, título, lugar, descripción, tecnologías y enlace */
+export function TimelineItem({ item }: { item: ExperienceItem }) {
   const isExternal = item.link?.href.startsWith("http");
 
   return (
-    <article
-      className={cn(
-        "sticker rounded-sticker bg-paper p-6 text-ink [--focus:var(--color-ink)]",
-        // los cursos planeados van con fondo amarillo para distinguirlos (además de su etiqueta)
-        item.status === "planned" && "bg-yellow",
-        className,
-      )}
-    >
-      <div className="flex flex-wrap items-center gap-2">
-        <StatusTag label={content.kindLabels[item.kind]} icon={kindIcon[item.kind]} variant="outline" />
-        <StatusTag label={content.statusLabels[item.status]} icon={statusIcon[item.status]} />
-        {item.period && <span className="text-sm font-semibold">{item.period}</span>}
-      </div>
-      <h4 className="mt-4 text-3xl leading-none">{item.title}</h4>
-      <p className="mt-1 font-semibold">{item.place}</p>
-      <p className="mt-3 leading-relaxed">{item.description}</p>
+    <>
+      <p className="text-sm font-medium text-blue-soft">
+        {item.period ?? content.statusLabels[item.status]}
+        <span className="text-muted"> · {content.kindLabels[item.kind]}</span>
+      </p>
+      <h4 className="mt-1.5 text-xl">{item.title}</h4>
+      <p className="text-sm text-muted">{item.place}</p>
+      <p className="mt-3 text-text/90">{item.description}</p>
 
       {item.stack && (
-        <ul className="mt-4 flex flex-wrap gap-2">
+        <ul aria-label="Tecnologías" className="mt-4 flex flex-wrap gap-2">
           {item.stack.map((entry) => (
             <li key={entry.name}>
               <TechBadge tech={entry} size="sm" />
@@ -59,7 +42,7 @@ export function TimelineItem({ item, className }: { item: ExperienceItem; classN
             href={item.link.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-5 inline-flex items-center gap-1.5 font-bold underline decoration-3 underline-offset-4"
+            className="mt-4 inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold text-blue-soft hover:text-white"
           >
             {item.link.label}
             <Icon name="external" className="size-4" />
@@ -70,12 +53,13 @@ export function TimelineItem({ item, className }: { item: ExperienceItem; classN
         ) : (
           <Link
             href={item.link.href}
-            className="mt-5 inline-flex font-bold underline decoration-3 underline-offset-4"
+            className="mt-4 inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold text-blue-soft hover:text-white"
           >
             {item.link.label}
+            <Icon name="arrowUpRight" className="size-4" />
             <span className="sr-only">: {item.title}</span>
           </Link>
         ))}
-    </article>
+    </>
   );
 }

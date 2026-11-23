@@ -1,46 +1,40 @@
 import type { Testimonial, TestimonialsContent } from "@/types";
 
+// En la guía del profe esta sección se llama "Testimonios"; aquí se muestra como "Referencias"
 export const testimonialsContent: TestimonialsContent = {
-  title: "Testimonios",
-  lead: "Lo que dicen quienes han trabajado conmigo. Por ahora son ejemplos: pronto pondré los de compañeros y profesores reales.",
+  title: "Referencias",
+  lead: "Lo que dicen de mí compañeros con los que he trabajado.",
   exampleLabel: "Ejemplo",
-  previous: "Testimonio anterior",
-  next: "Siguiente testimonio",
-  slideLabel: "Testimonio {n} de {total}",
 };
 
 /*
-  TODO antes de publicar: cambiar estos EJEMPLOS por testimonios reales de compañeros
-  o profesores (con su permiso) y poner isExample: false.
-  No llevan nombres de personas reales ni fotos inventadas.
+  Referencias de compañeros de la UCC (nombres dados por Johan el 22-nov-2026).
+  Los textos son un BORRADOR escrito a pedido de Johan: cada persona debe leer el suyo
+  y aprobarlo (o cambiarlo) antes de entregar. Si alguien no está de acuerdo, se quita.
 */
 export const testimonials: Testimonial[] = [
   {
-    id: "ejemplo-companero",
-    name: "Compañero de proyecto",
-    role: "Ingeniería de Software",
-    quote: "Johan explica lo que hizo y por qué lo hizo así. Trabajar en equipo con él es fácil.",
-    isExample: true,
+    id: "camilo-rosero",
+    name: "Camilo Rosero",
+    role: "Compañero de Ingeniería de Software, UCC",
+    quote:
+      "Trabajar con Johan es fácil: organiza bien su parte, la explica sin enredos y está pendiente de que todo el equipo entienda el código.",
+    isExample: false,
   },
   {
-    id: "ejemplo-docente",
-    name: "Docente",
-    role: "Universidad Cooperativa de Colombia",
-    quote: "Entrega a tiempo y se nota que entiende el código que escribe, no solo que funcione.",
-    isExample: true,
+    id: "santiago-ortega",
+    name: "Santiago Ortega",
+    role: "Compañero de Ingeniería de Software, UCC",
+    quote:
+      "Le pone mucho cuidado a cómo se ven las cosas. Sus pantallas se entienden rápido y funcionan bien en el celular y en el computador.",
+    isExample: false,
   },
   {
-    id: "ejemplo-usuario-flux",
-    name: "Persona que probó Flux IA",
-    role: "Prueba de la app",
-    quote: "El asistente me mostró en qué se me iba la plata cada semana. Ahora lo reviso antes de comprar.",
-    isExample: true,
-  },
-  {
-    id: "ejemplo-clase",
-    name: "Compañera de clase",
-    role: "Ingeniería de Software",
-    quote: "Le pone cuidado al diseño: sus pantallas se ven bien en el celular y en el computador.",
-    isExample: true,
+    id: "samuel-moreno",
+    name: "Samuel Moreno",
+    role: "Compañero de Ingeniería de Software, UCC",
+    quote:
+      "Es constante. Cuando algo no le sale, investiga hasta que funciona, y no entrega un trabajo a medias.",
+    isExample: false,
   },
 ];

@@ -1,6 +1,6 @@
 import aboutAvatar from "@/public/images/about/about-avatar.webp";
 import heroProfile from "@/public/images/profile/hero-profile.webp";
-import type { NavItem, SectionId, SiteImage, SiteInfo, SocialLink, UiText } from "@/types";
+import type { NavItem, SiteImage, SiteInfo, SocialLink, UiText } from "@/types";
 
 // Datos personales. Lo marcado TODO está pendiente de confirmar.
 export const site: SiteInfo = {
@@ -54,18 +54,14 @@ export const profileImages: { hero: SiteImage; avatar: SiteImage } = {
 // Menú: el orden es el mismo de las secciones en app/page.tsx
 export const navItems: NavItem[] = [
   { id: "hero", label: "Inicio" },
-  { id: "about", label: "Acerca de mí" },
+  { id: "about", label: "Sobre mí" },
   { id: "projects", label: "Proyectos" },
-  { id: "testimonials", label: "Testimonios" },
+  { id: "references", label: "Referencias" },
   { id: "experience", label: "Experiencia" },
   { id: "contact", label: "Contacto" },
   { id: "skills", label: "Skills" },
 ];
 
-/** nombre de una sección tal como aparece en el menú */
-export function navLabel(id: SectionId): string {
-  return navItems.find((item) => item.id === id)?.label ?? id;
-}
 
 // Textos cortos de la interfaz (borrador, revisar con ux-copy)
 export const ui: UiText = {
@@ -76,9 +72,6 @@ export const ui: UiText = {
   closeMenu: "Cerrar menú",
   cvButton: "Descargar CV",
   cvPending: "CV en camino",
-  cvLabel: "CV",
-  cvPendingDetail: "Pronto en Google Drive",
   opensNewTab: "(se abre en otra pestaña)",
   homeLink: "Ir al inicio",
-  sectionPending: "Sección en construcción",
 };

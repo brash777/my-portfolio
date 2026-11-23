@@ -4,11 +4,12 @@ import type { ExperienceContent, ExperienceItem } from "@/types";
 
 export const experienceContent: ExperienceContent = {
   title: "Experiencia",
-  lead: "Mi camino hasta ahora, en dos partes: lo que estudio y lo que trabajo. De lo más reciente a lo más antiguo.",
+  lead: "Lo que estudio y lo que trabajo, de lo más reciente a lo más antiguo.",
+  coursesTitle: "Cursos que voy a tomar",
   areas: {
     academic: {
       title: "Experiencia académica",
-      lead: "La universidad, los proyectos de clase y los cursos que voy a tomar.",
+      lead: "La universidad y los proyectos que hice en ella.",
     },
     work: {
       title: "Experiencia laboral",

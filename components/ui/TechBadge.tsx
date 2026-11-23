@@ -8,12 +8,12 @@ interface TechBadgeProps {
   className?: string;
 }
 
-/** Sticker con el ícono y el nombre de una tecnología (sin niveles ni porcentajes) */
+/** Etiqueta de vidrio con el ícono y el nombre de una tecnología (sin niveles ni porcentajes) */
 export function TechBadge({ tech, size = "md", className }: TechBadgeProps) {
   return (
     <span
       className={cn(
-        "sticker-sm inline-flex items-center gap-1.5 rounded-full bg-paper font-bold text-ink",
+        "glass inline-flex items-center gap-1.5 rounded-full font-medium text-text",
         size === "md" ? "px-3 py-1 text-sm" : "px-2.5 py-0.5 text-xs",
         className,
       )}
@@ -26,7 +26,7 @@ export function TechBadge({ tech, size = "md", className }: TechBadgeProps) {
           width={16}
           height={16}
           unoptimized
-          className={size === "md" ? "size-4" : "size-3.5"}
+          className={cn("icon-light", size === "md" ? "size-4" : "size-3.5")}
         />
       )}
       {tech.name}

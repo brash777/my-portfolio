@@ -23,7 +23,8 @@ export default function OpengraphImage() {
           flexDirection: "column",
           justifyContent: "center",
           padding: "70px 80px",
-          background: "#1a43d9",
+          // el mismo fondo de la página: noche azul con un brillo azul arriba a la izquierda
+          background: "radial-gradient(900px 600px at 10% 0%, rgba(47,91,255,0.45), #060a1a 70%)",
           color: "#ffffff",
           fontFamily: "Hubot",
         }}
@@ -34,40 +35,22 @@ export default function OpengraphImage() {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              width: 110,
-              height: 110,
-              borderRadius: 999,
-              background: "#ffd100",
-              border: "6px solid #000",
-              boxShadow: "8px 8px 0 #000",
-              color: "#000",
-              fontSize: 46,
+              width: 104,
+              height: 104,
+              borderRadius: 28,
+              background: "linear-gradient(135deg, #2f5bff, #1a2f99)",
+              color: "#ffffff",
+              fontSize: 44,
               fontWeight: 800,
             }}
           >
             {site.initials}
           </div>
-          <div style={{ fontSize: 34, fontWeight: 700 }}>{hero.kicker}</div>
+          <div style={{ fontSize: 34, fontWeight: 700, color: "#a6b1d1" }}>{hero.kicker}</div>
         </div>
-        <div style={{ marginTop: 40, fontSize: 64, fontWeight: 800 }}>{hero.greeting}</div>
-        <div style={{ fontSize: 210, fontWeight: 800, lineHeight: 0.85 }}>{site.name}</div>
-        <div style={{ display: "flex", marginTop: 40 }}>
-          <div
-            style={{
-              display: "flex",
-              padding: "14px 30px",
-              borderRadius: 999,
-              background: "#d7261e",
-              border: "5px solid #000",
-              boxShadow: "6px 6px 0 #000",
-              fontSize: 40,
-              fontWeight: 800,
-              transform: "rotate(-3deg)",
-            }}
-          >
-            {site.role}
-          </div>
-        </div>
+        <div style={{ marginTop: 44, fontSize: 60, fontWeight: 800, color: "#a6b1d1" }}>{hero.greeting}</div>
+        <div style={{ fontSize: 190, fontWeight: 800, lineHeight: 0.9 }}>{site.shortName}</div>
+        <div style={{ marginTop: 34, fontSize: 44, fontWeight: 800, color: "#8aa6ff" }}>{`${site.role} junior`}</div>
       </div>
     ),
     { ...size, fonts: [{ name: "Hubot", data: hubot, weight: 800, style: "normal" }] },

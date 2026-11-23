@@ -4,7 +4,9 @@ import type { ContactContent } from "@/types";
 export const contactContent: ContactContent = {
   title: "Contacto",
   lead: "¿Tienes un proyecto, una práctica o una pregunta? Escríbeme y te respondo.",
-  linksTitle: "Encuéntrame en",
+  locationLabel: "Ubicación",
+  emailLabel: "Correo",
+  linksTitle: "Redes y perfiles",
   form: {
     title: "Escríbeme",
     nameLabel: "Tu nombre",

@@ -1,158 +1,96 @@
 import Image from "next/image";
-import { ChameleonBackground } from "@/components/ui/ChameleonBackground";
-import { CodePanel } from "@/components/ui/CodePanel";
+import Link from "next/link";
 import { CvButton } from "@/components/ui/CvButton";
-import { FlipCard } from "@/components/ui/FlipCard";
-import { HeroDecor } from "@/components/ui/HeroDecor";
-import { TechBadge } from "@/components/ui/TechBadge";
+import { Icon } from "@/components/ui/Icon";
 import { hero } from "@/data/hero";
-import { sectionPalettes } from "@/data/palettes";
-import { services } from "@/data/services";
-import { profileImages, site, ui } from "@/data/site";
-import { cvFullUrl } from "@/lib/cv";
-import { displayUrl } from "@/lib/utils";
+import { getProject } from "@/data/projects";
+import { profileImages, site } from "@/data/site";
+import { buttonSecondary } from "@/lib/styles";
 
-// giro de cada sticker del stack, para que se vean "pegados a mano"
-const tilts = ["-rotate-3", "rotate-2", "-rotate-1", "rotate-3", "rotate-1", "-rotate-2"];
+/** Tarjeta de vidrio de la derecha: la app más fuerte (Flux IA) con su pantalla */
+function FeaturedCard() {
+  const project = getProject(hero.featured.slug);
+  if (!project?.cover) return null;
 
-/** Reverso de la tarjeta: CV resumido */
-function CvSummary() {
-  const { cv } = hero;
   return (
-    <div className="flex h-full flex-col gap-3 bg-yellow px-4 pt-9 pb-14 text-ink [--focus:var(--color-ink)] sm:gap-4 sm:px-6 sm:pt-10 sm:pb-16">
-      <h2 className="text-3xl leading-none sm:text-4xl">{cv.title}</h2>
-
-      <div>
-        <h3 className="text-lg leading-tight sm:text-xl">{cv.whoTitle}</h3>
-        <p className="mt-1 text-sm leading-snug">{cv.who}</p>
+    <div className="glass relative mx-auto w-full max-w-sm overflow-hidden rounded-panel p-6 sm:p-7">
+      {/* brillo azul detrás del celular */}
+      <div aria-hidden="true" className="absolute inset-x-0 top-10 mx-auto size-72 rounded-full bg-blue/35 blur-3xl" />
+      <div className="relative flex items-center justify-between gap-3">
+        <p className="text-sm font-medium text-blue-soft">{hero.featured.label}</p>
+        {project.logo && <Image src={project.logo.src} alt="" sizes="40px" className="size-10 rounded-xl" />}
       </div>
-
-      <div>
-        <h3 className="text-lg leading-tight sm:text-xl">{cv.doTitle}</h3>
-        <p className="mt-1 text-sm leading-snug">{cv.do}</p>
+      {/* el celular se corta abajo: así siempre se ve el inicio de la pantalla */}
+      <div className="relative mx-auto mt-5 h-72 w-48 overflow-hidden rounded-t-[1.75rem] border border-b-0 border-line sm:h-80 sm:w-52">
+        <Image
+          src={project.cover.src}
+          alt={project.cover.alt}
+          placeholder="blur"
+          preload
+          sizes="208px"
+          className="h-auto w-full"
+        />
       </div>
-
-      <div>
-        <h3 className="text-lg leading-tight sm:text-xl">{cv.servicesTitle}</h3>
-        <ul className="mt-1.5 flex flex-wrap gap-1.5">
-          {services.map((service) => (
-            <li key={service.title} className="rounded-full border-2 border-ink px-2.5 py-0.5 text-xs font-semibold">
-              {service.title}
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <div>
-        <h3 className="text-lg leading-tight sm:text-xl">{cv.experienceTitle}</h3>
-        <ul className="mt-1 list-disc space-y-1 pl-4 text-sm leading-snug">
-          {cv.experience.map((item) => (
-            <li key={item}>{item}</li>
-          ))}
-        </ul>
-      </div>
-
-      <div className="mt-auto flex flex-wrap items-center gap-2 pt-2">
-        <CvButton />
-        <a
-          href={site.githubUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex min-h-11 items-center rounded-full border-2 border-ink px-3 py-2 text-sm font-bold"
+      <div className="relative -mx-6 -mb-6 border-t border-line bg-night/70 px-6 py-5 backdrop-blur sm:-mx-7 sm:-mb-7 sm:px-7">
+        <p className="text-xl font-semibold text-white [font-stretch:112%]">{project.name}</p>
+        <p className="mt-1 text-sm text-muted">{project.tagline}</p>
+        <Link
+          href={`/projects/${project.slug}`}
+          className="mt-3 inline-flex min-h-11 items-center gap-1.5 font-semibold text-blue-soft hover:text-white"
         >
-          {cv.moreButton}
-          <span className="sr-only"> {ui.opensNewTab}</span>
-        </a>
+          {hero.featured.linkLabel}
+          <Icon name="arrowUpRight" className="size-4" />
+        </Link>
       </div>
-      {cvFullUrl && (
-        <p className="text-xs break-all">
-          {cv.cvLinkLabel} {displayUrl(cvFullUrl)}
-        </p>
-      )}
     </div>
   );
 }
 
-/** Inicio (fondo azul eléctrico): saludo, intro, botones, panel de código, foto flip y stack */
+/** Inicio: saludo con foto, rol, frase, botones (Descargar CV y Ver mis proyectos), datos y la app destacada */
 export function Hero() {
   return (
-    <section
-      id="hero"
-      aria-labelledby="hero-title"
-      className="relative overflow-hidden px-5 pt-32 pb-24 text-paper [--focus:var(--color-paper)] sm:px-8 lg:pt-40"
-    >
-      <ChameleonBackground palette={sectionPalettes.hero} />
-      <HeroDecor />
-      {/* en celular el orden es: intro, foto y panel de código; en computador la foto va a la derecha */}
-      <div className="relative mx-auto grid max-w-6xl items-center gap-x-12 gap-y-14 lg:grid-cols-12">
-        <div className="lg:col-span-7 lg:row-start-1">
-          <p className="text-lg font-semibold">{hero.kicker}</p>
-          <h1 id="hero-title" className="mt-4">
-            <span className="block text-title">{hero.greeting}</span>{" "}
-            <span className="-ml-1 block origin-bottom-left animate-slap-in text-hero [animation-delay:120ms]">{site.name}</span>
-          </h1>
-          <p className="mt-8 max-w-xl text-lg leading-relaxed">{hero.description}</p>
+    <section id="hero" aria-labelledby="hero-title" className="px-5 pt-32 pb-20 sm:px-8 lg:pt-40 lg:pb-28">
+      <div className="mx-auto grid max-w-6xl items-center gap-14 lg:grid-cols-12">
+        <div className="animate-rise-in lg:col-span-7">
+          <div className="flex items-center gap-4">
+            <Image
+              src={profileImages.avatar.src}
+              alt={profileImages.avatar.alt}
+              placeholder="blur"
+              sizes="64px"
+              className="size-16 rounded-full border border-line object-cover ring-4 ring-blue/25"
+            />
+            <p className="font-medium text-muted">{hero.kicker}</p>
+          </div>
 
-          <div className="mt-8 flex flex-wrap items-center gap-4">
+          <h1 id="hero-title" className="mt-8">
+            <span className="block text-2xl font-medium text-muted sm:text-3xl">{hero.greeting}</span>
+            <span className="mt-2 block text-hero">{site.shortName}</span>
+          </h1>
+          <p className="mt-5 text-xl font-semibold text-blue-soft sm:text-2xl">{site.role} junior</p>
+          <p className="mt-5 max-w-xl text-lg text-muted">{hero.description}</p>
+
+          <div className="mt-9 flex flex-wrap items-center gap-3">
             <CvButton />
-            {/* la guía del profe pide un botón secundario a Proyectos o Contacto */}
-            <a
-              href="#projects"
-              className="sticker-sm inline-flex min-h-11 items-center rounded-full bg-paper px-5 py-2 font-bold text-ink transition-transform duration-200 hover:-translate-y-0.5"
-            >
+            <a href="#projects" className={buttonSecondary}>
               {hero.projectsButton}
             </a>
           </div>
 
-        </div>
-
-        <div className="lg:col-span-5 lg:col-start-8 lg:row-span-2 lg:row-start-1">
-          <div className="relative mx-auto max-w-sm animate-slap-in [animation-delay:250ms]">
-            <p className="sticker-sm absolute -top-5 -left-3 z-10 -rotate-6 animate-pop-in rounded-full bg-red [animation-delay:650ms] px-4 py-1.5 font-display text-xl font-extrabold text-paper font-stretch-condensed">
-              {site.role}
-            </p>
-            <FlipCard
-              toBackLabel={hero.flip.toBack}
-              toFrontLabel={hero.flip.toFront}
-              front={
-                // size-full: llena la tarjeta aunque el reverso la haga más alta que 3:4
-                <div className="relative aspect-[3/4] size-full">
-                  <Image
-                    src={profileImages.hero.src}
-                    alt={profileImages.hero.alt}
-                    fill
-                    preload
-                    placeholder="blur"
-                    sizes="(min-width: 640px) 384px, calc(100vw - 40px)"
-                    className="object-cover object-[46%_30%]"
-                  />
-                </div>
-              }
-              back={<CvSummary />}
-            />
-          </div>
-
-          {/* en pantallas táctiles (pointer-coarse) no hay mouse: se muestra la otra pista */}
-          <p className="mx-auto mt-6 max-w-sm text-sm">
-            <span className="pointer-coarse:hidden">{hero.flip.hint}</span>
-            <span className="hidden pointer-coarse:inline">{hero.flip.hintTouch}</span>
-          </p>
-
-          <ul aria-label={hero.stackLabel} className="mx-auto mt-6 flex max-w-sm flex-wrap gap-3">
-            {hero.stack.map((item, index) => (
-              <li key={item.name} className="animate-pop-in" style={{ animationDelay: `${800 + index * 70}ms` }}>
-                <TechBadge tech={item} className={tilts[index % tilts.length]} />
-              </li>
+          {/* cada dato es un div con su <dt> y su <dd>; visualmente el número va arriba */}
+          <dl className="mt-12 grid max-w-md grid-cols-3 gap-6 border-t border-line pt-8">
+            {hero.stats.map((stat) => (
+              <div key={stat.label} className="flex flex-col">
+                <dt className="text-sm text-muted">{stat.label}</dt>
+                <dd className="order-first text-3xl font-bold text-white [font-stretch:112%]">{stat.value}</dd>
+              </div>
             ))}
-          </ul>
+          </dl>
         </div>
 
-        <CodePanel
-          fileName={hero.code.fileName}
-          variable={hero.code.variable}
-          fields={hero.code.fields}
-          className="w-full max-w-lg -rotate-1 animate-rise-in self-start [animation-delay:400ms] lg:col-span-7 lg:row-start-2"
-        />
+        <div className="animate-rise-in [animation-delay:150ms] lg:col-span-5">
+          <FeaturedCard />
+        </div>
       </div>
     </section>
   );

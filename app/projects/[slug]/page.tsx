@@ -4,17 +4,15 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
-import { ChameleonBackground } from "@/components/ui/ChameleonBackground";
 import { Icon } from "@/components/ui/Icon";
+import { ProjectCard } from "@/components/ui/ProjectCard";
 import { ProjectCover } from "@/components/ui/ProjectCover";
 import { StatusTag } from "@/components/ui/StatusTag";
 import { TechBadge } from "@/components/ui/TechBadge";
 import { getProject, projects, projectsContent as content } from "@/data/projects";
 import { site, ui } from "@/data/site";
-import { accentFill } from "@/lib/accent";
-import { projectPalette } from "@/lib/palette";
 import { statusIcon } from "@/lib/projects";
-import { cn } from "@/lib/utils";
+import { buttonPrimary, buttonSecondary } from "@/lib/styles";
 
 // crea una página estática por cada proyecto de data/projects.ts al hacer el build
 export function generateStaticParams() {
@@ -44,83 +42,70 @@ export default async function ProjectPage(props: PageProps<"/projects/[slug]">) 
     <>
       <Navbar />
       <main id="main-content" tabIndex={-1} className="outline-none">
-        <article className="relative text-paper [--focus:var(--color-paper)]">
-          {/* la página toma los colores de la app (Flux IA en violeta, FlowStore con los de OFFGRID…) */}
-          <ChameleonBackground palette={projectPalette(project)} />
-          <header className="px-5 pt-32 pb-16 sm:px-8 lg:pt-40">
-            <div className="mx-auto max-w-6xl">
-              <Link
-                href="/#projects"
-                className="inline-flex items-center gap-2 rounded-full border-3 border-current px-4 py-2 font-bold transition-transform duration-200 hover:-translate-y-0.5"
-              >
-                <Icon name="chevronLeft" />
-                {detail.back}
-              </Link>
-              <div className="mt-10 flex flex-wrap gap-2">
-                <StatusTag label={content.statusLabels[project.status]} icon={statusIcon[project.status]} />
-                <StatusTag label={content.categoryLabels[project.category]} variant="outline" />
-              </div>
-              <h1 className="mt-5 text-display">{project.name}</h1>
-              <p className="mt-5 max-w-2xl text-xl leading-relaxed">{project.tagline}</p>
+        <article className="px-5 pt-32 pb-24 sm:px-8 lg:pt-40">
+          <div className="mx-auto max-w-6xl">
+            <Link
+              href="/#projects"
+              className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-blue-soft hover:text-white"
+            >
+              <Icon name="chevronLeft" className="size-4" />
+              {detail.back}
+            </Link>
 
-              <dl className="mt-10 flex flex-wrap gap-x-12 gap-y-5">
+            <header className="mt-8">
+              <div className="flex flex-wrap items-center gap-2">
+                <StatusTag label={content.categoryLabels[project.category]} />
+                <StatusTag label={content.statusLabels[project.status]} icon={statusIcon[project.status]} />
+              </div>
+              <h1 className="mt-5 text-hero">{project.name}</h1>
+              <p className="mt-5 max-w-2xl text-xl text-muted">{project.tagline}</p>
+
+              <dl className="mt-10 grid max-w-2xl gap-6 border-t border-line pt-8 sm:grid-cols-3">
                 <div>
-                  <dt className="text-sm font-semibold">{detail.roleLabel}</dt>
-                  <dd className="text-lg font-bold">{project.role}</dd>
+                  <dt className="text-sm text-muted">{detail.roleLabel}</dt>
+                  <dd className="mt-1 font-semibold text-white">{project.role}</dd>
                 </div>
                 <div>
-                  <dt className="text-sm font-semibold">{detail.yearLabel}</dt>
-                  <dd className="text-lg font-bold">{project.year}</dd>
+                  <dt className="text-sm text-muted">{detail.yearLabel}</dt>
+                  <dd className="mt-1 font-semibold text-white">{project.year}</dd>
                 </div>
                 <div>
-                  <dt className="text-sm font-semibold">{detail.categoryLabel}</dt>
-                  <dd className="text-lg font-bold">{content.categoryLabels[project.category]}</dd>
+                  <dt className="text-sm text-muted">{detail.categoryLabel}</dt>
+                  <dd className="mt-1 font-semibold text-white">{content.categoryLabels[project.category]}</dd>
                 </div>
               </dl>
 
               <div className="mt-10 flex flex-wrap gap-3">
-                {project.repoUrl && (
-                  <a
-                    href={project.repoUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="sticker-sm inline-flex items-center gap-2 rounded-full bg-paper px-5 py-2.5 font-bold text-ink transition-transform duration-200 hover:-translate-y-0.5"
-                  >
-                    <Image src="/images/icons/github.svg" alt="" width={20} height={20} unoptimized className="size-5" />
-                    {content.repoButton}
-                    <span className="sr-only"> {ui.opensNewTab}</span>
-                  </a>
-                )}
                 {project.demoUrl && (
-                  <a
-                    href={project.demoUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="sticker-sm inline-flex items-center gap-2 rounded-full bg-yellow px-5 py-2.5 font-bold text-ink transition-transform duration-200 hover:-translate-y-0.5"
-                  >
-                    <Icon name="external" />
+                  <a href={project.demoUrl} target="_blank" rel="noopener noreferrer" className={buttonPrimary}>
+                    <Icon name="external" className="size-4" />
                     {content.demoButton}
                     <span className="sr-only"> {ui.opensNewTab}</span>
                   </a>
                 )}
+                {project.repoUrl && (
+                  <a href={project.repoUrl} target="_blank" rel="noopener noreferrer" className={buttonSecondary}>
+                    <Image src="/images/icons/github.svg" alt="" width={18} height={18} unoptimized className="icon-light size-4.5" />
+                    {content.repoButton}
+                    <span className="sr-only"> {ui.opensNewTab}</span>
+                  </a>
+                )}
               </div>
-            </div>
-          </header>
+            </header>
 
-          <div className="px-5 py-20 sm:px-8">
-            <div className="mx-auto grid max-w-6xl gap-14 lg:grid-cols-12">
+            <div className="mt-20 grid gap-14 lg:grid-cols-12">
               <div className="lg:col-span-7">
                 {project.description.map((paragraph) => (
-                  <p key={paragraph} className="mb-6 text-lg leading-relaxed">
+                  <p key={paragraph} className="mb-6 text-lg">
                     {paragraph}
                   </p>
                 ))}
-                <h2 className="mt-12 text-5xl">{detail.highlightsTitle}</h2>
+                <h2 className="mt-12 text-3xl">{detail.highlightsTitle}</h2>
                 <ul className="mt-6 space-y-4">
                   {project.highlights.map((highlight) => (
-                    <li key={highlight} className="flex gap-3 text-lg leading-snug">
-                      <span className="mt-0.5 grid size-7 shrink-0 place-items-center rounded-full bg-yellow text-ink">
-                        <Icon name="check" className="size-4" />
+                    <li key={highlight} className="flex gap-3 text-lg">
+                      <span className="mt-1 grid size-6 shrink-0 place-items-center rounded-full bg-blue/20 text-blue-soft">
+                        <Icon name="check" className="size-3.5" />
                       </span>
                       {highlight}
                     </li>
@@ -129,11 +114,11 @@ export default async function ProjectPage(props: PageProps<"/projects/[slug]">) 
               </div>
 
               <aside className="lg:col-span-5">
-                <div className="sticker overflow-hidden rounded-sticker">
+                <div className="glass rounded-panel p-2">
                   <ProjectCover project={project} size="lg" />
                 </div>
-                <h2 className="mt-12 text-4xl">{detail.stackTitle}</h2>
-                <ul className="mt-5 flex flex-wrap gap-3">
+                <h2 className="mt-12 text-2xl">{detail.stackTitle}</h2>
+                <ul className="mt-5 flex flex-wrap gap-2.5">
                   {project.stack.map((item) => (
                     <li key={item.name}>
                       <TechBadge tech={item} />
@@ -144,19 +129,19 @@ export default async function ProjectPage(props: PageProps<"/projects/[slug]">) 
             </div>
 
             {project.gallery.length > 0 && (
-              <section aria-labelledby="gallery-title" className="mx-auto mt-24 max-w-6xl">
-                <h2 id="gallery-title" className="text-5xl">
+              <section aria-labelledby="gallery-title" className="mt-24">
+                <h2 id="gallery-title" className="text-3xl">
                   {detail.galleryTitle}
                 </h2>
-                <ul className="mt-10 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:gap-10">
-                  {project.gallery.map((image, index) => (
-                    <li key={image.alt} className={index % 2 ? "rotate-2" : "-rotate-2"}>
+                <ul className="mt-8 grid grid-cols-2 gap-5 sm:grid-cols-3 lg:gap-8">
+                  {project.gallery.map((image) => (
+                    <li key={image.alt} className="glass rounded-panel p-2">
                       <Image
                         src={image.src}
                         alt={image.alt}
                         placeholder="blur"
                         sizes="(min-width: 640px) 33vw, 50vw"
-                        className="sticker h-auto w-full rounded-[1.5rem]"
+                        className="h-auto w-full rounded-[1.35rem]"
                       />
                     </li>
                   ))}
@@ -164,22 +149,14 @@ export default async function ProjectPage(props: PageProps<"/projects/[slug]">) 
               </section>
             )}
 
-            <nav aria-labelledby="others-title" className="mx-auto mt-24 max-w-6xl">
-              <h2 id="others-title" className="text-5xl">
+            <nav aria-labelledby="others-title" className="mt-24">
+              <h2 id="others-title" className="text-3xl">
                 {detail.otherProjectsTitle}
               </h2>
-              <ul className="mt-8 flex flex-wrap gap-4">
+              <ul className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
                 {others.map((item) => (
                   <li key={item.slug}>
-                    <Link
-                      href={`/projects/${item.slug}`}
-                      className={cn(
-                        "sticker-sm inline-flex rounded-full px-5 py-2.5 font-bold transition-transform duration-200 hover:-translate-y-0.5",
-                        accentFill[item.accent],
-                      )}
-                    >
-                      {item.name}
-                    </Link>
+                    <ProjectCard project={item} />
                   </li>
                 ))}
               </ul>

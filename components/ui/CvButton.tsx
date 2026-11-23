@@ -1,5 +1,6 @@
 import { site, ui } from "@/data/site";
 import { cvIsFile, cvLinkProps } from "@/lib/cv";
+import { buttonPrimary } from "@/lib/styles";
 import { cn } from "@/lib/utils";
 
 interface CvButtonProps {
@@ -15,7 +16,7 @@ export function CvButton({ className }: CvButtonProps) {
     return (
       <span
         className={cn(
-          "inline-flex items-center rounded-full border-2 border-dashed border-current px-4 py-2 text-sm font-semibold whitespace-nowrap",
+          "inline-flex min-h-11 items-center rounded-full border border-dashed border-line px-5 py-2 text-sm font-semibold whitespace-nowrap text-muted",
           className,
         )}
       >
@@ -28,10 +29,7 @@ export function CvButton({ className }: CvButtonProps) {
     <a
       href={site.cvUrl}
       {...cvLinkProps()}
-      className={cn(
-        "sticker-sm inline-flex min-h-11 items-center rounded-full bg-yellow px-5 py-2 font-bold whitespace-nowrap text-ink transition-transform duration-200 hover:-translate-y-0.5",
-        className,
-      )}
+      className={cn(buttonPrimary, "whitespace-nowrap", className)}
     >
       {ui.cvButton}
       {!cvIsFile && <span className="sr-only"> {ui.opensNewTab}</span>}
