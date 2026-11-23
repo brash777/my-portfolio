@@ -171,6 +171,8 @@ export interface Project {
   cover?: SiteImage;
   /** logo o ícono de la app, si no hay capturas */
   logo?: SiteImage;
+  /** ícono de la app (ruta en public/): es la cara de su tarjeta en Proyectos */
+  icon: string;
   gallery: SiteImage[];
   repoUrl?: string;
   demoUrl?: string;
