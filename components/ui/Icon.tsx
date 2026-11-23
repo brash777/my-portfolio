@@ -110,6 +110,21 @@ const paths = {
       <path d="M18 9h1.5A1.5 1.5 0 0 1 21 10.5v5a1.5 1.5 0 0 1-1.5 1.5H19v3l-3.5-3H11a1.5 1.5 0 0 1-1.5-1.5V15" />
     </>
   ),
+  server: (
+    <>
+      <rect x="3.5" y="4" width="17" height="7" rx="2" />
+      <rect x="3.5" y="13" width="17" height="7" rx="2" />
+      <path d="M7.5 7.5h.01M7.5 16.5h.01" />
+    </>
+  ),
+  monitor: (
+    <>
+      <rect x="3" y="4" width="18" height="12.5" rx="2.5" />
+      <path d="M8.5 20.5h7M12 16.5v4" />
+    </>
+  ),
+  download: <path d="M12 4v11m-4.5-4.5L12 15l4.5-4.5M5 19.5h14" />,
+  arrowUpRight: <path d="M7 17 17 7M8.5 7H17v8.5" />,
   flag: <path d="M5 21V4h11l-2 4 2 4H5" />,
   arrowUp: <path d="M12 20V5M5.5 11.5 12 5l6.5 6.5" />,
   code: <path d="m8 8-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14" />,
