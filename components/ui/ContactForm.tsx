@@ -4,6 +4,7 @@ import { useRef, useState, type FormEvent } from "react";
 import { Icon } from "@/components/ui/Icon";
 import { contactContent } from "@/data/contact";
 import { site, ui } from "@/data/site";
+import { buttonPrimary } from "@/lib/styles";
 import { cn } from "@/lib/utils";
 
 type Field = "name" | "email" | "message";
@@ -77,24 +78,24 @@ export function ContactForm() {
 
   const fieldClass = (field: Field) =>
     cn(
-      "mt-2 w-full rounded-xl border-3 bg-paper px-4 py-3 text-base text-ink placeholder:text-ink/60",
-      errors[field] ? "border-red" : "border-ink",
+      "mt-2 w-full rounded-xl border bg-night-2/80 px-4 py-3 text-base text-white transition-colors focus:border-blue-soft",
+      errors[field] ? "border-error" : "border-line",
     );
 
   const errorText = (field: Field) =>
     errors[field] ? (
-      <p id={`${field}-error`} className="mt-2 flex items-center gap-1.5 text-sm font-bold text-red">
+      <p id={`${field}-error`} className="mt-2 flex items-center gap-1.5 text-sm font-semibold text-error">
         <Icon name="flag" className="size-4" />
         {errors[field]}
       </p>
     ) : null;
 
   return (
-    <form ref={formRef} onSubmit={handleSubmit} noValidate className="sticker rounded-sticker bg-paper p-6 text-ink [--focus:var(--color-ink)] sm:p-8">
-      <h3 className="text-4xl">{form.title}</h3>
+    <form ref={formRef} onSubmit={handleSubmit} noValidate className="glass rounded-panel p-6 sm:p-8">
+      <h3 className="text-2xl">{form.title}</h3>
 
       <div className="mt-6">
-        <label htmlFor="name" className="font-bold">
+        <label htmlFor="name" className="text-sm font-medium text-white">
           {form.nameLabel}
         </label>
         <input
@@ -110,7 +111,7 @@ export function ContactForm() {
       </div>
 
       <div className="mt-5">
-        <label htmlFor="email" className="font-bold">
+        <label htmlFor="email" className="text-sm font-medium text-white">
           {form.emailLabel}
         </label>
         <input
@@ -126,7 +127,7 @@ export function ContactForm() {
       </div>
 
       <div className="mt-5">
-        <label htmlFor="message" className="font-bold">
+        <label htmlFor="message" className="text-sm font-medium text-white">
           {form.messageLabel}
         </label>
         <textarea
@@ -146,7 +147,7 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={status === "sending"}
-        className="sticker-sm mt-7 inline-flex items-center gap-2 rounded-full bg-red px-6 py-3 font-bold text-paper transition-transform duration-200 hover:-translate-y-0.5 disabled:opacity-60"
+        className={cn(buttonPrimary, "mt-7 w-full disabled:opacity-60")}
       >
         <Icon name="mail" />
         {status === "sending" ? form.sending : form.submit}
@@ -154,15 +155,15 @@ export function ContactForm() {
 
       <div aria-live="polite" className="mt-5">
         {status === "success" && (
-          <p className="flex items-center gap-2 font-bold">
+          <p className="flex items-center gap-2 font-semibold text-white">
             <Icon name="check" />
             {form.success}
           </p>
         )}
         {(status === "error" || status === "not-connected") && (
-          <p className="rounded-xl border-3 border-dashed border-ink p-4 font-semibold">
+          <p className="rounded-xl border border-dashed border-line p-4 text-sm text-muted">
             {status === "error" ? form.sendError : form.notConnected}{" "}
-            <a href={site.linkedinUrl} target="_blank" rel="noopener noreferrer" className="font-bold underline decoration-3 underline-offset-4">
+            <a href={site.linkedinUrl} target="_blank" rel="noopener noreferrer" className="font-semibold text-blue-soft underline underline-offset-4">
               LinkedIn
               <span className="sr-only"> {ui.opensNewTab}</span>
             </a>
