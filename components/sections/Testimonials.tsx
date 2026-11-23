@@ -1,24 +1,22 @@
-import { ChameleonBackground } from "@/components/ui/ChameleonBackground";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { TestimonialCarousel } from "@/components/ui/TestimonialCarousel";
-import { sectionPalettes } from "@/data/palettes";
+import { TestimonialCard } from "@/components/ui/TestimonialCard";
 import { testimonials, testimonialsContent as content } from "@/data/testimonials";
 
-/** Testimonios (fondo rojo y rosado): carrusel de tarjetas con flechas */
+/** Referencias (en la guía del profe: Testimonios): mínimo 3 tarjetas, con nombre, cargo, avatar y texto */
 export function Testimonials() {
   return (
-    <section
-      id="testimonials"
-      aria-labelledby="testimonials-title"
-      className="relative overflow-x-clip px-5 py-24 text-paper [--focus:var(--color-paper)] sm:px-8 lg:py-32"
-    >
-      <ChameleonBackground palette={sectionPalettes.testimonials} />
+    <section id="references" aria-labelledby="references-title" className="px-5 py-24 sm:px-8 lg:py-28">
       <div className="mx-auto max-w-6xl">
-        <SectionHeading id="testimonials-title">{content.title}</SectionHeading>
-        <p className="mt-4 max-w-2xl text-lg">{content.lead}</p>
-        <div className="mt-10">
-          <TestimonialCarousel testimonials={testimonials} />
-        </div>
+        <SectionHeading id="references-title" lead={content.lead}>
+          {content.title}
+        </SectionHeading>
+        <ul className="mt-14 grid gap-6 md:grid-cols-3">
+          {testimonials.map((testimonial) => (
+            <li key={testimonial.id}>
+              <TestimonialCard testimonial={testimonial} />
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );
