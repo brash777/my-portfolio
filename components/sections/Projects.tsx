@@ -1,88 +1,81 @@
+import Image from "next/image";
 import Link from "next/link";
+import type { CSSProperties } from "react";
 import { Icon } from "@/components/ui/Icon";
-import { ProjectCover } from "@/components/ui/ProjectCover";
+import { ProjectLogo } from "@/components/ui/ProjectLogo";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { StatusTag } from "@/components/ui/StatusTag";
-import { TechBadge } from "@/components/ui/TechBadge";
 import { projects, projectsContent as content } from "@/data/projects";
 import { ui } from "@/data/site";
 import { statusIcon } from "@/lib/projects";
-import { buttonPrimary, buttonSecondary } from "@/lib/styles";
+import { buttonPrimary } from "@/lib/styles";
 import { cn } from "@/lib/utils";
 import type { Project } from "@/types";
 
-const MAX_BADGES = 6;
-const MAX_HIGHLIGHTS = 3;
+const MAX_TECH = 6;
 
-/** Una fila: la portada grande a un lado y la información al otro (se alternan) */
-function ProjectRow({ project, reverse }: { project: Project; reverse: boolean }) {
-  const hidden = project.stack.length - MAX_BADGES;
+/** Tarjeta de un proyecto: el logo en la cara, el título, la frase, sus tecnologías y los enlaces */
+function ProjectCardLarge({ project }: { project: Project }) {
+  const hidden = project.stack.length - MAX_TECH;
   const detailHref = `/projects/${project.slug}`;
 
   return (
-    <article className="grid items-center gap-8 lg:grid-cols-12 lg:gap-14">
-      {/* la portada repite el enlace del título: se oculta del teclado y del lector de pantalla */}
-      <Link
-        href={detailHref}
-        tabIndex={-1}
-        aria-hidden="true"
-        className={cn(
-          "glass block rounded-panel p-2 transition duration-300 hover:-translate-y-1 hover:border-blue-soft/40 lg:col-span-7",
-          reverse && "lg:order-last",
-        )}
-      >
-        <ProjectCover project={project} size="lg" />
-      </Link>
+    <article className="glass group rounded-panel p-2 transition duration-300 hover:-translate-y-1 hover:border-blue-soft/40">
+      <ProjectLogo project={project} size={project.featured ? "lg" : "md"} />
 
-      <div className="lg:col-span-5">
+      <div className="p-5 sm:p-6">
         <div className="flex flex-wrap items-center gap-2">
           <StatusTag label={content.categoryLabels[project.category]} />
           <StatusTag label={content.statusLabels[project.status]} icon={statusIcon[project.status]} />
           <span className="text-sm text-muted">{project.year}</span>
         </div>
 
-        <h3 className="mt-4 text-3xl sm:text-4xl">
-          <Link href={detailHref} className="group inline-flex items-center gap-2 hover:text-blue-soft">
+        <h3 className={cn("mt-4", project.featured ? "text-3xl" : "text-2xl")}>
+          <Link href={detailHref} className="hover:text-blue-soft">
             {project.name}
-            <Icon name="arrowUpRight" className="size-6 text-blue-soft transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
           </Link>
         </h3>
-        <p className="mt-4 text-lg text-muted">{project.tagline}</p>
+        <p className="mt-2 text-muted">{project.tagline}</p>
 
-        <ul className="mt-6 space-y-2.5">
-          {project.highlights.slice(0, MAX_HIGHLIGHTS).map((highlight) => (
-            <li key={highlight} className="flex gap-2.5 text-sm">
-              <Icon name="check" className="mt-0.5 size-4 text-blue-soft" />
-              {highlight}
+        {/* tecnologías como íconos (como en la referencia); el nombre va en el texto alternativo */}
+        <ul aria-label={content.builtWith} className="mt-5 flex flex-wrap items-center gap-2">
+          {project.stack.slice(0, MAX_TECH).map((item) => (
+            <li key={item.name} title={item.name} className="glass grid size-9 place-items-center rounded-xl">
+              {item.icon ? (
+                <Image src={item.icon} alt={item.name} width={18} height={18} unoptimized className="icon-light size-4.5" />
+              ) : (
+                <span className="text-[0.6rem] leading-none font-semibold">{item.name.slice(0, 4)}</span>
+              )}
             </li>
           ))}
+          {hidden > 0 && <li className="px-1 text-xs font-semibold text-muted">+{hidden}</li>}
         </ul>
 
-        <ul aria-label={content.builtWith} className="mt-6 flex flex-wrap gap-2">
-          {project.stack.slice(0, MAX_BADGES).map((item) => (
-            <li key={item.name}>
-              <TechBadge tech={item} size="sm" />
-            </li>
-          ))}
-          {hidden > 0 && <li className="self-center text-xs font-semibold text-muted">+{hidden}</li>}
-        </ul>
-
-        <div className="mt-8 flex flex-wrap gap-3">
-          <Link href={detailHref} className={buttonPrimary}>
+        <div className="mt-6 flex flex-wrap items-center gap-3">
+          <Link href={detailHref} className={cn(buttonPrimary, "min-h-11 px-5 py-2 text-sm")}>
             {content.viewDetails}
             <span className="sr-only"> {project.name}</span>
           </Link>
           {project.repoUrl && (
-            <a href={project.repoUrl} target="_blank" rel="noopener noreferrer" className={buttonSecondary}>
-              {content.repoButton}
+            <a
+              href={project.repoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="glass grid size-11 place-items-center rounded-full transition duration-200 hover:-translate-y-0.5 hover:border-blue-soft/40"
+            >
+              <Image src="/images/icons/github.svg" alt="" width={20} height={20} unoptimized className="icon-light size-5" />
               <span className="sr-only">
-                {" "}
-                de {project.name} {ui.opensNewTab}
+                {content.repoButton} de {project.name} {ui.opensNewTab}
               </span>
             </a>
           )}
           {project.demoUrl && (
-            <a href={project.demoUrl} target="_blank" rel="noopener noreferrer" className={buttonSecondary}>
+            <a
+              href={project.demoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold text-blue-soft hover:text-white"
+            >
               <Icon name="external" className="size-4" />
               {content.demoButton}
               <span className="sr-only">
@@ -97,25 +90,49 @@ function ProjectRow({ project, reverse }: { project: Project; reverse: boolean }
   );
 }
 
-/** Proyectos: todos en filas que se alternan, primero las apps más grandes */
+/**
+ * Una columna de tarjetas; cada una entra desde abajo al aparecer en pantalla.
+ * En celular la columna no existe como caja (display: contents) y las tarjetas de las dos columnas
+ * se ordenan con "order" según su lugar en la lista; en computador cada columna es su propia pila.
+ */
+function Column({ items, ordered, className }: { items: Project[]; ordered: Project[]; className?: string }) {
+  return (
+    <ul className={cn("contents lg:flex lg:flex-col lg:gap-8", className)}>
+      {items.map((project, index) => (
+        <li
+          key={project.slug}
+          data-reveal="up"
+          style={{ order: ordered.indexOf(project), "--reveal-delay": `${index * 80}ms` } as CSSProperties}
+        >
+          <ProjectCardLarge project={project} />
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+/**
+ * Proyectos: tarjetas con el logo de cada app, en dos columnas desfasadas (la de la derecha
+ * empieza más abajo). Primero van las apps grandes. En celular es una sola columna en orden.
+ */
 export function Projects() {
-  // primero los destacados; dentro de cada grupo se respeta el orden de data/projects.ts
   const ordered = [...projects].sort((a, b) => Number(b.featured) - Number(a.featured));
+  const left = ordered.filter((_, index) => index % 2 === 0);
+  const right = ordered.filter((_, index) => index % 2 === 1);
 
   return (
     <section id="projects" aria-labelledby="projects-title" className="px-5 py-24 sm:px-8 lg:py-28">
       <div className="mx-auto max-w-6xl">
-        <SectionHeading id="projects-title" lead={content.lead}>
-          {content.title}
-        </SectionHeading>
+        <div data-reveal="up">
+          <SectionHeading id="projects-title" lead={content.lead}>
+            {content.title}
+          </SectionHeading>
+        </div>
 
-        <ul className="mt-16 space-y-20 lg:space-y-28">
-          {ordered.map((project, index) => (
-            <li key={project.slug}>
-              <ProjectRow project={project} reverse={index % 2 === 1} />
-            </li>
-          ))}
-        </ul>
+        <div className="mt-14 flex flex-col gap-8 lg:mt-16 lg:grid lg:grid-cols-2 lg:items-start">
+          <Column items={left} ordered={ordered} />
+          <Column items={right} ordered={ordered} className="lg:pt-24" />
+        </div>
       </div>
     </section>
   );

@@ -32,8 +32,9 @@
 
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 
-  /* única animación de entrada: el hero al cargar la página (solo transform y opacity) */
+  /* entrada del inicio al cargar la página (sin JavaScript): el texto sube y la foto llega desde la derecha */
   --animate-rise-in: rise-in 0.9s var(--ease-out) both;
+  --animate-slide-in-right: reveal-in-right 0.9s var(--ease-out) both;
 
   @keyframes rise-in {
     from {
@@ -151,5 +152,107 @@
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
     }
+  }
+}
+
+/*
+  ---------- Animaciones al hacer scroll ----------
+  Cada bloque con data-reveal="up" | "left" | "right" | "fade" entra cuando aparece en pantalla
+  y sale cuando se va; al volver, entra otra vez. Los tiempos son los del portafolio de referencia:
+  entra en 0.7 s (frena suave al final) y sale en 0.45 s (acelera al irse), moviéndose 32 px.
+  components/ui/ScrollReveal.tsx pone data-state="in" o "out" con IntersectionObserver.
+  Solo se animan transform y opacity, que no obligan al navegador a recalcular la página.
+*/
+[data-reveal]:not([data-state]) {
+  opacity: 0;
+}
+[data-reveal][data-state="in"] {
+  animation-duration: 0.7s;
+  animation-timing-function: var(--ease-out);
+  animation-delay: var(--reveal-delay, 0ms);
+  animation-fill-mode: both;
+}
+[data-reveal][data-state="out"] {
+  animation-duration: 0.45s;
+  animation-timing-function: cubic-bezier(0.55, 0, 0.78, 0);
+  animation-fill-mode: both;
+}
+[data-reveal="up"][data-state="in"] {
+  animation-name: reveal-in-up;
+}
+[data-reveal="up"][data-state="out"] {
+  animation-name: reveal-out-down;
+}
+[data-reveal="left"][data-state="in"] {
+  animation-name: reveal-in-left;
+}
+[data-reveal="left"][data-state="out"] {
+  animation-name: reveal-out-left;
+}
+[data-reveal="right"][data-state="in"] {
+  animation-name: reveal-in-right;
+}
+[data-reveal="right"][data-state="out"] {
+  animation-name: reveal-out-right;
+}
+[data-reveal="fade"][data-state="in"] {
+  animation-name: reveal-in-fade;
+}
+[data-reveal="fade"][data-state="out"] {
+  animation-name: reveal-out-fade;
+}
+
+@keyframes reveal-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+}
+@keyframes reveal-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-32px);
+  }
+}
+@keyframes reveal-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(32px);
+  }
+}
+@keyframes reveal-in-fade {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes reveal-out-down {
+  to {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+}
+@keyframes reveal-out-left {
+  to {
+    opacity: 0;
+    transform: translateX(-32px);
+  }
+}
+@keyframes reveal-out-right {
+  to {
+    opacity: 0;
+    transform: translateX(32px);
+  }
+}
+@keyframes reveal-out-fade {
+  to {
+    opacity: 0;
+  }
+}
+
+/* con "reducir movimiento" activado en el sistema todo se muestra quieto y completo */
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1 !important;
+    animation: none !important;
   }
 }

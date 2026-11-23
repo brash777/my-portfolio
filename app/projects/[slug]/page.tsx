@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import type { CSSProperties } from "react";
 import { notFound } from "next/navigation";
 import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
@@ -52,7 +53,7 @@ export default async function ProjectPage(props: PageProps<"/projects/[slug]">) 
               {detail.back}
             </Link>
 
-            <header className="mt-8">
+            <header className="mt-8 animate-rise-in">
               <div className="flex flex-wrap items-center gap-2">
                 <StatusTag label={content.categoryLabels[project.category]} />
                 <StatusTag label={content.statusLabels[project.status]} icon={statusIcon[project.status]} />
@@ -94,7 +95,7 @@ export default async function ProjectPage(props: PageProps<"/projects/[slug]">) 
             </header>
 
             <div className="mt-20 grid gap-14 lg:grid-cols-12">
-              <div className="lg:col-span-7">
+              <div data-reveal="up" className="lg:col-span-7">
                 {project.description.map((paragraph) => (
                   <p key={paragraph} className="mb-6 text-lg">
                     {paragraph}
@@ -113,7 +114,7 @@ export default async function ProjectPage(props: PageProps<"/projects/[slug]">) 
                 </ul>
               </div>
 
-              <aside className="lg:col-span-5">
+              <aside data-reveal="right" className="lg:col-span-5">
                 <div className="glass rounded-panel p-2">
                   <ProjectCover project={project} size="lg" />
                 </div>
@@ -134,8 +135,13 @@ export default async function ProjectPage(props: PageProps<"/projects/[slug]">) 
                   {detail.galleryTitle}
                 </h2>
                 <ul className="mt-8 grid grid-cols-2 gap-5 sm:grid-cols-3 lg:gap-8">
-                  {project.gallery.map((image) => (
-                    <li key={image.alt} className="glass rounded-panel p-2">
+                  {project.gallery.map((image, index) => (
+                    <li
+                      key={image.alt}
+                      data-reveal="up"
+                      style={{ "--reveal-delay": `${index * 100}ms` } as CSSProperties}
+                      className="glass rounded-panel p-2"
+                    >
                       <Image
                         src={image.src}
                         alt={image.alt}
@@ -154,8 +160,8 @@ export default async function ProjectPage(props: PageProps<"/projects/[slug]">) 
                 {detail.otherProjectsTitle}
               </h2>
               <ul className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-                {others.map((item) => (
-                  <li key={item.slug}>
+                {others.map((item, index) => (
+                  <li key={item.slug} data-reveal="up" style={{ "--reveal-delay": `${index * 80}ms` } as CSSProperties}>
                     <ProjectCard project={item} />
                   </li>
                 ))}

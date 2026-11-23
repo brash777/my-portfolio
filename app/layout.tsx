@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Mona_Sans } from "next/font/google";
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { site } from "@/data/site";
 import { siteUrl } from "@/lib/siteUrl";
 import "./globals.css";
@@ -27,7 +28,14 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="es" className={`${mona.variable} antialiased`}>
-      <body>{children}</body>
+      <body>
+        {/* sin JavaScript no hay animaciones al hacer scroll: se muestra todo de una */}
+        <noscript>
+          <style>{"[data-reveal]{opacity:1!important;animation:none!important}"}</style>
+        </noscript>
+        {children}
+        <ScrollReveal />
+      </body>
     </html>
   );
 }

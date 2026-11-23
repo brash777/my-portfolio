@@ -1,4 +1,4 @@
-import aboutAvatar from "@/public/images/about/about-avatar.webp";
+import portrait from "@/public/images/about/about-portrait.webp";
 import heroProfile from "@/public/images/profile/hero-profile.webp";
 import type { NavItem, SiteImage, SiteInfo, SocialLink, UiText } from "@/types";
 
@@ -40,14 +40,14 @@ export const socialLinks: SocialLink[] = [
 ];
 
 // Fotos de perfil con su texto alternativo (borrador)
-export const profileImages: { hero: SiteImage; avatar: SiteImage } = {
+export const profileImages: { hero: SiteImage; portrait: SiteImage } = {
   hero: {
     src: heroProfile,
     alt: "Johan con gorra negra y gafas, sentado frente a su portátil en una sala de estudio",
   },
-  avatar: {
-    src: aboutAvatar,
-    alt: "Retrato de Johan con gorra negra y gafas",
+  portrait: {
+    src: portrait,
+    alt: "Retrato de Johan con gorra negra, gafas y chaqueta deportiva, en una sala de estudio",
   },
 };
 

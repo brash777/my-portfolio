@@ -98,13 +98,8 @@ export interface HeroContent {
   description: string;
   projectsButton: string;
   stats: HeroStat[];
-  /** tarjeta de la derecha: la app más fuerte */
-  featured: {
-    label: string;
-    /** slug del proyecto en data/projects.ts */
-    slug: string;
-    linkLabel: string;
-  };
+  /** texto sobre la foto del inicio */
+  photoCaption: string;
 }
 
 /** textos cortos de la interfaz (botones, etiquetas de accesibilidad) */
@@ -171,6 +166,8 @@ export interface Project {
   cover?: SiteImage;
   /** logo o ícono de la app, si no hay capturas */
   logo?: SiteImage;
+  /** ícono de la app (ruta en public/): es la cara de su tarjeta en Proyectos */
+  icon: string;
   gallery: SiteImage[];
   repoUrl?: string;
   demoUrl?: string;
@@ -214,10 +211,10 @@ export interface TestimonialsContent extends SectionIntro {
 
 /* ---------- Experiencia ---------- */
 
-export type ExperienceKind = "education" | "freelance" | "project" | "course";
+export type ExperienceKind = "education" | "freelance" | "project";
 /** la guía del profe divide la experiencia en dos partes: académica y laboral */
 export type ExperienceArea = "academic" | "work";
-export type ExperienceStatus = "current" | "in-progress" | "planned" | "completed";
+export type ExperienceStatus = "current" | "in-progress" | "completed";
 
 export interface ExperienceItem {
   id: string;
@@ -227,16 +224,14 @@ export interface ExperienceItem {
   place: string;
   description: string;
   status: ExperienceStatus;
-  /** fechas de inicio y fin (por ejemplo "2024 – actualidad"); vacío si es un curso planeado */
-  period?: string;
+  /** fechas de inicio y fin (por ejemplo "2024 – actualidad") */
+  period: string;
   stack?: Tech[];
   link?: { label: string; href: string };
 }
 
 export interface ExperienceContent extends SectionIntro {
   areas: Record<ExperienceArea, { title: string; lead: string }>;
-  /** los cursos planeados van aparte, en una lista corta */
-  coursesTitle: string;
   kindLabels: Record<ExperienceKind, string>;
   statusLabels: Record<ExperienceStatus, string>;
 }

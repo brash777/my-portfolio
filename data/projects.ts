@@ -34,11 +34,14 @@ export const projectsContent: ProjectsContent = {
   Mis proyectos. Para agregar uno nuevo:
   1. Deja sus imágenes en public/images/projects/<slug>/ (WebP, máximo 120 KB).
   2. Agrega un objeto a esta lista. Su página de detalle se crea sola en /projects/<slug>.
+  3. "icon" es la cara de su tarjeta: el ícono real de la app (Flux IA y OFFGRID) o uno hecho
+     para el portafolio en public/images/projects/<slug>/icon.svg (los proyectos de clase no tenían).
   Los textos son borrador, sacados de los README de cada repositorio.
 */
 export const projects: Project[] = [
   {
     slug: "flux-ia",
+    icon: "/images/projects/flux-ia/project-flux-ia-icon.webp",
     name: "Flux IA",
     tagline: "App de finanzas personales con un asistente de IA que responde con tus movimientos reales.",
     description: [
@@ -68,6 +71,7 @@ export const projects: Project[] = [
   },
   {
     slug: "flowstore",
+    icon: "/images/projects/offgrid/project-offgrid-icon.webp",
     name: "FlowStore",
     tagline: "Tienda de ropa de escritorio con avatar 3D y una IA estilista. Su marca es OFFGRID.",
     description: [
@@ -92,6 +96,7 @@ export const projects: Project[] = [
   },
   {
     slug: "music-player-system",
+    icon: "/images/projects/music-player-system/icon.svg",
     name: "Music Player System",
     tagline: "Reproductor de música full stack donde la playlist es una lista doblemente enlazada.",
     description: [
@@ -114,6 +119,7 @@ export const projects: Project[] = [
   },
   {
     slug: "choose-seats",
+    icon: "/images/projects/choose-seats/icon.svg",
     name: "Choose Seats",
     tagline: "Interfaz para elegir asientos de un vuelo, pensada para computador y para celular.",
     description: [
@@ -136,6 +142,7 @@ export const projects: Project[] = [
   },
   {
     slug: "clinica-backend",
+    icon: "/images/projects/clinica-backend/icon.svg",
     name: "Clínica Backend",
     tagline: "Backend de gestión médica organizado con el patrón de diseño Facade.",
     description: [
