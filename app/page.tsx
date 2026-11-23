@@ -9,8 +9,8 @@ import { Skills } from "@/components/sections/Skills";
 import { Testimonials } from "@/components/sections/Testimonials";
 
 // Orden de las secciones: el mismo de la guía del profe (structure-portfolio.vercel.app):
-// Hero, Acerca de mí, Proyectos, Testimonios, Experiencia, Contactos, sección adicional (Skills) y footer.
-// Cada sección pinta su propio fondo de color (ChameleonBackground) y se mezcla con la anterior.
+// Hero, Sobre mí, Proyectos, Referencias (Testimonios en la guía), Experiencia, Contactos,
+// sección adicional (Skills) y footer. Todas comparten el mismo fondo (el de body en globals.css).
 export default function Home() {
   return (
     <>
