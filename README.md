@@ -1,8 +1,8 @@
 # Portafolio de Johan Mosquera
 
-Mi portafolio personal y la vitrina de las apps que estoy construyendo. Es una página de una sola sección larga (landing) con mucho movimiento al hacer scroll, colores primarios y estilo "sticker". El fondo es un **camaleón**: cada sección y cada app tiene su propio color, y en la división entre una y otra los colores se mezclan mientras bajas.
+Mi portafolio personal y la vitrina de las apps que estoy construyendo. Es una página de una sola sección larga (landing), con **un solo tono de color**: fondo "noche azul", tarjetas de vidrio y el azul eléctrico como único acento. Cada sección es corta y se explica rápido.
 
-**Stack:** Next.js 16 (App Router) · TypeScript en modo estricto · Tailwind CSS 4 · Vercel. Sin librerías de animación: todo el movimiento es CSS + `IntersectionObserver`.
+**Stack:** Next.js 16 (App Router) · TypeScript en modo estricto · Tailwind CSS 4 · Vercel. Sin librerías de animación: el poco movimiento que hay es CSS.
 
 ## Cómo correrlo
 
@@ -30,9 +30,9 @@ La guía es [structure-portfolio.vercel.app](https://structure-portfolio.vercel.
 | Next.js + TypeScript + Tailwind CSS | todo el proyecto | Listo |
 | 1. Menú fijo, con logo, anclas, menú hamburguesa y scroll suave | `components/layout/Navbar.tsx` | Listo |
 | 2. Hero con nombre, rol, foto, frase, **Descargar CV** y botón a Proyectos | `components/sections/Hero.tsx`, `public/cv.pdf` | Listo |
-| 3. Acerca de mí: presentación, foto, tecnologías, ubicación, semestre e intereses | `components/sections/About.tsx`, `data/about.ts` | Listo |
+| 3. Acerca de mí ("Sobre mí"): presentación, foto, tecnologías, ubicación, semestre e intereses | `components/sections/About.tsx`, `data/about.ts` | Listo |
 | 4. Proyectos: imagen, descripción, tecnologías, **GitHub** y **demo en vivo** | `components/sections/Projects.tsx`, `data/projects.ts` | Falta la demo de cada proyecto |
-| 5. Testimonios: mínimo 3, con **nombre**, cargo, avatar y texto | `data/testimonials.ts` | Faltan los reales con nombre |
+| 5. Testimonios (aquí "Referencias"): mínimo 3, con **nombre**, cargo, avatar y texto | `components/sections/Testimonials.tsx`, `data/testimonials.ts` | Listo (cada compañero debe aprobar su texto) |
 | 6. Experiencia **académica** y **laboral**, con fechas, de lo más reciente a lo más antiguo | `components/sections/Experience.tsx`, `data/experience.ts` | Listo |
 | 7. Contactos: **correo**, LinkedIn, GitHub y formulario con validación y confirmación | `components/sections/Contact.tsx`, `data/contact.ts` | Falta el correo y Formspree |
 | Sección adicional antes del pie (Skills con servicios) | `components/sections/Skills.tsx` | Listo |
@@ -40,12 +40,12 @@ La guía es [structure-portfolio.vercel.app](https://structure-portfolio.vercel.
 | Se ve bien en celular | todo | Listo (revisado hasta 320 px) |
 | Código en GitHub y publicado en Vercel | ver "Cómo publicar en Vercel" | Falta Vercel |
 
-El orden de `app/page.tsx` es el de la guía: Hero, Acerca de mí, Proyectos, Testimonios, Experiencia, Contactos, Skills (adicional) y pie.
+El orden de `app/page.tsx` es el de la guía: Hero, Sobre mí, Proyectos, Referencias (Testimonios), Experiencia, Contactos, Skills (adicional) y pie.
 
 ## Pendientes antes de publicar
 
 - [x] **CV:** está en `public/cv.pdf` (armado el 22-nov-2026 solo con datos confirmados: sin teléfono, dirección ni correo). Para cambiarlo, reemplaza ese archivo por tu PDF con el mismo nombre.
-- [ ] **Testimonios:** cambia los ejemplos de `data/testimonials.ts` por testimonios reales (con permiso), con el **nombre** de la persona, y pon `isExample: false`. La guía pide mínimo 3.
+- [ ] **Referencias:** las de Camilo Rosero, Santiago Ortega y Samuel Moreno (`data/testimonials.ts`) son un borrador: cada uno debe leer su texto y aprobarlo o cambiarlo antes de entregar.
 - [ ] **Demos de los proyectos:** la guía pide un enlace de demo en cada proyecto (`demoUrl` en `data/projects.ts`). Choose Seats ya está publicado en `choose-seats-psi.vercel.app`.
 - [ ] **Correo:** la guía lo pide en Contactos. Por ahora no se muestra (decidido el 22-nov-2026); si luego quieres mostrar uno, agrégalo en `emails` (`data/site.ts`).
 - [ ] **Cursos:** elige cuáles se quedan en `data/experience.ts`. Cuando termines uno, cambia `status` a `"completed"` y agrega `period` con las fechas reales.
@@ -67,7 +67,7 @@ app/
 components/
   layout/               Navbar, menú móvil y Footer
   sections/             una sección por archivo (Hero, About, Projects…)
-  ui/                   piezas reutilizables (FlipCard, TechBadge, Reveal…)
+  ui/                   piezas reutilizables (TechBadge, ProjectCover, TimelineItem…)
 data/                   TODOS los textos e información (aquí se edita el contenido)
 hooks/                  useScrollSpy (sección activa del menú) y useInView (animaciones)
 lib/                    funciones pequeñas de ayuda
@@ -85,13 +85,12 @@ assets/fonts/           letra para la imagen de Open Graph
 | Nombre, ciudad, semestre, idiomas, enlaces, CV, correo, menú | `data/site.ts` |
 | Saludo, intro, panel de código, CV resumido | `data/hero.ts` |
 | Servicios ("Qué puedo hacer", en Skills y en el CV resumido) | `data/services.ts` |
-| Acerca de mí | `data/about.ts` y `data/hobbies.ts` |
+| Sobre mí (presentación, datos, idiomas, intereses) | `data/about.ts` |
 | Proyectos | `data/projects.ts` |
-| Testimonios | `data/testimonials.ts` |
+| Referencias (Testimonios) | `data/testimonials.ts` |
 | Línea de tiempo | `data/experience.ts` |
 | Contacto y formulario | `data/contact.ts` |
 | Skills | `data/skills.ts` (y los íconos en `data/tech.ts`) |
-| Colores del fondo de cada sección | `data/palettes.ts` |
 | Pie de página | `data/footer.ts` |
 | Página 404 (dirección que no existe) | `data/not-found.ts` |
 
@@ -151,34 +150,29 @@ No hay claves secretas en el navegador: Formspree recibe el mensaje y te lo mand
 
 ## Guía corta: cómo está hecho (para explicarlo)
 
-**La idea visual: "la tapa del portátil".** Los developers llenan la tapa de su portátil de stickers. Aquí todo lo que se puede tocar es un sticker: borde blanco, contorno negro y sombra dura (las utilidades `sticker` y `sticker-sm` en `app/globals.css`). Los textos van sin caja.
+**La idea visual: "noche azul".** Un solo tono en toda la página, como en los portafolios del curso: fondo azul casi negro, tarjetas de vidrio (transparentes, con un borde fino y un brillo de luz arriba) y un solo color de acento, el azul eléctrico. Lo más llamativo es el nombre grande del inicio; todo lo demás es tranquilo y ordenado. Cada sección tiene un título, una raya azul corta y una frase que la explica rápido (`SectionHeading`).
 
-**Colores y letras (tokens).** En `app/globals.css` está el bloque `@theme` de Tailwind con los únicos colores que existen: azul `#1A43D9`, rojo `#D7261E`, amarillo `#FFD100`, violeta `#6A2EE8` (el de Flux IA), negro y blanco. Los colores que trae Tailwind están borrados (`--color-*: initial`), así ninguna sección puede inventarse un color. Los únicos otros colores son los del fondo camaleón, en `data/palettes.ts`. Todos los textos tienen contraste de 4.5:1 o más. Las letras son **Hubot Sans** (títulos, en versión angosta) y **Mona Sans** (textos), las dos de GitHub; **JetBrains Mono** solo va en el panel de código. Se cargan con `next/font`, que las descarga al hacer el build y no depende de Google al abrir la página.
+**Colores y letras (tokens).** En `app/globals.css` está el bloque `@theme` de Tailwind con los únicos colores que existen: fondo `#060A1A`, texto `#EEF2FF`, texto secundario `#A6B1D1`, azul de botones `#2F5BFF` y azul claro `#8AA6FF` para enlaces y detalles. Los colores que trae Tailwind están borrados (`--color-*: initial`), así ninguna sección puede inventarse un color. Contraste: texto 17:1, secundario 9.2:1, azul claro 8.4:1 y texto blanco sobre el botón azul 5.2:1 (la regla pide 4.5:1). La letra es **Mona Sans** (de GitHub) en toda la página; los títulos la usan ancha (`font-stretch: 112%`) y gruesa. Se carga con `next/font`, que la descarga al hacer el build y no depende de Google al abrir la página.
+
+**El vidrio.** La utilidad `glass` de `app/globals.css` hace las tarjetas: un fondo azul muy transparente (deja ver el fondo de la página), borde de 1 px y una sombra suave. `glass-blur` es el vidrio esmerilado (difumina lo de atrás con `backdrop-filter`) y solo va en el menú fijo y en la insignia de la foto, porque difuminar es costoso para el celular.
+
+**El fondo.** Es uno solo para toda la página: un pseudo-elemento fijo (`body::before`) con dos brillos azules (degradados radiales) y una cuadrícula muy tenue, como un plano. Los íconos de tecnologías son SVG negros; la utilidad `icon-light` los vuelve claros con `filter` para que queden en el mismo tono.
 
 **Una página, muchas secciones.** `app/page.tsx` pone el menú, las 7 secciones en orden y el footer. Cada sección tiene un `id` (`hero`, `about`…) al que apuntan los enlaces del menú.
 
-**El fondo camaleón.** Cada sección, cada app destacada y el footer pintan su propio fondo con `ChameleonBackground`: una base oscura y tres brillos de color, como el fondo "aurora" de Flux IA. Así cada parte se ve como una página de otro color. La mezcla está en la división: el fondo de cada zona empieza un poco más arriba que ella (`--blend`) y aparece de a poco con `mask-image` (de transparente a sólido) encima del final de la zona anterior. Mientras bajas, un color se va convirtiendo en el otro. No usa JavaScript: es solo CSS, y el fondo va con `z-index: -1` para quedar detrás del texto. En Proyectos las tarjetas de las apps son *sticky* y un elemento sticky arrastra lo que tiene adentro, así que sus fondos van en una capa aparte alineada fila por fila con las tarjetas (`subgrid`). En la página de detalle de una app, la página toma los colores de esa app. Como el texto encima siempre es blanco, cada paleta se probó para dar 4.5:1 o más incluso donde se juntan los tres brillos, y la mezcla de dos paletas nunca queda más clara que la más clara de las dos.
+**El menú siempre visible.** `Navbar` está fijo arriba. El hook `useScrollSpy` usa `IntersectionObserver`: el navegador avisa qué sección cruza la mitad de la pantalla y ese enlace se pone blanco con una raya azul debajo (`aria-current`). En celular, `MobileMenu` usa el elemento `<dialog>` del navegador, que ya cierra con Esc y deja el foco del teclado dentro del menú.
 
-**El menú siempre visible.** `Navbar` está fijo arriba. El hook `useScrollSpy` usa `IntersectionObserver`: el navegador avisa qué sección cruza la mitad de la pantalla y ese enlace se pone negro (`aria-current`). En celular, `MobileMenu` usa el elemento `<dialog>` del navegador, que ya cierra con Esc y deja el foco del teclado dentro del menú.
+**El movimiento.** No hay librerías de animación y casi todo está quieto, a propósito: solo el inicio entra suave al cargar (`animate-rise-in`, que mueve `transform` y `opacity`), y los botones y tarjetas suben un poco al pasar el mouse. Con **"reducir movimiento"** activado en el sistema todo se muestra quieto.
 
-**La tarjeta que se voltea (`FlipCard`).** Son dos caras en la misma celda de una grilla; la de atrás está girada 180°, y al voltear se gira todo con `rotateY(180deg)` (CSS 3D, `backface-visibility: hidden`). Funciona con el mouse (al pasar), con el dedo y con el teclado (la esquina doblada es un botón). Mientras se ve la foto, el reverso queda `inert`, así el teclado nunca cae en algo que no se ve.
-
-**El movimiento.** No hay librerías de animación:
-- `Reveal` + `useInView`: cuando un elemento entra en pantalla se le pone `data-visible` y CSS hace la transición (subir o "pegarse" con rebote).
-- La línea de tiempo se dibuja y los stickers del hero hacen parallax con **animaciones ligadas al scroll** de CSS (`animation-timeline: view()` y `scroll()`); si el navegador no las soporta, se ven quietos y completos.
-- `TiltCard` inclina tarjetas siguiendo el mouse.
-- Los brillos del fondo flotan despacio (solo `transform`) y se quedan quietos con "reducir movimiento".
-- Solo se animan `transform` y `opacity` (no hacen recalcular el diseño de la página), y con **"reducir movimiento"** activado en el sistema todo se muestra quieto.
-
-**Proyectos y páginas de detalle.** Los datos están en `data/projects.ts`. La cuadrícula filtra por tipo con un estado de React. `app/projects/[slug]/page.tsx` usa `generateStaticParams` para crear una página estática por proyecto al hacer el build.
+**Proyectos y páginas de detalle.** Los datos están en `data/projects.ts`. En la página principal cada proyecto es una fila (portada grande a un lado, información al otro) y se alternan; primero van los destacados. `app/projects/[slug]/page.tsx` usa `generateStaticParams` para crear una página estática por proyecto al hacer el build.
 
 **El año automático.** `CurrentYear` calcula `new Date().getFullYear()` en el navegador de quien visita (con `useSyncExternalStore`), así nunca queda viejo aunque la página se haya generado antes.
 
-**Calidad.** Lighthouse (21-nov-2026, en local): computador 100/100/100/100; celular 91 de rendimiento y 100 en accesibilidad, buenas prácticas y SEO. Se revisó con teclado (foco visible en todo, con 3:1 o más contra el fondo), lector de pantalla (títulos en orden, textos alternativos) y a 320 px de ancho sin scroll horizontal. Ninguna parte usa barras de progreso ni porcentajes.
+**Calidad.** Lighthouse (22-nov-2026, en local, después del rediseño): 100 en rendimiento, accesibilidad, buenas prácticas y SEO, en computador y en celular. Se revisó con teclado (foco visible en todo, con 3:1 o más contra el fondo), lector de pantalla (títulos en orden, textos alternativos) y a 320 px de ancho sin scroll horizontal. Ninguna parte usa barras de progreso ni porcentajes.
 
 ## Créditos y licencias
 
 - Íconos de tecnologías: [Simple Icons](https://simpleicons.org) (CC0) y [Devicon](https://devicon.dev) (MIT) para Java, LinkedIn y VS Code. Las marcas pertenecen a sus dueños.
-- Fuentes: Hubot Sans, Mona Sans y JetBrains Mono (SIL Open Font License).
-- Íconos genéricos (control, lápiz, balón, guante…): dibujados para este proyecto en `components/ui/Icon.tsx`.
+- Fuentes: Mona Sans en la página y Hubot Sans en la imagen para compartir (SIL Open Font License).
+- Íconos genéricos (servidor, pantalla, maletín, calendario…): dibujados para este proyecto en `components/ui/Icon.tsx`.
 - Fotos y capturas: propias.
