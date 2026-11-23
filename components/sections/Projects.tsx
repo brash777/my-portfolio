@@ -1,118 +1,121 @@
 import Link from "next/link";
-import type { CSSProperties } from "react";
-import { ChameleonBackground } from "@/components/ui/ChameleonBackground";
+import { Icon } from "@/components/ui/Icon";
 import { ProjectCover } from "@/components/ui/ProjectCover";
-import { ProjectsGrid } from "@/components/ui/ProjectsGrid";
-import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { StatusTag } from "@/components/ui/StatusTag";
 import { TechBadge } from "@/components/ui/TechBadge";
-import { sectionPalettes } from "@/data/palettes";
 import { projects, projectsContent as content } from "@/data/projects";
 import { ui } from "@/data/site";
-import { projectPalette } from "@/lib/palette";
 import { statusIcon } from "@/lib/projects";
+import { buttonPrimary, buttonSecondary } from "@/lib/styles";
+import { cn } from "@/lib/utils";
 import type { Project } from "@/types";
 
-/** Tarjeta grande de una app destacada */
-function FeaturedProject({ project }: { project: Project }) {
-  return (
-    <article className="sticker grid overflow-hidden rounded-sticker bg-paper text-ink [--focus:var(--color-ink)] lg:grid-cols-2">
-      <div className="order-2 flex flex-col p-6 sm:p-10 lg:order-1">
-        <div className="flex flex-wrap gap-2">
-          <StatusTag label={content.statusLabels[project.status]} icon={statusIcon[project.status]} />
-          <StatusTag label={content.categoryLabels[project.category]} variant="outline" />
-        </div>
-        <h4 className="mt-5 text-5xl leading-none sm:text-6xl">{project.name}</h4>
-        <p className="mt-4 text-lg leading-relaxed">{project.tagline}</p>
+const MAX_BADGES = 6;
+const MAX_HIGHLIGHTS = 3;
 
-        <p className="mt-6 text-sm font-semibold">{content.builtWith}</p>
-        <ul className="mt-2 flex flex-wrap gap-2.5">
-          {project.stack.map((item) => (
+/** Una fila: la portada grande a un lado y la información al otro (se alternan) */
+function ProjectRow({ project, reverse }: { project: Project; reverse: boolean }) {
+  const hidden = project.stack.length - MAX_BADGES;
+  const detailHref = `/projects/${project.slug}`;
+
+  return (
+    <article className="grid items-center gap-8 lg:grid-cols-12 lg:gap-14">
+      {/* la portada repite el enlace del título: se oculta del teclado y del lector de pantalla */}
+      <Link
+        href={detailHref}
+        tabIndex={-1}
+        aria-hidden="true"
+        className={cn(
+          "glass block rounded-panel p-2 transition duration-300 hover:-translate-y-1 hover:border-blue-soft/40 lg:col-span-7",
+          reverse && "lg:order-last",
+        )}
+      >
+        <ProjectCover project={project} size="lg" />
+      </Link>
+
+      <div className="lg:col-span-5">
+        <div className="flex flex-wrap items-center gap-2">
+          <StatusTag label={content.categoryLabels[project.category]} />
+          <StatusTag label={content.statusLabels[project.status]} icon={statusIcon[project.status]} />
+          <span className="text-sm text-muted">{project.year}</span>
+        </div>
+
+        <h3 className="mt-4 text-3xl sm:text-4xl">
+          <Link href={detailHref} className="group inline-flex items-center gap-2 hover:text-blue-soft">
+            {project.name}
+            <Icon name="arrowUpRight" className="size-6 text-blue-soft transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+          </Link>
+        </h3>
+        <p className="mt-4 text-lg text-muted">{project.tagline}</p>
+
+        <ul className="mt-6 space-y-2.5">
+          {project.highlights.slice(0, MAX_HIGHLIGHTS).map((highlight) => (
+            <li key={highlight} className="flex gap-2.5 text-sm">
+              <Icon name="check" className="mt-0.5 size-4 text-blue-soft" />
+              {highlight}
+            </li>
+          ))}
+        </ul>
+
+        <ul aria-label={content.builtWith} className="mt-6 flex flex-wrap gap-2">
+          {project.stack.slice(0, MAX_BADGES).map((item) => (
             <li key={item.name}>
               <TechBadge tech={item} size="sm" />
             </li>
           ))}
+          {hidden > 0 && <li className="self-center text-xs font-semibold text-muted">+{hidden}</li>}
         </ul>
 
-        <div className="mt-8 flex flex-wrap gap-3 pt-2 lg:mt-auto">
-          <Link
-            href={`/projects/${project.slug}`}
-            className="sticker-sm inline-flex items-center rounded-full bg-ink px-5 py-2.5 font-bold text-paper transition-transform duration-200 hover:-translate-y-0.5"
-          >
+        <div className="mt-8 flex flex-wrap gap-3">
+          <Link href={detailHref} className={buttonPrimary}>
             {content.viewDetails}
-            <span className="sr-only"> de {project.name}</span>
+            <span className="sr-only"> {project.name}</span>
           </Link>
           {project.repoUrl && (
-            <a
-              href={project.repoUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center rounded-full border-3 border-ink px-5 py-2 font-bold transition-transform duration-200 hover:-translate-y-0.5"
-            >
+            <a href={project.repoUrl} target="_blank" rel="noopener noreferrer" className={buttonSecondary}>
               {content.repoButton}
-              <span className="sr-only"> de {project.name} {ui.opensNewTab}</span>
+              <span className="sr-only">
+                {" "}
+                de {project.name} {ui.opensNewTab}
+              </span>
+            </a>
+          )}
+          {project.demoUrl && (
+            <a href={project.demoUrl} target="_blank" rel="noopener noreferrer" className={buttonSecondary}>
+              <Icon name="external" className="size-4" />
+              {content.demoButton}
+              <span className="sr-only">
+                {" "}
+                de {project.name} {ui.opensNewTab}
+              </span>
             </a>
           )}
         </div>
       </div>
-      <ProjectCover project={project} size="lg" className="order-1 border-b-3 border-ink lg:order-2 lg:border-b-0 lg:border-l-3" />
     </article>
   );
 }
 
-/**
- * Proyectos: el título (fondo noche), cada app destacada con sus propios colores y la cuadrícula
- * con filtro (fondo noche otra vez). Cada bloque va de lado a lado y pegado al siguiente, sin
- * márgenes, para que el fondo de uno empiece justo donde termina el otro.
- */
+/** Proyectos: todos en filas que se alternan, primero las apps más grandes */
 export function Projects() {
-  const featured = projects.filter((project) => project.featured);
+  // primero los destacados; dentro de cada grupo se respeta el orden de data/projects.ts
+  const ordered = [...projects].sort((a, b) => Number(b.featured) - Number(a.featured));
 
   return (
-    <section id="projects" aria-labelledby="projects-title" className="text-paper [--focus:var(--color-paper)]">
-      <div className="relative px-5 pt-24 pb-8 sm:px-8 lg:pt-32">
-        <ChameleonBackground palette={sectionPalettes.projects} />
-        <div className="mx-auto max-w-6xl">
-          <SectionHeading id="projects-title">{content.title}</SectionHeading>
-          <p className="mt-4 max-w-2xl text-lg">{content.lead}</p>
-          <h3 className="mt-16 text-4xl sm:text-5xl">{content.featuredTitle}</h3>
-        </div>
-      </div>
+    <section id="projects" aria-labelledby="projects-title" className="px-5 py-24 sm:px-8 lg:py-28">
+      <div className="mx-auto max-w-6xl">
+        <SectionHeading id="projects-title" lead={content.lead}>
+          {content.title}
+        </SectionHeading>
 
-      {/*
-        Apps destacadas. En computador cada tarjeta se queda pegada arriba (a la altura --stick) y la
-        siguiente se le apila encima. El fondo de cada app va aparte, en la misma fila de la cuadrícula
-        que su tarjeta (subgrid): si fuera dentro de la tarjeta pegada, se movería con ella y taparía
-        lo de arriba. El espacio entre tarjetas va por dentro (pb-12) para no dejar huecos.
-      */}
-      <div className="grid" style={{ gridTemplateRows: `repeat(${featured.length}, auto)` }}>
-        {featured.map((project, index) => (
-          <div key={project.slug} className="relative col-start-1" style={{ gridRow: index + 1 }}>
-            <ChameleonBackground palette={projectPalette(project)} />
-          </div>
-        ))}
-        <ul className="col-start-1 row-span-full grid grid-rows-subgrid">
-          {featured.map((project, index) => (
-            <li
-              key={project.slug}
-              style={{ "--stick": `${7 + index * 1.5}rem` } as CSSProperties}
-              className="px-5 pb-12 last:pb-0 sm:px-8 lg:sticky lg:top-(--stick)"
-            >
-              <Reveal className="mx-auto max-w-6xl">
-                <FeaturedProject project={project} />
-              </Reveal>
+        <ul className="mt-16 space-y-20 lg:space-y-28">
+          {ordered.map((project, index) => (
+            <li key={project.slug}>
+              <ProjectRow project={project} reverse={index % 2 === 1} />
             </li>
           ))}
         </ul>
-      </div>
-
-      <div className="relative px-5 pt-28 pb-24 sm:px-8 lg:pb-32">
-        <ChameleonBackground palette={sectionPalettes.projects} />
-        <div className="mx-auto max-w-6xl">
-          <h3 className="text-4xl sm:text-5xl">{content.moreTitle}</h3>
-          <ProjectsGrid projects={projects} />
-        </div>
       </div>
     </section>
   );
