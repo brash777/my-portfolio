@@ -1,16 +1,16 @@
 import Link from "next/link";
 import { Icon } from "@/components/ui/Icon";
-import { ProjectCover } from "@/components/ui/ProjectCover";
+import { ProjectLogo } from "@/components/ui/ProjectLogo";
 import { StatusTag } from "@/components/ui/StatusTag";
 import { projectsContent as content } from "@/data/projects";
 import { statusIcon } from "@/lib/projects";
 import type { Project } from "@/types";
 
-/** Tarjeta pequeña de vidrio (en "Otros proyectos" de cada página de detalle) */
+/** Tarjeta pequeña de vidrio con el logo de la app (en "Otros proyectos" de cada página de detalle) */
 export function ProjectCard({ project }: { project: Project }) {
   return (
     <article className="glass group relative flex h-full flex-col rounded-panel p-2 transition duration-200 hover:-translate-y-1 hover:border-blue-soft/40">
-      <ProjectCover project={project} />
+      <ProjectLogo project={project} className="h-40" />
       <div className="flex flex-1 flex-col p-4">
         <StatusTag label={content.statusLabels[project.status]} icon={statusIcon[project.status]} className="w-fit" />
         <h3 className="mt-3 text-xl">
