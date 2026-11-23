@@ -41,11 +41,11 @@ export function MobileMenu({ activeId, linkPrefix }: MobileMenuProps) {
         aria-haspopup="dialog"
         aria-expanded={isOpen}
         aria-controls="mobile-menu"
-        className="sticker-sm grid size-11 place-items-center rounded-xl bg-yellow text-ink lg:hidden"
+        className="glass grid size-11 place-items-center rounded-xl text-white lg:hidden"
       >
         <span className="sr-only">{ui.openMenu}</span>
-        <svg aria-hidden="true" viewBox="0 0 24 24" className="size-6" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round">
-          <path d="M4 6h16M4 12h11M4 18h16" />
+        <svg aria-hidden="true" viewBox="0 0 24 24" className="size-6" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
+          <path d="M4 7h16M4 12h16M4 17h16" />
         </svg>
       </button>
 
@@ -54,19 +54,19 @@ export function MobileMenu({ activeId, linkPrefix }: MobileMenuProps) {
         ref={dialogRef}
         aria-label={ui.mobileNav}
         onClose={() => setIsOpen(false)}
-        className="m-0 h-dvh max-h-none w-full max-w-none bg-blue p-0 text-paper transition-[opacity,translate] duration-300 ease-slap [--focus:var(--color-paper)] starting:open:-translate-y-6 starting:open:opacity-0 lg:hidden"
+        className="m-0 h-dvh max-h-none w-full max-w-none bg-night/95 p-0 text-text backdrop-blur-xl transition-[opacity,translate] duration-300 ease-out starting:open:-translate-y-4 starting:open:opacity-0 lg:hidden"
       >
-        <div className="flex min-h-full flex-col px-5 pt-5 pb-8 sm:px-8">
+        <div className="flex min-h-full flex-col px-5 pt-4 pb-8 sm:px-8">
           <div className="flex items-center justify-between gap-3">
             <Logo href={`${linkPrefix}#hero`} onClick={closeMenu} />
             <button
               ref={closeButtonRef}
               type="button"
               onClick={closeMenu}
-              className="sticker-sm grid size-11 place-items-center rounded-xl bg-paper text-ink"
+              className="glass grid size-11 place-items-center rounded-xl text-white"
             >
               <span className="sr-only">{ui.closeMenu}</span>
-              <svg aria-hidden="true" viewBox="0 0 24 24" className="size-6" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round">
+              <svg aria-hidden="true" viewBox="0 0 24 24" className="size-6" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
                 <path d="M6 6l12 12M18 6L6 18" />
               </svg>
             </button>
@@ -83,8 +83,8 @@ export function MobileMenu({ activeId, linkPrefix }: MobileMenuProps) {
                       onClick={closeMenu}
                       aria-current={isActive ? "true" : undefined}
                       className={cn(
-                        "inline-block rounded-2xl px-3 py-1.5 font-display text-5xl leading-none font-extrabold font-stretch-condensed sm:text-6xl",
-                        isActive && "sticker-sm -rotate-2 bg-yellow text-ink",
+                        "flex items-center gap-3 rounded-xl px-3 py-2.5 text-3xl font-semibold [font-stretch:112%] sm:text-4xl",
+                        isActive ? "text-white before:size-2 before:rounded-full before:bg-blue-soft" : "text-muted",
                       )}
                     >
                       {item.label}
@@ -103,7 +103,7 @@ export function MobileMenu({ activeId, linkPrefix }: MobileMenuProps) {
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-full border-2 border-paper px-4 py-2 text-sm font-semibold"
+                className="glass inline-flex min-h-11 items-center rounded-full px-5 py-2 text-sm font-semibold"
               >
                 {link.label}
                 <span className="sr-only"> {ui.opensNewTab}</span>
