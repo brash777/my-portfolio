@@ -9,7 +9,6 @@ export const kindIcon: Record<ExperienceKind, IconName> = {
   education: "book",
   freelance: "briefcase",
   project: "code",
-  course: "flag",
 };
 
 /** Contenido de un punto de la experiencia: fechas, título, lugar, descripción, tecnologías y enlace */
@@ -19,7 +18,7 @@ export function TimelineItem({ item }: { item: ExperienceItem }) {
   return (
     <>
       <p className="text-sm font-medium text-blue-soft">
-        {item.period ?? content.statusLabels[item.status]}
+        {item.period}
         <span className="text-muted"> · {content.kindLabels[item.kind]}</span>
       </p>
       <h4 className="mt-1.5 text-xl">{item.title}</h4>

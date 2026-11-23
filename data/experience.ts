@@ -5,7 +5,6 @@ import type { ExperienceContent, ExperienceItem } from "@/types";
 export const experienceContent: ExperienceContent = {
   title: "Experiencia",
   lead: "Lo que estudio y lo que trabajo, de lo más reciente a lo más antiguo.",
-  coursesTitle: "Cursos que voy a tomar",
   areas: {
     academic: {
       title: "Experiencia académica",
@@ -20,12 +19,10 @@ export const experienceContent: ExperienceContent = {
     education: "Formación",
     freelance: "Freelance",
     project: "Proyecto",
-    course: "Curso",
   },
   statusLabels: {
     current: "En curso",
     "in-progress": "En desarrollo",
-    planned: "Planeado",
     completed: "Terminado",
   },
 };
@@ -35,9 +32,6 @@ export const experienceContent: ExperienceContent = {
   Dentro de cada parte va de lo más reciente a lo más antiguo. Regla de honestidad:
   - Fechas solo confirmadas: la carrera empezó en 2024 (dicho el 22-nov-2026); los proyectos
     tienen el año de data/projects.ts y los de clase van de 2024 a 2026 (fechas de los repos).
-  - Los cursos quedan como "planned" (sin fecha) hasta que tengas el certificado.
-  TODO: elegir cuáles cursos se quedan. Verificados el 11-nov-2026: freeCodeCamp
-  (certificaciones gratis) y CS50x (certificado gratis de CS50, versión 2026 hasta el 31-dic).
 */
 export const experience: ExperienceItem[] = [
   {
@@ -88,48 +82,5 @@ export const experience: ExperienceItem[] = [
     period: "2024 – 2026",
     stack: [tech.java, tech.python, tech.typescript, tech.react],
     link: { label: "Ver mis repositorios", href: site.githubUrl },
-  },
-  {
-    id: "fcc-bases-de-datos",
-    area: "academic",
-    kind: "course",
-    title: "Bases de datos relacionales",
-    place: "freeCodeCamp",
-    description: "SQL y PostgreSQL con proyectos prácticos. Es gratis y da certificado.",
-    status: "planned",
-    stack: [tech.postgresql],
-    link: { label: "Ver el curso", href: "https://www.freecodecamp.org/learn" },
-  },
-  {
-    id: "fcc-javascript",
-    area: "academic",
-    kind: "course",
-    title: "JavaScript",
-    place: "freeCodeCamp",
-    description: "Certificación gratuita para reforzar la base de TypeScript, React y Next.js.",
-    status: "planned",
-    stack: [tech.javascript],
-    link: { label: "Ver el curso", href: "https://www.freecodecamp.org/learn" },
-  },
-  {
-    id: "cs50x",
-    area: "academic",
-    kind: "course",
-    title: "CS50x: introducción a la ciencia de la computación",
-    place: "Harvard (edX)",
-    description: "Curso gratuito con certificado de CS50. La versión 2026 se puede terminar hasta el 31 de diciembre.",
-    status: "planned",
-    link: { label: "Ver el curso", href: "https://cs50.harvard.edu/x/" },
-  },
-  {
-    id: "nextjs-learn",
-    area: "academic",
-    kind: "course",
-    title: "Next.js Learn",
-    place: "Vercel",
-    description: "El curso oficial de Next.js, donde se arma una app completa paso a paso.",
-    status: "planned",
-    stack: [tech.nextjs],
-    link: { label: "Ver el curso", href: "https://nextjs.org/learn" },
   },
 ];
