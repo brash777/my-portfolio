@@ -2,7 +2,7 @@
 
 Mi portafolio personal y la vitrina de las apps que estoy construyendo. Es una página de una sola sección larga (landing), con **un solo tono de color**: fondo "noche azul", tarjetas de vidrio y el azul eléctrico como único acento. Cada sección es corta y se explica rápido.
 
-**Stack:** Next.js 16 (App Router) · TypeScript en modo estricto · Tailwind CSS 4 · Vercel. Sin librerías de animación: el poco movimiento que hay es CSS.
+**Stack:** Next.js 16 (App Router) · TypeScript en modo estricto · Tailwind CSS 4 · Vercel. Sin librerías de animación: el movimiento al hacer scroll es CSS + `IntersectionObserver`.
 
 ## Cómo correrlo
 
@@ -48,7 +48,6 @@ El orden de `app/page.tsx` es el de la guía: Hero, Sobre mí, Proyectos, Refere
 - [ ] **Referencias:** las de Camilo Rosero, Santiago Ortega y Samuel Moreno (`data/testimonials.ts`) son un borrador: cada uno debe leer su texto y aprobarlo o cambiarlo antes de entregar.
 - [ ] **Demos de los proyectos:** la guía pide un enlace de demo en cada proyecto (`demoUrl` en `data/projects.ts`). Choose Seats ya está publicado en `choose-seats-psi.vercel.app`.
 - [ ] **Correo:** la guía lo pide en Contactos. Por ahora no se muestra (decidido el 22-nov-2026); si luego quieres mostrar uno, agrégalo en `emails` (`data/site.ts`).
-- [ ] **Cursos:** elige cuáles se quedan en `data/experience.ts`. Cuando termines uno, cambia `status` a `"completed"` y agrega `period` con las fechas reales.
 - [ ] **Estado de relación:** escríbelo en `relationship` (`data/site.ts`). Con `null` no se muestra.
 - [ ] **Formulario:** conéctalo con Formspree (ver abajo). Sin eso no sale el mensaje de confirmación al enviar.
 - [ ] **Textos:** todos los textos en `data/` son borradores. Cámbialos con tus palabras.
@@ -162,13 +161,13 @@ No hay claves secretas en el navegador: Formspree recibe el mensaje y te lo mand
 
 **El menú siempre visible.** `Navbar` está fijo arriba. El hook `useScrollSpy` usa `IntersectionObserver`: el navegador avisa qué sección cruza la mitad de la pantalla y ese enlace se pone blanco con una raya azul debajo (`aria-current`). En celular, `MobileMenu` usa el elemento `<dialog>` del navegador, que ya cierra con Esc y deja el foco del teclado dentro del menú.
 
-**El movimiento.** No hay librerías de animación y casi todo está quieto, a propósito: solo el inicio entra suave al cargar (`animate-rise-in`, que mueve `transform` y `opacity`), y los botones y tarjetas suben un poco al pasar el mouse. Con **"reducir movimiento"** activado en el sistema todo se muestra quieto.
+**El movimiento al hacer scroll.** Cada bloque que lleva `data-reveal="up"`, `"left"`, `"right"` o `"fade"` entra cuando aparece en pantalla y sale cuando se va; al volver, entra otra vez. `components/ui/ScrollReveal.tsx` (va una sola vez en `app/layout.tsx`) usa un solo `IntersectionObserver`: el navegador avisa qué bloque entra o sale del área visible y el componente le pone `data-state="in"` u `"out"`. El movimiento lo hace CSS en `app/globals.css`: entra en 0.7 s frenando suave al final y sale en 0.45 s, moviéndose 32 px (los mismos valores del portafolio que se tomó de referencia). En listas, cada tarjeta espera un poco más que la anterior (`--reveal-delay`). El inicio no espera al scroll: entra al cargar la página (`animate-rise-in` y `animate-slide-in-right`). Solo se animan `transform` y `opacity`, que no obligan al navegador a recalcular la página. Con **"reducir movimiento"** activado o sin JavaScript, todo se muestra quieto y completo.
 
-**Proyectos y páginas de detalle.** Los datos están en `data/projects.ts`. En la página principal cada proyecto es una fila (portada grande a un lado, información al otro) y se alternan; primero van los destacados. `app/projects/[slug]/page.tsx` usa `generateStaticParams` para crear una página estática por proyecto al hacer el build.
+**Proyectos y páginas de detalle.** Los datos están en `data/projects.ts`. En la página principal cada proyecto es una tarjeta con el ícono de la app en la cara (`ProjectLogo`), en dos columnas desfasadas; en celular es una sola columna en el mismo orden (las columnas usan `display: contents` y cada tarjeta su `order`). Flux IA y FlowStore (OFFGRID) usan su ícono real; Music Player, Choose Seats y Clínica no tenían logo, así que se dibujó uno en SVG para el portafolio (`public/images/projects/<slug>/icon.svg`). `app/projects/[slug]/page.tsx` usa `generateStaticParams` para crear una página estática por proyecto al hacer el build.
 
 **El año automático.** `CurrentYear` calcula `new Date().getFullYear()` en el navegador de quien visita (con `useSyncExternalStore`), así nunca queda viejo aunque la página se haya generado antes.
 
-**Calidad.** Lighthouse (22-nov-2026, en local, después del rediseño): 100 en rendimiento, accesibilidad, buenas prácticas y SEO, en computador y en celular. Se revisó con teclado (foco visible en todo, con 3:1 o más contra el fondo), lector de pantalla (títulos en orden, textos alternativos) y a 320 px de ancho sin scroll horizontal. Ninguna parte usa barras de progreso ni porcentajes.
+**Calidad.** Lighthouse (23-nov-2026, en local, con las animaciones de scroll): 100 en rendimiento, accesibilidad, buenas prácticas y SEO, en computador y en celular. Se revisó con teclado (foco visible en todo, con 3:1 o más contra el fondo), lector de pantalla (títulos en orden, textos alternativos) y a 320 px de ancho sin scroll horizontal. Ninguna parte usa barras de progreso ni porcentajes.
 
 ## Créditos y licencias
 
