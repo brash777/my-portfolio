@@ -98,13 +98,8 @@ export interface HeroContent {
   description: string;
   projectsButton: string;
   stats: HeroStat[];
-  /** tarjeta de la derecha: la app más fuerte */
-  featured: {
-    label: string;
-    /** slug del proyecto en data/projects.ts */
-    slug: string;
-    linkLabel: string;
-  };
+  /** texto sobre la foto del inicio */
+  photoCaption: string;
 }
 
 /** textos cortos de la interfaz (botones, etiquetas de accesibilidad) */

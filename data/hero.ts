@@ -19,9 +19,5 @@ export const hero: HeroContent = {
     { value: String(techCount), label: "Tecnologías" },
     { value: site.semester.replace(" semestre", ""), label: "Semestre" },
   ],
-  featured: {
-    label: "Mi proyecto más fuerte",
-    slug: "flux-ia",
-    linkLabel: "Ver Flux IA",
-  },
+  photoCaption: `${site.role} junior`,
 };
