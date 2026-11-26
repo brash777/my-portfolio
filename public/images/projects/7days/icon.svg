@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Ícono hecho para el portafolio: el 7 de los siete días, con zarpazos de zombi y la luna sobre el valle -->
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1d2d74"/>
+      <stop offset="1" stop-color="#060a1a"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="116" fill="url(#g)"/>
+  <circle cx="112" cy="104" r="36" fill="#eef2ff"/>
+  <circle cx="130" cy="92" r="34" fill="#1d2d74"/>
+  <path d="M0 420c60-34 120-46 180-30s110 20 170-6 120-20 162 8V512H0Z" fill="#0a1130"/>
+  <path d="M138 150h232v52L262 420h-74l104-208H138Z" fill="#eef2ff"/>
+  <path d="M232 284l100-38M216 322l100-38M200 360l100-38" stroke="#ff5c5c" stroke-width="15" stroke-linecap="round"/>
+</svg>

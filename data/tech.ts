@@ -1,7 +1,7 @@
 import type { Tech } from "@/types";
 
 // Registro de tecnologías con su ícono (public/images/icons/).
-// Íconos de Simple Icons (CC0) y Devicon (MIT): Java, LinkedIn y VS Code vienen de Devicon.
+// Íconos de Simple Icons (CC0) y Devicon (MIT): Java, C#, LinkedIn y VS Code vienen de Devicon.
 // Para agregar una: guarda su SVG en public/images/icons/ y agrégala aquí.
 export const tech = {
   java: { name: "Java", icon: "/images/icons/java.svg" },
@@ -28,6 +28,13 @@ export const tech = {
   github: { name: "GitHub", icon: "/images/icons/github.svg" },
   vscode: { name: "VS Code", icon: "/images/icons/vscode.svg" },
   vercel: { name: "Vercel", icon: "/images/icons/vercel.svg" },
+  kotlin: { name: "Kotlin", icon: "/images/icons/kotlin.svg" },
+  wearos: { name: "Wear OS", icon: "/images/icons/wearos.svg" },
+  prisma: { name: "Prisma", icon: "/images/icons/prisma.svg" },
+  vitest: { name: "Vitest", icon: "/images/icons/vitest.svg" },
+  docker: { name: "Docker", icon: "/images/icons/docker.svg" },
+  unity: { name: "Unity", icon: "/images/icons/unity.svg" },
+  csharp: { name: "C#", icon: "/images/icons/csharp.svg" },
   groq: { name: "Groq (IA)" },
   anthropic: { name: "API de Anthropic", icon: "/images/icons/anthropic.svg" },
   claudeCode: { name: "Claude Code", icon: "/images/icons/claude.svg" },

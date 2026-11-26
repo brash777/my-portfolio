@@ -80,7 +80,7 @@ export default async function ProjectPage(props: PageProps<"/projects/[slug]">) 
                 {project.demoUrl && (
                   <a href={project.demoUrl} target="_blank" rel="noopener noreferrer" className={buttonPrimary}>
                     <Icon name="external" className="size-4" />
-                    {content.demoButton}
+                    {project.demoLabel ?? content.demoButton}
                     <span className="sr-only"> {ui.opensNewTab}</span>
                   </a>
                 )}

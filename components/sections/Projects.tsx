@@ -77,7 +77,7 @@ function ProjectCardLarge({ project }: { project: Project }) {
               className="inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold text-blue-soft hover:text-white"
             >
               <Icon name="external" className="size-4" />
-              {content.demoButton}
+              {project.demoLabel ?? content.demoButton}
               <span className="sr-only">
                 {" "}
                 de {project.name} {ui.opensNewTab}

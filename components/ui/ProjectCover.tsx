@@ -12,7 +12,7 @@ interface ProjectCoverProps {
  * Portada de un proyecto sobre un panel azul de noche (con brillo y cuadrícula), según lo que tenga:
  * 1. captura → la muestra como pantalla de celular;
  * 2. solo logo → el logo en claro;
- * 3. nada → el nombre en grande con los íconos de su stack (decorativo).
+ * 3. nada → el ícono de la app en grande (decorativo).
  */
 export function ProjectCover({ project, size = "sm", className }: ProjectCoverProps) {
   const height = size === "lg" ? "h-72 sm:h-96" : "h-52";
@@ -62,17 +62,17 @@ export function ProjectCover({ project, size = "sm", className }: ProjectCoverPr
           />
         </div>
       ) : (
-        <div aria-hidden="true" className="relative flex h-full flex-col justify-between p-6 sm:p-8">
-          <ul className="flex gap-2">
-            {project.stack.slice(0, 4).map((item) =>
-              item.icon ? (
-                <li key={item.name} className="glass grid size-11 place-items-center rounded-xl">
-                  <Image src={item.icon} alt="" width={22} height={22} unoptimized className="icon-light size-5.5" />
-                </li>
-              ) : null,
-            )}
-          </ul>
-          <span className="text-4xl leading-none font-bold text-white [font-stretch:112%] sm:text-5xl">{project.name}</span>
+        // sin capturas ni logo: el ícono de la app en grande (decorativo; el nombre está en la página)
+        <div className="relative grid h-full place-items-center">
+          <Image
+            src={project.icon}
+            alt=""
+            width={512}
+            height={512}
+            unoptimized={project.icon.endsWith(".svg")}
+            sizes="176px"
+            className="size-36 rounded-[22%] shadow-[0_24px_60px_-16px_rgb(0_0_0/0.8)] sm:size-44"
+          />
         </div>
       )}
     </div>
