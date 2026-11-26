@@ -170,7 +170,10 @@ export interface Project {
   icon: string;
   gallery: SiteImage[];
   repoUrl?: string;
+  /** demo, video o descarga de la app */
   demoUrl?: string;
+  /** texto del botón de demoUrl (por ejemplo "Ver video"); si no hay, dice "Ver demo" */
+  demoLabel?: string;
 }
 
 export interface ProjectsContent extends SectionIntro {
