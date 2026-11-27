@@ -1,3 +1,5 @@
+Video explicativo
+En este video se explica el portafolio: su diseño, secciones y funcionamiento.
 
 enlace video:https://drive.google.com/file/d/1GSomdR2mDG1f7X5cA6ch-dwR18sUHkoi/view?usp=sharing
 
