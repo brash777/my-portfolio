@@ -12,16 +12,6 @@ Mi portafolio personal y la vitrina de las apps que estoy construyendo. Es una p
 
 El orden de `app/page.tsx` es el de la guía: Hero, Sobre mí, Proyectos, Referencias (Testimonios), Experiencia, Contactos, Skills (adicional) y pie.
 
-## Pendientes antes de publicar
-
-- [x] **CV:** está en `public/cv.pdf` (armado el 22-nov-2026 solo con datos confirmados: sin teléfono, dirección ni correo). Para cambiarlo, reemplaza ese archivo por tu PDF con el mismo nombre.
-- [ ] **Referencias:** las de Camilo Rosero, Santiago Ortega y Samuel Moreno (`data/testimonials.ts`) son un borrador: cada uno debe leer su texto y aprobarlo o cambiarlo antes de entregar.
-- [ ] **Demos de los proyectos:** la guía pide un enlace de demo en cada proyecto (`demoUrl` en `data/projects.ts`, y `demoLabel` para el texto del botón). Snapia y 7Days ya enlazan su video; faltan Flux IA, FlowStore y Clínica.
-- [ ] **Correo:** la guía lo pide en Contactos. Por ahora no se muestra (decidido el 22-nov-2026); si luego quieres mostrar uno, agrégalo en `emails` (`data/site.ts`).
-- [ ] **Estado de relación:** escríbelo en `relationship` (`data/site.ts`). Con `null` no se muestra.
-- [ ] **Formulario:** conéctalo con Formspree (ver abajo). Sin eso no sale el mensaje de confirmación al enviar.
-- [ ] **Textos:** todos los textos en `data/` son borradores. Cámbialos con tus palabras.
-
 ## Dónde está cada cosa
 
 ```
