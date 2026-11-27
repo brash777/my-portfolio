@@ -7,43 +7,9 @@ enlace video:https://drive.google.com/file/d/1GSomdR2mDG1f7X5cA6ch-dwR18sUHkoi/v
 
 Mi portafolio personal y la vitrina de las apps que estoy construyendo. Es una página de una sola sección larga (landing), con **un solo tono de color**: fondo "noche azul", tarjetas de vidrio y el azul eléctrico como único acento. Cada sección es corta y se explica rápido.
 
-**Stack:** Next.js 16 (App Router) · TypeScript en modo estricto · Tailwind CSS 4 · Vercel. Sin librerías de animación: el movimiento al hacer scroll es CSS + `IntersectionObserver`.
-
-## Cómo correrlo
-
-Necesitas Node.js 20 o superior.
-
-```bash
-npm install      # solo la primera vez
-npm run dev      # abre http://localhost:3000
-```
-
-Otros comandos:
-
-| Comando | Para qué |
-|---|---|
-| `npm run lint` | Revisa el código con ESLint |
-| `npm run build` | Arma la versión de producción (si falla, no se puede publicar) |
-| `npm start` | Corre la versión de producción en el computador |
-
-## Lo que pide la guía del profe
-
 La guía es [structure-portfolio.vercel.app](https://structure-portfolio.vercel.app). Este es el estado de cada requisito:
 
-| Requisito de la guía | Dónde está | Estado |
-|---|---|---|
-| Next.js + TypeScript + Tailwind CSS | todo el proyecto | Listo |
-| 1. Menú fijo, con logo, anclas, menú hamburguesa y scroll suave | `components/layout/Navbar.tsx` | Listo |
-| 2. Hero con nombre, rol, foto, frase, **Descargar CV** y botón a Proyectos | `components/sections/Hero.tsx`, `public/cv.pdf` | Listo |
-| 3. Acerca de mí ("Sobre mí"): presentación, foto, tecnologías, ubicación, semestre e intereses | `components/sections/About.tsx`, `data/about.ts` | Listo |
-| 4. Proyectos: imagen, descripción, tecnologías, **GitHub** y **demo en vivo** | `components/sections/Projects.tsx`, `data/projects.ts` | Snapia y 7Days tienen video; faltan las demos de Flux IA, FlowStore y Clínica |
-| 5. Testimonios (aquí "Referencias"): mínimo 3, con **nombre**, cargo, avatar y texto | `components/sections/Testimonials.tsx`, `data/testimonials.ts` | Listo (cada compañero debe aprobar su texto) |
-| 6. Experiencia **académica** y **laboral**, con fechas, de lo más reciente a lo más antiguo | `components/sections/Experience.tsx`, `data/experience.ts` | Listo |
-| 7. Contactos: **correo**, LinkedIn, GitHub y formulario con validación y confirmación | `components/sections/Contact.tsx`, `data/contact.ts` | Falta el correo y Formspree |
-| Sección adicional antes del pie (Skills con servicios) | `components/sections/Skills.tsx` | Listo |
-| 8. Pie con nombre, © año, redes, enlaces, volver arriba y créditos | `components/layout/Footer.tsx` | Listo |
-| Se ve bien en celular | todo | Listo (revisado hasta 320 px) |
-| Código en GitHub y publicado en Vercel | ver "Cómo publicar en Vercel" | Falta Vercel |
+| Req
 
 El orden de `app/page.tsx` es el de la guía: Hero, Sobre mí, Proyectos, Referencias (Testimonios), Experiencia, Contactos, Skills (adicional) y pie.
 
