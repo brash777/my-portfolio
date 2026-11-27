@@ -7,7 +7,6 @@ enlace video:https://drive.google.com/file/d/1GSomdR2mDG1f7X5cA6ch-dwR18sUHkoi/v
 
 Mi portafolio personal y la vitrina de las apps que estoy construyendo. Es una página de una sola sección larga (landing), con **un solo tono de color**: fondo "noche azul", tarjetas de vidrio y el azul eléctrico como único acento. Cada sección es corta y se explica rápido.
 
-La guía es [structure-portfolio.vercel.app](https://structure-portfolio.vercel.app). Este es el estado de cada requisito:
 
 | Req
 
